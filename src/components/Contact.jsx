@@ -66,9 +66,9 @@ const Contact = () => {
         'template_tn53hil',
         {
           from_name: form.name,
-          to_name: "Sunny Patel",
+          to_name: "Muja Kayadan",
           from_email: form.email,
-          to_email: "sunnypatel124555@gmail.com",
+          to_email: "mujakayadan@outlook.com",
           message: form.message,
         },
         "qKXGy2B0mb2m5HSJH"
@@ -188,7 +188,7 @@ const Contact = () => {
               name='message'
               value={form.message}
               onChange={handleChange}
-              placeholder="Hey Sunny, love the website! I'd like to chat about some opportunities you might like! 🎉"
+              placeholder="Hey Muja, love the website! I'd like to chat about some opportunities you might like! 🎉"
               className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium transition-all duration-300 focus:ring-2 focus:ring-purple-500'
             />
           </label>

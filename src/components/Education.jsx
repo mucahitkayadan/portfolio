@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import {
   VerticalTimeline,
   VerticalTimelineElement,
@@ -13,6 +13,9 @@ import { SectionWrapper } from "../hoc";
 import { textVariant } from "../utils/motion";
 
 const EducationCard = ({ education }) => {
+  const [showAllCourses, setShowAllCourses] = useState(false);
+  const initialCoursesToShow = 3;
+
   return (
     <VerticalTimelineElement
       contentStyle={{
@@ -40,7 +43,7 @@ const EducationCard = ({ education }) => {
       </div>
 
       <ul className="mt-5 list-disc ml-5 space-y-2">
-        {education.points.map((point, index) => (
+        {education.points.slice(0, showAllCourses ? education.points.length : initialCoursesToShow).map((point, index) => (
           <li
             key={`experience-point-${index}`}
             className="text-white-100 text-[14px] pl-1 tracking-wider"
@@ -49,6 +52,15 @@ const EducationCard = ({ education }) => {
           </li>
         ))}
       </ul>
+
+      {education.points.length > initialCoursesToShow && (
+        <button
+          onClick={() => setShowAllCourses(!showAllCourses)}
+          className="mt-4 text-[14px] text-secondary hover:text-white transition-colors duration-200"
+        >
+          {showAllCourses ? "Show Less" : `See All Courses (${education.points.length})`}
+        </button>
+      )}
     </VerticalTimelineElement>
   );
 };

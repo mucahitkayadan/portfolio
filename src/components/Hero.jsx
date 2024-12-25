@@ -73,6 +73,7 @@ const Hero = () => {
     "Software Engineer",
     "Machine Learning Engineer", 
     "Computer Vision Engineer",
+    "Machine Vision Engineer",
     "Electrical Electronics Engineer"
   ];
 

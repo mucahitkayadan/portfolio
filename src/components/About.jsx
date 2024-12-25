@@ -83,7 +83,7 @@ const About = () => {
             <div className="w-full h-full overflow-hidden">
               <img
                 src={profilepic}
-                alt="Sunny Patel"
+                alt="Muja Kayadan"
                 className="w-[150%] h-[150%] object-cover rounded-full"
                 style={{
                   objectPosition: "33.7% 22%",
@@ -108,7 +108,7 @@ const About = () => {
               style={{ boxShadow: "0px 5px 0px 0px rgba(0,0,0,0.6)", transition: "all ease 0.1s" }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => window.open("https://www.linkedin.com/in/sunny-patel-30b460204/", "_blank")}
+              onClick={() => window.open("https://www.linkedin.com/in/muja-kayadan/", "_blank")}
             >
               <span className="font-semibold">LinkedIn</span>
             </motion.button>
@@ -118,7 +118,7 @@ const About = () => {
               style={{ boxShadow: "0px 5px 0px 0px rgba(0,0,0,0.6)", transition: "all ease 0.1s" }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => window.open("https://github.com/sunnypatell", "_blank")}
+              onClick={() => window.open("https://github.com/mucahitkayadan", "_blank")}
             >
               <span className="font-semibold">GitHub</span>
             </motion.button>
@@ -136,19 +136,19 @@ const About = () => {
             <motion.li className="flex items-start" variants={fadeIn("up", "spring", 0.1, 0.75)}>
               <span className="mr-4 text-2xl flex-shrink-0">👨‍💻</span>
               <span>
-                I&apos;m a Software Engineer with over 4 years of experience in software development and cloud technologies.
+                I&apos;m a Software Engineer with 3 years of experience developing software solutions with a focus on machine learning, LLMs and computer vision applications.
               </span>
             </motion.li>
             <motion.li className="flex items-start" variants={fadeIn("up", "spring", 0.2, 0.75)}>
               <span className="mr-4 text-2xl flex-shrink-0">🎓</span>
               <span>
-                Currently working toward my Honours Bachelor of Science in Computer Science at Ontario Tech University, I&apos;m all about building reliable, scalable software that makes a difference.
+                3 Master&apos;s Degrees and 4 work experiences in 5 countries across 3 different continents.
               </span>
             </motion.li>
             <motion.li className="flex items-start" variants={fadeIn("up", "spring", 0.3, 0.75)}>
               <span className="mr-4 text-2xl flex-shrink-0">🛠</span>
               <span>
-                From full-stack development to cloud-based solutions, I&apos;ve led enterprise-level projects that streamline operations and deliver real impact.
+                Currently working as an ML Engineer on LLMs, RAG, Chatbots and developing intelligent solutions that bridge the gap between human language and machine understanding to create more intuitive and powerful AI applications.
               </span>
             </motion.li>
             <motion.li className="flex items-start" variants={fadeIn("up", "spring", 0.4, 0.75)}>
@@ -161,6 +161,12 @@ const About = () => {
               <span className="mr-4 text-2xl flex-shrink-0">💡</span>
               <span>
                 I&apos;m always curious and constantly learning.
+              </span>
+            </motion.li>
+            <motion.li className="flex items-start" variants={fadeIn("up", "spring", 0.6, 0.75)}>
+              <span className="mr-4 text-2xl flex-shrink-0">📚</span>
+              <span>
+                Published research in <a href="https://www.nature.com/articles/s41598-023-27772-4" target="_blank" rel="noopener noreferrer" className="text-purple-500 hover:text-purple-400 transition-colors duration-300">Nature - Scientific Reports</a> on "High Accuracy Gender Determination Using the Egg Shape Index" (Jan 2023), contributing to innovative machine learning applications in biological sciences.
               </span>
             </motion.li>
           </motion.ul>
