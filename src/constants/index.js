@@ -12,8 +12,6 @@ import {
   tailwind,
   postgresql,
   git,
-  otu,
-  rhhs,
   wonderland,
   mackenziehealth,
   privcurity,

@@ -86,8 +86,8 @@ const About = () => {
                 alt="Sunny Patel"
                 className="w-[150%] h-[150%] object-cover rounded-full"
                 style={{
-                  objectPosition: "50% 45%",
-                  transform: "scale(1.1) translate(3.0%, -29.625%)",
+                  objectPosition: "33.7% 22%",
+                  transform: "scale(1.5)",
                 }}
               />
             </div>
