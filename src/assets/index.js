@@ -1,6 +1,6 @@
 import profilepic from './pfp.png';
 
-import logo from "./logo0.png";
+import logo from "./logo0.webp";
 import backend from "./backend.png";
 import mobile from "./mobile.png";
 import web from "./web.png";
@@ -22,11 +22,6 @@ import azure from "./tech/azure.png";
 import powershell from "./tech/powershell.svg"
 
 
-import photoshop from "./tech/photoshop.svg"
-import premiere from "./tech/premiere.svg"
-import cinema4d from "./tech/cinema4d.png"
-import blender from "./tech/blender.svg"
-
 import google from "./company/google.png"
 import aws from "./tech/aws.png";
 
@@ -37,7 +32,6 @@ import wordsearch from "./wordsearchoutput.jpg"
 import financialflowimage from "./FinancialFlowDemonstration.png"
 import enterpriseapitester from "./enterpriseapiui.png"
 
-import resume from "./Resume-Sunny-Patel.pdf";
 import awsdbcert from "./AWS Database Specialty Certified - Sunny Jayendra Patel.jpg"
 
 // Languages
@@ -174,11 +168,6 @@ export {
   password_generator,
   wordsearch,
   powershell,
-  photoshop,
-  premiere,
-  cinema4d,
-  blender,
-  resume,
   awsdbcert,
   financialflowimage,
   enterpriseapitester,

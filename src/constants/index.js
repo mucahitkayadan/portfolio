@@ -24,10 +24,6 @@ import {
   pythonanalysis,
   password_generator,
   powershell,
-  photoshop,
-  premiere,
-  cinema4d,
-  blender,
   awsdbcert,
   financialflowimage,
   enterpriseapitester,
@@ -298,25 +294,6 @@ const cybersecurityTools = [
   {
     name: "Wireshark",
     icon: python,
-  },
-];
-
-const designTools = [
-  {
-    name: "Photoshop",
-    icon: photoshop,
-  },
-  {
-    name: "Premiere",
-    icon: premiere,
-  },
-  {
-    name: "Cinema 4D",
-    icon: cinema4d,
-  },
-  {
-    name: "Blender",
-    icon: blender,
   },
 ];
 
@@ -667,7 +644,6 @@ export {
   technologies,
   itTools,
   cybersecurityTools,
-  designTools,
   experiences,
   extracurricular,
   projects,

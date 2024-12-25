@@ -58,9 +58,6 @@ import {
   ubuntu,
   powershell,
   azure,
-  photoshop,
-  premiere,
-  cinema4d,
 } from "../assets";
 
 const programming_languages = [
@@ -120,11 +117,6 @@ const itTools = [
   { name: "Azure", icon: azure, url: "https://azure.microsoft.com" },
 ];
 
-const contentProduction = [
-  { name: "Photoshop", icon: photoshop, url: "https://www.adobe.com/products/photoshop.html" },
-  { name: "Premiere Pro", icon: premiere, url: "https://www.adobe.com/products/premiere.html" },
-  { name: "Cinema 4D", icon: cinema4d, url: "https://www.maxon.net/cinema-4d" },
-];
 
 const Tech = () => {
   const [rows, setRows] = useState({
@@ -177,7 +169,6 @@ const Tech = () => {
         machine_learning: calculateRows(window.innerWidth, machine_learning),
         cloud_platforms: calculateRows(window.innerWidth, cloud_platforms),
         itTools: calculateRows(window.innerWidth, itTools),
-        contentProduction: calculateRows(window.innerWidth, contentProduction),
       };
       setRows(rowsData);
     };
@@ -295,7 +286,6 @@ const Tech = () => {
         {renderCategory("machine_learning", rows.machine_learning)}
         {renderCategory("cloud_platforms", rows.cloud_platforms)}
         {renderCategory("itTools", rows.itTools)}
-        {renderCategory("contentProduction", rows.contentProduction)}
       </div>
     </section>
   );
