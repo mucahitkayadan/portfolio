@@ -50,14 +50,16 @@ import {
   googlecloud,
   computeengine,
 
+  // Miscellaneous  
+  mongodb,
+  mysql,
+  postgresql,
+  sqlite,
+
   // Technologies
   docker,
-  postgresql,
-  mongodb,
-  aws,
   ubuntu,
   powershell,
-  azure,
 } from "../assets";
 
 const programming_languages = [
@@ -107,20 +109,26 @@ const cloud_platforms = [
   { name: "Compute Engine", icon: computeengine, url: "https://cloud.google.com/compute" },
 ];
 
+const miscellaneous = [
+  { name: "MongoDB", icon: mongodb, url: "https://www.mongodb.com" },
+  { name: "MySQL", icon: mysql, url: "https://www.mysql.com" },
+  { name: "PostgreSQL", icon: postgresql, url: "https://www.postgresql.org" },
+  { name: "SQLite", icon: sqlite, url: "https://www.sqlite.org" },
+];
+
 const itTools = [
   { name: "Docker", icon: docker, url: "https://www.docker.com" },
-  { name: "PostgreSQL", icon: postgresql, url: "https://www.postgresql.org" },
-  { name: "MongoDB", icon: mongodb, url: "https://www.mongodb.com" },
-  { name: "AWS", icon: aws, url: "https://aws.amazon.com" },
   { name: "Ubuntu", icon: ubuntu, url: "https://ubuntu.com" },
   { name: "PowerShell", icon: powershell, url: "https://docs.microsoft.com/powershell" },
-  { name: "Azure", icon: azure, url: "https://azure.microsoft.com" },
 ];
 
 
 const Tech = () => {
   const [rows, setRows] = useState({
     programming: [],
+    machine_learning: [],
+    cloud_platforms: [],
+    miscellaneous: [],
     itTools: [],
     contentProduction: [],
   });
@@ -168,6 +176,7 @@ const Tech = () => {
         programming_languages: calculateRows(window.innerWidth, programming_languages),
         machine_learning: calculateRows(window.innerWidth, machine_learning),
         cloud_platforms: calculateRows(window.innerWidth, cloud_platforms),
+        miscellaneous: calculateRows(window.innerWidth, miscellaneous),
         itTools: calculateRows(window.innerWidth, itTools),
       };
       setRows(rowsData);
@@ -285,6 +294,7 @@ const Tech = () => {
         {renderCategory("programming_languages", rows.programming_languages)}
         {renderCategory("machine_learning", rows.machine_learning)}
         {renderCategory("cloud_platforms", rows.cloud_platforms)}
+        {renderCategory("miscellaneous", rows.miscellaneous)}
         {renderCategory("itTools", rows.itTools)}
       </div>
     </section>

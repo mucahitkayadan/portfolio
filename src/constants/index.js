@@ -18,13 +18,10 @@ import {
   fullstack,
   postgresql,
   git,
-  google,
-  aws,
   knifethrowimage,
   pythonanalysis,
   password_generator,
   powershell,
-  awsdbcert,
   financialflowimage,
   enterpriseapitester,
   github,
@@ -33,6 +30,7 @@ import {
   orsan,
   teknoworld,
   ventspils,
+  virac,
   miu,
   padua,
   aksaray,
@@ -273,10 +271,6 @@ const technologies = [
     name: "PostGreSQL",
     icon: postgresql,
   },
-  {
-    name: "AWS",
-    icon: aws,
-  },
 ];
 
 const itTools = [
@@ -358,7 +352,7 @@ const experiences = [
   {
     title: "Software Engineer",
     company_name: "Ventspils International Radio-Astronomy Center",
-    icon: ventspils,
+    icon: virac,
     iconBg: "#fff",
     date: "Jun 2018 - Oct 2018",
     points: [
@@ -389,25 +383,17 @@ const extracurricular = [
   {
     title: "AWS Certified Database Specialty",
     type: "Most Advanced Professional Credential",
-    icon: aws,
+    icon: python,
     iconBg: "#FFFFFF",
     date: "Issued: Aug 14, 2024 | Expiry: Aug 16, 2027",
     points: ["Cloud-Native Architecture, Multi-Region Data Replication, Automated Tuning and Query Optimization, IAM, Clustering, Distributed Databases, SQL/NoSQL, Legacy Cloud Integration"],
-    credential: awsdbcert,
+    credential: "placeholder",
   },
-  // {
-  //   title: "Certified Enterprise Scripting Architect",
-  //   type: "Automate | Connectwise University",
-  //   icon: connectwise,
-  //   iconBg: "#748C7B",
-  //   date: "Jul 2024",
-  //   points: ["RMM, MDM, Powershell, Scripting, Windows Server, Enterprise Architecture, Query Optimization"],
-  //   credential: connectwisecert,
-  // },
+
   {
     title: "Google IT Automation With Python",
     type: "Professional Certificate",
-    icon: google,
+    icon: python,
     iconBg: "#050C18",
     date: "Mar 2023",
     points: [

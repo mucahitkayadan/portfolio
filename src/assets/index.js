@@ -9,22 +9,66 @@ import github from "./github.png";
 import menu from "./menu.svg";
 import close from "./close.svg";
 
-import docker from "./tech/docker.png";
-import mysql from "./tech/mysql.png";
-import git from "./tech/git.png";
-import ubuntu from "./tech/ubuntu.png";
-import postgresql from "./tech/postgresql.png";
-import mongodb from "./tech/mongodb.png";
-import linux from "./tech/linux.png";
+// Languages
+import python from "./languages/python.png"
+import java from "./languages/java.webp"
+import cplusplus from "./languages/cplusplus.svg"
+import matlab from "./languages/matlab.svg"
+import octave from "./languages/octave.svg"
+import c from "./languages/c.svg"
+
+// Machine Learning
+import opencv from "./skills/machine_learning/opencv.svg"
+import tensorflow from "./skills/machine_learning/tensorflow.svg"
+import pytorch from "./skills/machine_learning/pytorch.svg"
+import keras from "./skills/machine_learning/keras.svg"
+import scikit from "./skills/machine_learning/scikitlearn.svg"
+import pillow from "./skills/machine_learning/pillow.png"
+import pandas from "./skills/machine_learning/pandas.svg"
+import numpy from "./skills/machine_learning/numpy.svg"
+import matplotlib from "./skills/machine_learning/matplotlib.svg"
+import seaborn from "./skills/machine_learning/seaborn.svg"
+import scipy from "./skills/machine_learning/scipy.svg"
+import ollama from "./skills/machine_learning/ollama.svg"
+import spacy from "./skills/machine_learning/spacy.svg"
+import langchain from "./skills/machine_learning/langchain.svg"
+import openai from "./skills/machine_learning/openai.svg"
+import onnx from "./skills/machine_learning/onnx.svg"
+import cuda from "./skills/machine_learning/cuda.svg"
+
+// Cloud Platforms
+import amazonapigateway from "./skills/cloud_platforms/amazonapigateway.svg"
+import amazoncloudwatch from "./skills/cloud_platforms/amazoncloudwatch.svg"
+import amazondocumentdb from "./skills/cloud_platforms/amazondocumentdb.svg"
+import amazondynamodb from "./skills/cloud_platforms/amazondynamodb.svg"
+import amazonec2 from "./skills/cloud_platforms/amazonec2.svg"
+import amazonecs from "./skills/cloud_platforms/amazonecs.svg"
+import amazonelasticache from "./skills/cloud_platforms/amazonelasticache.svg"
+import amazonrds from "./skills/cloud_platforms/amazonrds.svg"
+import amazonroute53 from "./skills/cloud_platforms/amazonroute53.svg"
+import amazons3 from "./skills/cloud_platforms/amazons3.svg"
+import amazonsqs from "./skills/cloud_platforms/amazonsqs.svg"
+import azurecloud from "./skills/cloud_platforms/azure.svg"
+import digitalocean from "./skills/cloud_platforms/digitalocean.svg"
+import googlecloud from "./skills/cloud_platforms/googlecloud.svg"
+import computeengine from "./skills/cloud_platforms/computeengine.svg"
+
+// Miscellaneous
+import mongodb from "./skills/miscellaneous/mongodb.svg";
+import mysql from "./skills/miscellaneous/mysql.svg";
+import postgresql from "./skills/miscellaneous/postgre.svg";
+import sqlite from "./skills/miscellaneous/sqlite.svg";
+
+import docker from "./skills/docker.png";
+
+import git from "./skills/git.png";
+import ubuntu from "./skills/ubuntu.png";
 
 
-import azure from "./tech/azure.png";
-import powershell from "./tech/powershell.svg"
+import linux from "./skills/linux.png";
+import powershell from "./skills/powershell.svg"
 
-
-import google from "./company/google.png"
-import aws from "./tech/aws.png";
-
+// Projects
 import knifethrowimage from "./knifethrow_demonstration.jpg"
 import pythonanalysis from "./data_analysis.png"
 import password_generator from "./passwordgenerator.png"
@@ -32,72 +76,26 @@ import wordsearch from "./wordsearchoutput.jpg"
 import financialflowimage from "./FinancialFlowDemonstration.png"
 import enterpriseapitester from "./enterpriseapiui.png"
 
-import awsdbcert from "./AWS Database Specialty Certified - Sunny Jayendra Patel.jpg"
-
-// Languages
-import python from "./tech/languages/python.png"
-import java from "./tech/languages/java.webp"
-import cplusplus from "./tech/languages/cplusplus.svg"
-import matlab from "./tech/languages/matlab.svg"
-import octave from "./tech/languages/octave.svg"
-import c from "./tech/languages/c.svg"
-
-// Machine Learning
-import opencv from "./tech/machine_learning/opencv.svg"
-import tensorflow from "./tech/machine_learning/tensorflow.svg"
-import pytorch from "./tech/machine_learning/pytorch.svg"
-import keras from "./tech/machine_learning/keras.svg"
-import scikit from "./tech/machine_learning/scikitlearn.svg"
-import pillow from "./tech/machine_learning/pillow.png"
-import pandas from "./tech/machine_learning/pandas.svg"
-import numpy from "./tech/machine_learning/numpy.svg"
-import matplotlib from "./tech/machine_learning/matplotlib.svg"
-import seaborn from "./tech/machine_learning/seaborn.svg"
-import scipy from "./tech/machine_learning/scipy.svg"
-import ollama from "./tech/machine_learning/ollama.svg"
-import spacy from "./tech/machine_learning/spacy.svg"
-import langchain from "./tech/machine_learning/langchain.svg"
-import openai from "./tech/machine_learning/openai.svg"
-import onnx from "./tech/machine_learning/onnx.svg"
-import cuda from "./tech/machine_learning/cuda.svg"
-
-// Cloud Platforms
-import amazonapigateway from "./tech/cloud_platforms/amazonapigateway.svg"
-import amazoncloudwatch from "./tech/cloud_platforms/amazoncloudwatch.svg"
-import amazondocumentdb from "./tech/cloud_platforms/amazondocumentdb.svg"
-import amazondynamodb from "./tech/cloud_platforms/amazondynamodb.svg"
-import amazonec2 from "./tech/cloud_platforms/amazonec2.svg"
-import amazonecs from "./tech/cloud_platforms/amazonecs.svg"
-import amazonelasticache from "./tech/cloud_platforms/amazonelasticache.svg"
-import amazonrds from "./tech/cloud_platforms/amazonrds.svg"
-import amazonroute53 from "./tech/cloud_platforms/amazonroute53.svg"
-import amazons3 from "./tech/cloud_platforms/amazons3.svg"
-import amazonsqs from "./tech/cloud_platforms/amazonsqs.svg"
-import azurecloud from "./tech/cloud_platforms/azure.svg"
-import digitalocean from "./tech/cloud_platforms/digitalocean.svg"
-import googlecloud from "./tech/cloud_platforms/googlecloud.svg"
-import computeengine from "./tech/cloud_platforms/computeengine.svg"
-
-
-
 
 
 // Electrical Electronics
-// import arduino from "./tech/arduino.svg"
-// import raspberrypi from "./tech/raspberrypi.svg"
-// import esp32 from "./tech/esp32.svg"
-// import esp8266 from "./tech/esp8266.svg"
-// import esp32c3 from "./tech/esp32c3.svg"
+// import arduino from "./skills/arduino.svg"
+// import raspberrypi from "./skills/raspberrypi.svg"
+// import esp32 from "./skills/esp32.svg"
+// import esp8266 from "./skills/esp8266.svg"
+// import esp32c3 from "./skills/esp32c3.svg"
 
+// Education
+import miu from "./education/miu.png";
+import padua from "./education/padua.png";
+import aksaray from "./education/aksaray.png";
+import ventspils from "./education/ventspils.png";
 
-import miu from "./company/miu.png";
-import padua from "./company/padua.png";
-import aksaray from "./company/aksaray.png";
-import ventspils from "./company/ventspils.png";
-
-import goglobal from "./company/goglobal.png";
-import orsan from "./company/orsan.png";
-import teknoworld from "./company/teknoworld.png";
+// Work Experience
+import goglobal from "./work_experience/goglobal.png";
+import orsan from "./work_experience/orsan.png";
+import teknoworld from "./work_experience/teknoworld.png";
+import virac from "./work_experience/virac.svg";
 
 
 export {
@@ -145,6 +143,12 @@ export {
   googlecloud,
   computeengine,
 
+  // Miscellaneous
+  mongodb,
+  mysql,
+  postgresql,
+  sqlite,
+
   // Technologies
   logo,
   backend,
@@ -159,27 +163,26 @@ export {
   ubuntu,
   linux,
 
-  postgresql,
-  mongodb,
-  aws,
-  google,
   knifethrowimage,
   pythonanalysis,
   password_generator,
   wordsearch,
   powershell,
-  awsdbcert,
   financialflowimage,
   enterpriseapitester,
   profilepic,
   docker,
-  mysql,
-  azure,
+
+
+  // Education
   miu,
   padua,
+  aksaray,  
+  ventspils,
+
+  // Work Experience
   goglobal,
   orsan,
   teknoworld,
-  ventspils,
-  aksaray,
+  virac,
 };
