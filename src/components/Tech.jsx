@@ -6,65 +6,124 @@ import { textVariant } from "../utils/motion";
 
 // Import all assets
 import {
+  // Languages
   python,
-  javascript,
   java,
   cplusplus,
-  typescript,
+  matlab,
+  octave,
+  c,
+
+  // Machine Learning
+  opencv,
+  tensorflow,
+  pytorch,
+  keras,
+  scikit,
+  pillow,
+  pandas,
+  numpy,
+  matplotlib,
+  seaborn,
+  scipy,
+  ollama,
+  spacy,
+  langchain,
+  openai,
+  onnx,
+  cuda,
+
+  // Cloud Platforms
+  amazonapigateway,
+  amazoncloudwatch,
+  amazondocumentdb,
+  amazondynamodb,
+  amazonec2,
+  amazonecs,
+  amazonelasticache,
+  amazonrds,
+  amazonroute53,
+  amazons3,
+  amazonsqs,
+  azurecloud,
+  digitalocean,
+  googlecloud,
+  computeengine,
+
+  // Technologies
   docker,
-  tailwind,
-  reactjs,
   postgresql,
   mongodb,
-  threejs,
   aws,
   ubuntu,
   powershell,
   azure,
-  cisco,
-  connectwise,
-  virtualbox,
-  kalilinux,
-  wireshark,
-  nmap,
-  johntheripper,
   photoshop,
   premiere,
   cinema4d,
 } from "../assets";
 
-const programming = [
-  { name: "Python", icon: python },
-  { name: "Java", icon: java },
-  { name: "C++", icon: cplusplus },
-  { name: "JavaScript", icon: javascript },
-  { name: "TypeScript", icon: typescript },
-  { name: "Docker", icon: docker },
-  { name: "Tailwind CSS", icon: tailwind },
-  { name: "React JS", icon: reactjs },
-  { name: "PostgreSQL", icon: postgresql },
-  { name: "MongoDB", icon: mongodb },
-  { name: "Three.js", icon: threejs },
+const programming_languages = [
+  { name: "Python", icon: python, url: "https://www.python.org" },
+  { name: "Java", icon: java, url: "https://www.java.com" },
+  { name: "C", icon: c, url: "https://en.wikipedia.org/wiki/C_(programming_language)" },
+  { name: "C++", icon: cplusplus, url: "https://isocpp.org" },  
+  { name: "Matlab", icon: matlab, url: "https://www.mathworks.com/products/matlab.html" },
+  { name: "Octave", icon: octave, url: "https://octave.org" },
+];
+
+const machine_learning = [
+  { name: "OpenCV", icon: opencv, url: "https://opencv.org" },
+  { name: "TensorFlow", icon: tensorflow, url: "https://www.tensorflow.org" },
+  { name: "PyTorch", icon: pytorch, url: "https://pytorch.org" },
+  { name: "Keras", icon: keras, url: "https://keras.io" },
+  { name: "Scikit-Learn", icon: scikit, url: "https://scikit-learn.org" },
+  { name: "Pillow", icon: pillow, url: "https://pypi.org/project/pillow/" },
+  { name: "Pandas", icon: pandas, url: "https://pandas.pydata.org" },
+  { name: "NumPy", icon: numpy, url: "https://numpy.org" },
+  { name: "Matplotlib", icon: matplotlib, url: "https://matplotlib.org" },
+  { name: "Seaborn", icon: seaborn, url: "https://seaborn.pydata.org" },
+  { name: "SciPy", icon: scipy, url: "https://scipy.org" },
+  { name: "Ollama", icon: ollama, url: "https://ollama.ai" },
+  { name: "Spacy", icon: spacy, url: "https://spacy.io" },
+  { name: "Langchain", icon: langchain, url: "https://www.langchain.com" },
+  { name: "OpenAI", icon: openai, url: "https://openai.com" },
+  { name: "ONNX", icon: onnx, url: "https://onnx.ai" },
+  { name: "CUDA", icon: cuda, url: "https://developer.nvidia.com/cuda-toolkit" },
+];
+
+const cloud_platforms = [
+  { name: "Amazon API Gateway", icon: amazonapigateway, url: "https://aws.amazon.com/api-gateway" },
+  { name: "Amazon CloudWatch", icon: amazoncloudwatch, url: "https://aws.amazon.com/cloudwatch" },
+  { name: "Amazon DocumentDB", icon: amazondocumentdb, url: "https://aws.amazon.com/documentdb" },
+  { name: "Amazon DynamoDB", icon: amazondynamodb, url: "https://aws.amazon.com/dynamodb" },
+  { name: "Amazon EC2", icon: amazonec2, url: "https://aws.amazon.com/ec2" },
+  { name: "Amazon ECS", icon: amazonecs, url: "https://aws.amazon.com/ecs" },
+  { name: "Amazon Elasticache", icon: amazonelasticache, url: "https://aws.amazon.com/elasticache" },
+  { name: "Amazon RDS", icon: amazonrds, url: "https://aws.amazon.com/rds" },
+  { name: "Amazon Route 53", icon: amazonroute53, url: "https://aws.amazon.com/route53" },
+  { name: "Amazon S3", icon: amazons3, url: "https://aws.amazon.com/s3" },
+  { name: "Amazon SQS", icon: amazonsqs, url: "https://aws.amazon.com/sqs" },
+  { name: "Azure Cloud", icon: azurecloud, url: "https://azure.microsoft.com" },
+  { name: "DigitalOcean", icon: digitalocean, url: "https://www.digitalocean.com" },
+  { name: "Google Cloud", icon: googlecloud, url: "https://cloud.google.com" },
+  { name: "Compute Engine", icon: computeengine, url: "https://cloud.google.com/compute" },
 ];
 
 const itTools = [
-  { name: "AWS", icon: aws },
-  { name: "Ubuntu", icon: ubuntu },
-  { name: "PowerShell", icon: powershell },
-  { name: "Azure", icon: azure },
-  { name: "Cisco", icon: cisco },
-  { name: "ConnectWise", icon: connectwise },
-  { name: "VirtualBox", icon: virtualbox },
-  { name: "Kali Linux", icon: kalilinux },
-  { name: "Wireshark", icon: wireshark },
-  { name: "Nmap", icon: nmap },
-  { name: "John the Ripper", icon: johntheripper },
+  { name: "Docker", icon: docker, url: "https://www.docker.com" },
+  { name: "PostgreSQL", icon: postgresql, url: "https://www.postgresql.org" },
+  { name: "MongoDB", icon: mongodb, url: "https://www.mongodb.com" },
+  { name: "AWS", icon: aws, url: "https://aws.amazon.com" },
+  { name: "Ubuntu", icon: ubuntu, url: "https://ubuntu.com" },
+  { name: "PowerShell", icon: powershell, url: "https://docs.microsoft.com/powershell" },
+  { name: "Azure", icon: azure, url: "https://azure.microsoft.com" },
 ];
 
 const contentProduction = [
-  { name: "Photoshop", icon: photoshop },
-  { name: "Premiere Pro", icon: premiere },
-  { name: "Cinema 4D", icon: cinema4d },
+  { name: "Photoshop", icon: photoshop, url: "https://www.adobe.com/products/photoshop.html" },
+  { name: "Premiere Pro", icon: premiere, url: "https://www.adobe.com/products/premiere.html" },
+  { name: "Cinema 4D", icon: cinema4d, url: "https://www.maxon.net/cinema-4d" },
 ];
 
 const Tech = () => {
@@ -114,7 +173,9 @@ const Tech = () => {
   useEffect(() => {
     const calculateRowsForAllCategories = () => {
       const rowsData = {
-        programming: calculateRows(window.innerWidth, programming),
+        programming_languages: calculateRows(window.innerWidth, programming_languages),
+        machine_learning: calculateRows(window.innerWidth, machine_learning),
+        cloud_platforms: calculateRows(window.innerWidth, cloud_platforms),
         itTools: calculateRows(window.innerWidth, itTools),
         contentProduction: calculateRows(window.innerWidth, contentProduction),
       };
@@ -191,8 +252,13 @@ const Tech = () => {
                 initial="hidden"
                 animate="visible"
                 whileHover="hover"
+                onClick={() => window.open(tech.url, '_blank')}
+                style={{ cursor: 'pointer', position: 'relative' }}
               >
-                <img src={tech.icon} alt={tech.name}  style={{ userSelect: "none" }} draggable="false"/>
+                <img src={tech.icon} alt={tech.name} style={{ userSelect: "none" }} draggable="false"/>
+                <div className="tech-name-overlay">
+                  {tech.name}
+                </div>
               </motion.div>
             ))}
           </div>
@@ -223,9 +289,11 @@ const Tech = () => {
       <div className="container">
         <motion.div variants={textVariant()}>
           <p className={`${styles.sectionSubText} text-center`}>Technical Proficiencies</p>
-          <h2 className={`${styles.sectionHeadText} text-center`}>Skills.</h2>
+          <h2 className={`${styles.sectionHeadText} text-center`}>Skills</h2>
         </motion.div>
-        {renderCategory("programming", rows.programming)}
+        {renderCategory("programming_languages", rows.programming_languages)}
+        {renderCategory("machine_learning", rows.machine_learning)}
+        {renderCategory("cloud_platforms", rows.cloud_platforms)}
         {renderCategory("itTools", rows.itTools)}
         {renderCategory("contentProduction", rows.contentProduction)}
       </div>

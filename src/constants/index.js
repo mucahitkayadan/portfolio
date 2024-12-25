@@ -1,47 +1,33 @@
 import {
+  // Languages
+  python, 
+  java,
+  cplusplus,
+  matlab,
+  octave,
+  c,
+  // Computer Vision
+  opencv,
+  tensorflow,
+  pytorch,
+  keras,
+  // Technologies
   mobile,
   backend,
   web,
   fullstack,
-  javascript,
-  java,
-  html,
-  css,
-  reactjs,
-  ubuntu,
-  tailwind,
   postgresql,
   git,
-  wonderland,
-  mackenziehealth,
-  privcurity,
   google,
-  whmis,
   aws,
-  python,
-  cplusplus,
-  typescript,
-  sunnifyimage,
   knifethrowimage,
   pythonanalysis,
   password_generator,
-  // wordsearch,
   powershell,
-  cisco,
-  connectwise,
-  virtualbox,
-  kalilinux,
-  wireshark,
-  nmap,
-  metasploit,
-  johntheripper,
-  hydra,
-  aircrackng,
   photoshop,
   premiere,
   cinema4d,
   blender,
-  connectwisecert,
   awsdbcert,
   financialflowimage,
   enterpriseapitester,
@@ -284,36 +270,12 @@ const technologies = [
     icon: powershell,
   },
   {
-    name: "Kali Linux",
-    icon: kalilinux,
-  },
-  {
     name: "MongoDB",
     icon: mongodb,
   },
   {
     name: "PostGreSQL",
     icon: postgresql,
-  },
-  {
-    name: "JavaScript",
-    icon: javascript,
-  },
-  {
-    name: "HTML 5",
-    icon: html,
-  },
-    {
-    name: "Tailwind CSS",
-    icon: tailwind,
-  }, 
-  {
-    name: "React JS",
-    icon: reactjs,
-  },
-  {
-    name: "Typescript",
-    icon: typescript,
   },
   {
     name: "AWS",
@@ -327,47 +289,15 @@ const itTools = [
     icon: powershell,
   },
   {
-    name: "Cisco",
-    icon: cisco,
-  },
-  {
-    name: "ConnectWise",
-    icon: connectwise,
-  },
-  {
     name: "VirtualBox",
-    icon: virtualbox,
+    icon: python,
   },
 ];
 
 const cybersecurityTools = [
   {
-    name: "Kali Linux",
-    icon: kalilinux,
-  },
-  {
     name: "Wireshark",
-    icon: wireshark,
-  },
-  {
-    name: "Nmap",
-    icon: nmap,
-  },
-  {
-    name: "Metasploit",
-    icon: metasploit,
-  },
-  {
-    name: "John the Ripper",
-    icon: johntheripper,
-  },
-  {
-    name: "Hydra",
-    icon: hydra,
-  },
-  {
-    name: "Aircrack-ng",
-    icon: aircrackng,
+    icon: python,
   },
 ];
 
@@ -488,15 +418,15 @@ const extracurricular = [
     points: ["Cloud-Native Architecture, Multi-Region Data Replication, Automated Tuning and Query Optimization, IAM, Clustering, Distributed Databases, SQL/NoSQL, Legacy Cloud Integration"],
     credential: awsdbcert,
   },
-  {
-    title: "Certified Enterprise Scripting Architect",
-    type: "Automate | Connectwise University",
-    icon: connectwise,
-    iconBg: "#748C7B",
-    date: "Jul 2024",
-    points: ["RMM, MDM, Powershell, Scripting, Windows Server, Enterprise Architecture, Query Optimization"],
-    credential: connectwisecert,
-  },
+  // {
+  //   title: "Certified Enterprise Scripting Architect",
+  //   type: "Automate | Connectwise University",
+  //   icon: connectwise,
+  //   iconBg: "#748C7B",
+  //   date: "Jul 2024",
+  //   points: ["RMM, MDM, Powershell, Scripting, Windows Server, Enterprise Architecture, Query Optimization"],
+  //   credential: connectwisecert,
+  // },
   {
     title: "Google IT Automation With Python",
     type: "Professional Certificate",
@@ -511,7 +441,7 @@ const extracurricular = [
   {
     title: "WHMIS (Worker Health and Safety)",
     type: "Government Workforce Requirement",
-    icon: whmis,
+    icon: python,
     iconBg: "#CCCFD8",
     date: "Sep 2020",
     points: ["Hazard Awareness, Legal Compliance, Personal Protection, Accident Prevention"],
@@ -567,7 +497,7 @@ const projects = [
         color: "blue-text-gradient",
       },
     ],
-    image: sunnifyimage,
+    image: python,
     source_code_link: "https://github.com/sunnypatell/sunnify-spotify-downloader",
     live_project_link: "https://sunnify-spotify-downloader.vercel.app/",
   },
@@ -700,7 +630,7 @@ const projects = [
         color: "pink-text-gradient",
       },
     ],
-    image: sunnifyimage,
+    image: python,
     source_code_link: "https://github.com/mucahitkayadan",
   },
 ];

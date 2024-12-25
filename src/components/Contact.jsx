@@ -133,11 +133,11 @@ const Contact = () => {
         <div className="flex justify-between items-center mb-4">
           <p className={styles.sectionSubText}>Get in touch</p>
           <a
-            href="tel:+14372161611"
+            href="tel:+16412339607"
             className="text-purple-500 hover:text-purple-400 transition-colors duration-300 flex items-center"
           >
             <FontAwesomeIcon icon={faPhone} className="mr-2" />
-            (437) 216-1611
+            (641) 233-9607
           </a>
         </div>
         <h3 className={styles.sectionHeadText}>Contact.</h3>
