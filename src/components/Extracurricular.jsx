@@ -151,67 +151,69 @@ const Extracurricular = () => {
         </Swiper>
       </motion.div>
 
-      <style jsx global>{`
-        .mySwiper {
-          width: 100%;
-          padding-top: 50px;
-          padding-bottom: 50px;
-        }
-        .swiper-slide {
-          background-position: center;
-          background-size: cover;
-          width: 280px;
-          height: 380px;
-        }
-        .swiper-slide-active {
-          transform: scale(1.1) !important;
-        }
-        .swiper-slide img {
-          display: block;
-          width: 100%;
-        }
-        .swiper-pagination-bullet {
-          background: #915eff;
-        }
-        .certification-card {
-          background-color: rgba(30, 30, 60, 0.8);
-          backdrop-filter: blur(10px);
-          box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-          border: 1px solid rgba(255, 255, 255, 0.18);
-          transition: all 0.3s ease-in-out;
-        }
-        .black-gradient {
-          background: #000000;
-          background: -webkit-linear-gradient(to right, #434343, #000000);
-          background: linear-gradient(to right, #434343, #000000);
-        }
-        @media (max-width: 768px) {
+      <div className="swiper-styles">
+        <style global="true">{`
+          .mySwiper {
+            width: 100%;
+            padding-top: 50px;
+            padding-bottom: 50px;
+          }
           .swiper-slide {
-            width: 90vw;
-            max-width: 300px;
-            height: auto;
-            min-height: 340px;
-            opacity: 1 !important;
-            transform: scale(1) !important;
+            background-position: center;
+            background-size: cover;
+            width: 280px;
+            height: 380px;
           }
           .swiper-slide-active {
-            transform: scale(1) !important;
+            transform: scale(1.1) !important;
           }
-          .mySwiper {
-            padding-left: 5vw;
-            padding-right: 5vw;
+          .swiper-slide img {
+            display: block;
+            width: 100%;
+          }
+          .swiper-pagination-bullet {
+            background: #915eff;
           }
           .certification-card {
             background-color: rgba(30, 30, 60, 0.8);
-            box-shadow: 0 4px 16px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            transition: all 0.3s ease-in-out;
           }
-          .swiper-slide-next,
-          .swiper-slide-prev {
-            opacity: 0 !important;
-            visibility: hidden;
+          .black-gradient {
+            background: #000000;
+            background: -webkit-linear-gradient(to right, #434343, #000000);
+            background: linear-gradient(to right, #434343, #000000);
           }
-        }
-      `}</style>
+          @media (max-width: 768px) {
+            .swiper-slide {
+              width: 90vw;
+              max-width: 300px;
+              height: auto;
+              min-height: 340px;
+              opacity: 1 !important;
+              transform: scale(1) !important;
+            }
+            .swiper-slide-active {
+              transform: scale(1) !important;
+            }
+            .mySwiper {
+              padding-left: 5vw;
+              padding-right: 5vw;
+            }
+            .certification-card {
+              background-color: rgba(30, 30, 60, 0.8);
+              box-shadow: 0 4px 16px 0 rgba(31, 38, 135, 0.37);
+            }
+            .swiper-slide-next,
+            .swiper-slide-prev {
+              opacity: 0 !important;
+              visibility: hidden;
+            }
+          }
+        `}</style>
+      </div>
     </div>
   );
 };

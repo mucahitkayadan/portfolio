@@ -68,6 +68,16 @@ import resume from "./Resume-Sunny-Patel.pdf";
 import awsdbcert from "./AWS Database Specialty Certified - Sunny Jayendra Patel.jpg"
 import connectwisecert from "./Connectwise-Scripting-Certification.pdf"
 
+import miu from "./company/miu.png";
+import padua from "./company/padua.png";
+import aksaray from "./company/aksaray.png";
+import ventspils from "./company/ventspils.png";
+
+import goglobal from "./company/goglobal.png";
+import orsan from "./company/orsan.png";
+import teknoworld from "./company/teknoworld.png";
+
+
 export {
   logo,
   backend,
@@ -129,5 +139,12 @@ export {
   figma,
   mysql,
   threejs,
-  azure
+  azure,
+  miu,
+  padua,
+  goglobal,
+  orsan,
+  teknoworld,
+  ventspils,
+  aksaray,
 };
