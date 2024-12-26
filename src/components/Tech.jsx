@@ -32,7 +32,7 @@ import {
   openai,
   onnx,
   cuda,
-
+  openvino,
   // Cloud Platforms
   amazonapigateway,
   amazoncloudwatch,
@@ -55,11 +55,29 @@ import {
   mysql,
   postgresql,
   sqlite,
-
-  // Technologies
   docker,
-  ubuntu,
-  powershell,
+  githubactions,
+  git,
+  elasticsearch,
+  fastapi,
+  flask,
+  gradle,
+  hibernate,
+  jupyter,
+  latex,
+  pytest,
+  qt,
+  spring,
+  streamlit,
+  linux,
+  selenium,
+  milvus,
+  // Platforms
+  arduino,
+  esp32,
+  jetson,
+  raspberrypi,
+  stm32,
 } from "../assets";
 
 const programming_languages = [
@@ -88,7 +106,7 @@ const machine_learning = [
   { name: "Langchain", icon: langchain, url: "https://www.langchain.com" },
   { name: "OpenAI", icon: openai, url: "https://openai.com" },
   { name: "ONNX", icon: onnx, url: "https://onnx.ai" },
-  { name: "CUDA", icon: cuda, url: "https://developer.nvidia.com/cuda-toolkit" },
+  { name: "OpenVINO", icon: openvino, url: "https://openvino.ai" },
 ];
 
 const cloud_platforms = [
@@ -114,23 +132,41 @@ const miscellaneous = [
   { name: "MySQL", icon: mysql, url: "https://www.mysql.com" },
   { name: "PostgreSQL", icon: postgresql, url: "https://www.postgresql.org" },
   { name: "SQLite", icon: sqlite, url: "https://www.sqlite.org" },
-];
-
-const itTools = [
   { name: "Docker", icon: docker, url: "https://www.docker.com" },
-  { name: "Ubuntu", icon: ubuntu, url: "https://ubuntu.com" },
-  { name: "PowerShell", icon: powershell, url: "https://docs.microsoft.com/powershell" },
+  { name: "GitHub Actions", icon: githubactions, url: "https://github.com/features/actions" },
+  { name: "Git", icon: git, url: "https://git-scm.com" },
+  { name: "Elasticsearch", icon: elasticsearch, url: "https://www.elastic.co/elasticsearch" },
+  { name: "FastAPI", icon: fastapi, url: "https://fastapi.tiangolo.com" },
+  { name: "Flask", icon: flask, url: "https://flask.palletsprojects.com" },
+  { name: "Gradle", icon: gradle, url: "https://gradle.org" },
+  { name: "Hibernate", icon: hibernate, url: "https://hibernate.org" },
+  { name: "Jupyter", icon: jupyter, url: "https://jupyter.org" },
+  { name: "Latex", icon: latex, url: "https://www.latex-project.org" },
+  { name: "Pytest", icon: pytest, url: "https://docs.pytest.org" },
+  { name: "Qt", icon: qt, url: "https://www.qt.io" },
+  { name: "Spring", icon: spring, url: "https://spring.io" },
+  { name: "Streamlit", icon: streamlit, url: "https://streamlit.io" },
+  { name: "Selenium", icon: selenium, url: "https://www.selenium.dev" },
+  { name: "Milvus", icon: milvus, url: "https://milvus.io" },
 ];
 
+const platforms = [
+  { name: "Linux", icon: linux, url: "https://www.linux.org" },
+  { name: "Arduino", icon: arduino, url: "https://www.arduino.cc" },
+  { name: "ESP32", icon: esp32, url: "https://www.espressif.com" },
+  { name: "Jetson", icon: jetson, url: "https://developer.nvidia.com/jetson" },
+  { name: "Raspberry Pi", icon: raspberrypi, url: "https://www.raspberrypi.org" },
+  { name: "STM32", icon: stm32, url: "https://www.st.com/stm32" },
+  { name: "CUDA", icon: cuda, url: "https://developer.nvidia.com/cuda-toolkit" },
+];
 
 const Tech = () => {
   const [rows, setRows] = useState({
-    programming: [],
+    programming_languages: [],
     machine_learning: [],
     cloud_platforms: [],
     miscellaneous: [],
-    itTools: [],
-    contentProduction: [],
+    platforms: [],
   });
 
   const ref = useRef(null);
@@ -177,7 +213,7 @@ const Tech = () => {
         machine_learning: calculateRows(window.innerWidth, machine_learning),
         cloud_platforms: calculateRows(window.innerWidth, cloud_platforms),
         miscellaneous: calculateRows(window.innerWidth, miscellaneous),
-        itTools: calculateRows(window.innerWidth, itTools),
+        platforms: calculateRows(window.innerWidth, platforms),
       };
       setRows(rowsData);
     };
@@ -295,7 +331,7 @@ const Tech = () => {
         {renderCategory("machine_learning", rows.machine_learning)}
         {renderCategory("cloud_platforms", rows.cloud_platforms)}
         {renderCategory("miscellaneous", rows.miscellaneous)}
-        {renderCategory("itTools", rows.itTools)}
+        {renderCategory("platforms", rows.platforms)}
       </div>
     </section>
   );

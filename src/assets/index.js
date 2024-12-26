@@ -1,21 +1,23 @@
+// My Images
 import profilepic from './pfp.png';
-
 import logo from "./logo0.webp";
+
+// Technologies
 import backend from "./backend.png";
 import mobile from "./mobile.png";
 import web from "./web.png";
 import fullstack from "./creator.png";
-import github from "./github.png";
 import menu from "./menu.svg";
 import close from "./close.svg";
+import github from "./skills/github.svg";
 
 // Languages
-import python from "./languages/python.png"
-import java from "./languages/java.webp"
-import cplusplus from "./languages/cplusplus.svg"
-import matlab from "./languages/matlab.svg"
-import octave from "./languages/octave.svg"
-import c from "./languages/c.svg"
+import python from "./skills/languages/python.png"
+import java from "./skills/languages/java.webp"
+import cplusplus from "./skills/languages/cplusplus.svg"
+import matlab from "./skills/languages/matlab.svg"
+import octave from "./skills/languages/octave.svg"
+import c from "./skills/languages/c.svg"
 
 // Machine Learning
 import opencv from "./skills/machine_learning/opencv.svg"
@@ -34,7 +36,7 @@ import spacy from "./skills/machine_learning/spacy.svg"
 import langchain from "./skills/machine_learning/langchain.svg"
 import openai from "./skills/machine_learning/openai.svg"
 import onnx from "./skills/machine_learning/onnx.svg"
-import cuda from "./skills/machine_learning/cuda.svg"
+import openvino from "./skills/machine_learning/openvino2.svg"
 
 // Cloud Platforms
 import amazonapigateway from "./skills/cloud_platforms/amazonapigateway.svg"
@@ -58,15 +60,22 @@ import mongodb from "./skills/miscellaneous/mongodb.svg";
 import mysql from "./skills/miscellaneous/mysql.svg";
 import postgresql from "./skills/miscellaneous/postgre.svg";
 import sqlite from "./skills/miscellaneous/sqlite.svg";
-
-import docker from "./skills/docker.png";
-
-import git from "./skills/git.png";
-import ubuntu from "./skills/ubuntu.png";
-
-
-import linux from "./skills/linux.png";
-import powershell from "./skills/powershell.svg"
+import docker from "./skills/miscellaneous/docker.svg";
+import githubactions from "./skills/miscellaneous/githubactions.svg";
+import git from "./skills/miscellaneous/git.svg";
+import elasticsearch from "./skills/miscellaneous/elasticsearch.svg";
+import fastapi from "./skills/miscellaneous/fastapi.svg";
+import flask from "./skills/miscellaneous/flask.svg";
+import gradle from "./skills/miscellaneous/gradle.svg";
+import hibernate from "./skills/miscellaneous/hibernate.svg";
+import jupyter from "./skills/miscellaneous/jupyter.svg";
+import latex from "./skills/miscellaneous/latex.svg";
+import pytest from "./skills/miscellaneous/pytest.svg";
+import qt from "./skills/miscellaneous/qt.svg";
+import spring from "./skills/miscellaneous/spring.svg";
+import streamlit from "./skills/miscellaneous/streamlit.svg";
+import selenium from "./skills/miscellaneous/selenium.svg";
+import milvus from "./skills/miscellaneous/milvus.svg";
 
 // Projects
 import knifethrowimage from "./knifethrow_demonstration.jpg"
@@ -76,14 +85,14 @@ import wordsearch from "./wordsearchoutput.jpg"
 import financialflowimage from "./FinancialFlowDemonstration.png"
 import enterpriseapitester from "./enterpriseapiui.png"
 
-
-
-// Electrical Electronics
-// import arduino from "./skills/arduino.svg"
-// import raspberrypi from "./skills/raspberrypi.svg"
-// import esp32 from "./skills/esp32.svg"
-// import esp8266 from "./skills/esp8266.svg"
-// import esp32c3 from "./skills/esp32c3.svg"
+// Platforms
+import linux from "./skills/platforms/linux.svg";
+import cuda from "./skills/platforms/cuda.svg";
+import arduino from "./skills/platforms/arduino.svg";
+import esp32 from "./skills/platforms/esp32.svg";
+import jetson from "./skills/platforms/jetson.svg";
+import raspberrypi from "./skills/platforms/raspberrypi.svg";
+import stm32 from "./skills/platforms/stm32.svg";
 
 // Education
 import miu from "./education/miu.png";
@@ -99,6 +108,10 @@ import virac from "./work_experience/virac.svg";
 
 
 export {
+  // Images
+  profilepic,
+  logo,
+
   // Languages
   python,
   java,
@@ -124,7 +137,7 @@ export {
   langchain,
   openai,
   onnx,
-  cuda,
+  openvino,
 
   // Cloud Platforms
   amazonapigateway,
@@ -148,31 +161,49 @@ export {
   mysql,
   postgresql,
   sqlite,
+  githubactions,
+  git,
+  docker,
+  elasticsearch,
+  fastapi,
+  flask,
+  gradle,
+  hibernate,
+  jupyter,
+  latex,
+  pytest,
+  qt,
+  spring,
+  streamlit,
+  selenium,
+  milvus,
+
+  // Platforms
+  arduino,
+  esp32,
+  jetson,
+  raspberrypi,
+  stm32,
+  linux,
+  cuda,
+
 
   // Technologies
-  logo,
   backend,
   mobile,
   web,
   fullstack,
-  github,
   menu,
   close,
- 
-  git,
-  ubuntu,
-  linux,
+  github,
 
+  // Projects
   knifethrowimage,
   pythonanalysis,
   password_generator,
   wordsearch,
-  powershell,
   financialflowimage,
   enterpriseapitester,
-  profilepic,
-  docker,
-
 
   // Education
   miu,

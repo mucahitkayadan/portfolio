@@ -1,31 +1,17 @@
 import {
   // Languages
   python, 
-  java,
-  cplusplus,
-  matlab,
-  octave,
-  c,
-  // Computer Vision
-  opencv,
-  tensorflow,
-  pytorch,
-  keras,
-  // Technologies
   mobile,
+  github,
   backend,
   web,
   fullstack,
   postgresql,
-  git,
   knifethrowimage,
   pythonanalysis,
   password_generator,
-  powershell,
   financialflowimage,
   enterpriseapitester,
-  github,
-  mongodb,
   goglobal,
   orsan,
   teknoworld,
@@ -246,43 +232,7 @@ const education = [
   },
 ];
 
-const technologies = [
-  {
-    name: "Java",
-    icon: java,
-  },
-  {
-    name: "Python",
-    icon: python,
-  },
-  {
-    name: "C++",
-    icon: cplusplus,
-  },
-    {
-    name: "Powershell",
-    icon: powershell,
-  },
-  {
-    name: "MongoDB",
-    icon: mongodb,
-  },
-  {
-    name: "PostGreSQL",
-    icon: postgresql,
-  },
-];
 
-const itTools = [
-  {
-    name: "Powershell",
-    icon: powershell,
-  },
-  {
-    name: "VirtualBox",
-    icon: python,
-  },
-];
 
 const cybersecurityTools = [
   {
@@ -627,8 +577,6 @@ const testimonials = [
 
 export {
   services,
-  technologies,
-  itTools,
   cybersecurityTools,
   experiences,
   extracurricular,
