@@ -15,6 +15,8 @@ import {
   padua,
   aksaray,
   placeholder,
+  chess,
+  tubitak,
 } from "../assets";
 
 export const navLinks = [
@@ -309,43 +311,40 @@ const experiences = [
 
 const extracurricular = [
   {
-    title: "Github Foundations",
-    type: "Professional Certificate",
-    icon: github,
-    iconBg: "#000000",
-    date: "Sep 2024",
-    points: ["Version Control, Git, Actions, CI/CD, Repository Management, SAP Workflow"],
-    credential: "https://www.credly.com/badges/b6f69785-2da8-447e-b02c-3350bf9af803",
+    title: "68th Iowa Reserve Chess Championship Winner",
+    type: "Chess Competition",
+    icon: chess,
+    iconBg: "#000000", 
+    date: "Aug 2023",
+    points: ["Issued by Iowa State Chess Association, 4 Rounds G/60 d5"],
+    credential: "placeholder"
   },
   {
-    title: "AWS Certified Database Specialty",
-    type: "Most Advanced Professional Credential",
-    icon: python,
+    title: "High Honors Degree",
+    type: "Academic Achievement",
+    icon: aksaray,
     iconBg: "#FFFFFF",
-    date: "Issued: Aug 14, 2024 | Expiry: Aug 16, 2027",
-    points: ["Cloud-Native Architecture, Multi-Region Data Replication, Automated Tuning and Query Optimization, IAM, Clustering, Distributed Databases, SQL/NoSQL, Legacy Cloud Integration"],
-    credential: "placeholder",
+    date: "Jun 2019",
+    points: ["Awarded to Bachelor alumni who have graduated with a 3.60 GPA as 3rd of the faculty by Aksaray University"],
+    credential: "placeholder"
   },
-
   {
-    title: "Google IT Automation With Python",
-    type: "Professional Certificate",
-    icon: python,
+    title: "TUBITAK Scientist Support Programs Presidency Winner",
+    type: "Research Competition",
+    icon: tubitak,
     iconBg: "#050C18",
-    date: "Mar 2023",
-    points: [
-      "Configuration Management, Automation, Google Cloud Platform (GCP), Cloud Servers and VM's, Version Control Tools, Automation.",
-    ],
-    credential: "https://www.coursera.org/account/accomplishments/specialization/certificate/82SZFUWF4B3T",
+    date: "Jun 2019", 
+    points: ["\"Egg Sex Classification with Morphological Methods\" at the Food and Agriculture Category of 2242-University Students Research Project Competitions organized by TUBITAK Scientist Support Programs Presidency won the first prize in the Kayseri Regional Exhibition"],
   },
   {
-    title: "WHMIS (Worker Health and Safety)",
-    type: "Government Workforce Requirement",
-    icon: python,
+    title: "University of Padua Scholarship",
+    type: "Academic Scholarship",
+    icon: padua,
     iconBg: "#CCCFD8",
-    date: "Sep 2020",
-    points: ["Hazard Awareness, Legal Compliance, Personal Protection, Accident Prevention"],
-  },
+    date: "Sep 2021 - Sep 2023",
+    points: ["Awarded to graduate students who have been successful in the educational and professional area. Fee waiver + 7000 Euro / year grant"],
+    credential: "placeholder"
+  }
 ];
 
 const projects = [

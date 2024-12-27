@@ -109,6 +109,9 @@ import orsan from "./work_experience/orsan.png";
 import teknoworld from "./work_experience/teknoworld.png";
 import virac from "./work_experience/virac.svg";
 
+// Certificates
+import chess from "./awards/chess.svg";
+import tubitak from "./awards/tubitak.svg";
 
 export {
   // Images
@@ -222,4 +225,8 @@ export {
 
   // Projects
   placeholder,
+
+  // Certificates
+  chess,
+  tubitak,
 };

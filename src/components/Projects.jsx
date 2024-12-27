@@ -74,11 +74,11 @@ const ProjectCard = ({ name, description, tags, image, source_code_link, live_pr
   );
 };
 
-const Works = () => {
+const Projects = () => {
   const [visibleProjects, setVisibleProjects] = useState(6);
   const [isLoading, setIsLoading] = useState(false);
 
-  console.log("Rendering Works component with", projects.length, "total projects");
+  console.log("Rendering Projects component with", projects.length, "total projects");
 
   const loadMore = useCallback(async () => {
     if (isLoading) return;
@@ -124,4 +124,4 @@ const Works = () => {
   );
 };
 
-export default SectionWrapper(Works, "projects");
+export default SectionWrapper(Projects, "projects");

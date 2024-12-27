@@ -11,7 +11,7 @@ import Tech from "./Tech";
 import Education from "./Education";
 import Experience from "./Experience";
 import Extracurricular from "./Extracurricular";
-import Works from "./Works";
+import Projects from "./Projects";
 import Contact from "./Contact";
 import CanvasLoader from "./Loader";
 
@@ -23,7 +23,7 @@ export {
   Education,
   Experience,
   Extracurricular,
-  Works,
+  Projects,
   Contact,
   CanvasLoader,
   EarthCanvas,
