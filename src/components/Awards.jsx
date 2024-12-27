@@ -3,7 +3,7 @@ import { motion, useAnimation, useInView } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Autoplay, Pagination } from "swiper/modules";
 import { styles } from "../styles";
-import { extracurricular } from "../constants";
+import { awards } from "../constants";
 import { SectionWrapper } from "../hoc";
 import { fadeIn, textVariant } from "../utils/motion";
 
@@ -48,7 +48,7 @@ const CertificationCard = ({ title, icon, type, date, points, credential }) => (
   </div>
 );
 
-const Extracurricular = () => {
+const Awards = () => {
   const [isMobile, setIsMobile] = useState(false);
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
@@ -94,7 +94,7 @@ const Extracurricular = () => {
           visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
         }}
       >
-        <h2 className={`${styles.sectionHeadText} text-center`}>Certifications</h2>
+        <h2 className={`${styles.sectionHeadText} text-center`}>Awards</h2>
       </motion.div>
 
       <motion.div 
@@ -143,7 +143,7 @@ const Extracurricular = () => {
             },
           }}
         >
-          {extracurricular.map((certification, index) => (
+          {awards.map((certification, index) => (
             <SwiperSlide key={`certification-${index}`}>
               <CertificationCard {...certification} />
             </SwiperSlide>
@@ -218,4 +218,4 @@ const Extracurricular = () => {
   );
 };
 
-export default SectionWrapper(Extracurricular, "extracurricular");
+export default SectionWrapper(Awards, "awards");

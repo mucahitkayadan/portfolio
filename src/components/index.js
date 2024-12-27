@@ -10,7 +10,7 @@ import About from "./About";
 import Tech from "./Tech";
 import Education from "./Education";
 import Experience from "./Experience";
-import Extracurricular from "./Extracurricular";
+import Awards from "./Awards";
 import Projects from "./Projects";
 import Contact from "./Contact";
 import CanvasLoader from "./Loader";
@@ -22,7 +22,7 @@ export {
   Tech,
   Education,
   Experience,
-  Extracurricular,
+  Awards,
   Projects,
   Contact,
   CanvasLoader,

@@ -309,7 +309,7 @@ const experiences = [
   },
 ];
 
-const extracurricular = [
+const awards = [
   {
     title: "68th Iowa Reserve Chess Championship Winner",
     type: "Chess Competition",
@@ -756,7 +756,7 @@ const testimonials = [
 export {
   services,
   experiences,
-  extracurricular,
+  awards,
   projects,
   education,
   testimonials
