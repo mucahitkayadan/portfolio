@@ -6,12 +6,6 @@ import {
   backend,
   web,
   fullstack,
-  postgresql,
-  knifethrowimage,
-  pythonanalysis,
-  password_generator,
-  financialflowimage,
-  enterpriseapitester,
   goglobal,
   orsan,
   teknoworld,
@@ -20,6 +14,7 @@ import {
   miu,
   padua,
   aksaray,
+  placeholder,
 } from "../assets";
 
 export const navLinks = [
@@ -233,14 +228,6 @@ const education = [
 ];
 
 
-
-const cybersecurityTools = [
-  {
-    name: "Wireshark",
-    icon: python,
-  },
-];
-
 const experiences = [
   {
     title: "Machine Learning Engineer",
@@ -363,188 +350,380 @@ const extracurricular = [
 
 const projects = [
   {
-    name: "FinancialFlow 💸",
+    name: "BMS and Battery Package Systems for Nenessa Electric Car",
     description:
-      "Comprehensive personal finance management application built with Next.js and Typescript. It empowers users to take control of their financial health through intuitive tracking, insightful analytics, and personalized recommendations.",
+      "Led battery team for TUBITAK Efficiency Challenge, implementing BMS with STM32F030 and designing battery pack for 3kW 60V Kelly motor controller. Optimized battery management algorithms, integrated real-time monitoring, and created custom UI for diagnostics.",
     tags: [
       {
-        name: "React-native",
+        name: "STM32",
         color: "blue-text-gradient",
       },
       {
-        name: "Typescript",
-        color: "green-text-gradient",
+        name: "BMS",
+        color: "green-text-gradient", 
       },
       {
-        name: "Tailwind CSS",
+        name: "LiFePo4",
         color: "pink-text-gradient",
-      },
-      {
-        name: "Next.js",
-        color: "blue-text-gradient",
-      },
+      }
     ],
-    image: financialflowimage,
-    source_code_link: "https://github.com/sunnypatell/financialflow",
-    live_project_link: "https://financial-flow.vercel.app/",
-  },
-  {
-    name: "Sunnify (Spotify Downloader) ♫",
-    description:
-      "Sunnify is a Spotify downloader webapp/desktop application that allows you to download entire playlists locally onto your Mac/Linux/Windows PC. The web version of the app is hosted on AWS Lambda and Elastic Beanstalk, with FastAPI ASGI production.",
-    tags: [
-      {
-        name: "python",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "webscraping",
-        color: "green-text-gradient",
-      },
-      {
-        name: "AWS Lambda/Beanstalk",
-        color: "pink-text-gradient",
-      },
-      {
-        name: "Proxy/API",
-        color: "blue-text-gradient",
-      },
-    ],
-    image: python,
-    source_code_link: "https://github.com/sunnypatell/sunnify-spotify-downloader",
-    live_project_link: "https://sunnify-spotify-downloader.vercel.app/",
-  },
-  {
-    name: "Enterprise API Tester 🌐",
-    description:
-      "Comprehensive API testing tool with support for all major HTTP methods, authentication, and CORS-friendly proxy. Features include request import/export, real-world samples, and local storage for data persistence. Built with Next.js, and TypeScript for optimal performance and developer experience.",
-    tags: [
-      {
-        name: "Typescript",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "Tailwind CSS",
-        color: "green-text-gradient",
-      },
-      {
-        name: "Next.js",
-        color: "pink-text-gradient",
-      },
-      {
-        name: "Authentication-Body",
-        color: "blue-text-gradient",
-      },
-    ],
-    image: enterpriseapitester,
-    source_code_link: "https://github.com/sunnypatell/enterprise-api-request-tester",
-    live_project_link: "https://enterprise-api-request-tester.vercel.app/",
-  },
-  {
-    name: "KnifeThrow 🎯",
-    description:
-      "KnifeThrow is a Java Swing-based 2D mini-game, packed by maven with over 5000 lines of code. It includes a menu, game-over screens, sound effects, and custom sprites. Players unlock different knives with varied abilities in a dedicated knife shop. The game features improved collision systems, animations, and particle effects for an immersive experience.",
-    tags: [
-      {
-        name: "java",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "swing",
-        color: "green-text-gradient",
-      },
-      {
-        name: "maven",
-        color: "pink-text-gradient",
-      },
-      {
-        name: "arcadegame",
-        color: "green-text-gradient",
-      },
-    ],
-    image: knifethrowimage,
-    source_code_link: "https://github.com/sunnypatell/KnifeThrow",
-    live_project_link: "https://github.com/sunnypatell/KnifeThrow",
-  },
-  {
-    name: "COVID-19 GTA Cases Data Analysis 🧪",
-    description:
-      "A deep dive into ongoing COVID-19 outbreaks in the Greater Toronto Area (GTA), Ontario. Using data from a government-licensed dataset called Outbreaks by Public Health Unit (PHU) to explore trends and patterns in these outbreaks. This data analysis integrates the essential aspects of the data science workflow (Filesize: 3.5 MiB, 62699 lines of raw dataset)",
-    tags: [
-      {
-        name: "python",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "tensorflow",
-        color: "green-text-gradient",
-      },
-      {
-        name: "scikit-learn",
-        color: "pink-text-gradient",
-      },
-      {
-        name: "pandas",
-        color: "green-text-gradient",
-      },
-      {
-        name: "matplotlib",
-        color: "pink-text-gradient",
-      },
-      {
-        name: "numpy",
-        color: "blue-text-gradient",
-      },
-    ],
-    image: pythonanalysis,
-    source_code_link: "https://drive.google.com/drive/folders/1cTbp-6-flypV-kj3-q606UwwWEralu11",
-    live_project_link: "https://drive.google.com/drive/folders/1cTbp-6-flypV-kj3-q606UwwWEralu11",
-  },
-  {
-    name: "Secure Password Generator 🔐",
-    description:
-      "Secure Password Generator is a Java-based tool designed to generate and manage secure passwords, prioritizing simplicity, security, and user-friendliness. It employs industry-standard encryption algorithms to create strong, unique passwords resistant to common hacking attempts.",
-    tags: [
-      {
-        name: "java",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "sha-256",
-        color: "green-text-gradient",
-      },
-      {
-        name: "encryption/decryption",
-        color: "pink-text-gradient",
-      },
-      {
-        name: "data-algorithms",
-        color: "blue-text-gradient",
-      },
-    ],
-    image: password_generator,
-    source_code_link: "https://github.com/sunnypatell/SecurePasswordGenerator",
-    live_project_link: "https://github.com/sunnypatell/SecurePasswordGenerator",
-  },
-  {
-    name: "Patently: AI-Powered Patent Search",
-    description: "Architected a patent analysis platform utilizing fine-tuned Llama 3.1 for semantic search and prior art retrieval, streamlining IP workflows.",
-    tags: [
-      {
-        name: "LangChain",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "Llama",
-        color: "green-text-gradient",
-      },
-      {
-        name: "Faiss",
-        color: "pink-text-gradient",
-      },
-    ],
-    image: python,
+    image: placeholder,
     source_code_link: "https://github.com/mucahitkayadan",
+    live_project_link: "https://github.com/mucahitkayadan",
+  },
+  {
+    name: "RF Energy Harvesting Circuit",
+    description: 
+      "Developed RF energy harvesting system using custom antenna designs and rectifier circuits. Implemented Schottky diode rectification, optimized impedance matching, and integrated LTC3108-1 DC converter for efficient low-power energy management.",
+    tags: [
+      {
+        name: "RF",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "CST",
+        color: "green-text-gradient",
+      },
+      {
+        name: "ADS",
+        color: "pink-text-gradient",
+      }
+    ],
+    image: placeholder,
+    source_code_link: "https://github.com/mucahitkayadan",
+    live_project_link: "https://github.com/mucahitkayadan",
+  },
+  {
+    name: "Fit Coach with OmniPose and Palm",
+    description:
+      "Developed fitness system with personalized diet plans and workouts using OpenAI API. Integrated features for dietary preferences and fitness goals, ensuring customized user experience. Implemented pose estimation and sensor data analysis for real-time exercise performance assessment. Provided actionable insights and corrections on proper form and technique during exercises.",
+    tags: [
+      {
+        name: "OpenAI API",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "OmniPose",
+        color: "green-text-gradient",
+      },
+      {
+        name: "Palm API",
+        color: "pink-text-gradient",
+      },
+      {
+        name: "Pose Estimation",
+        color: "blue-text-gradient",
+      },
+    ],
+    image: placeholder,
+    source_code_link: "https://github.com/mucahitkayadan",
+    live_project_link: "https://github.com/mucahitkayadan",
+  },
+  {
+    name: "Mortal Combat Game Controller Using Kinect v2 and Kinect SDK",
+    description:
+      "Developed app using Kinect v2 and SDK for camera-based game control via pose detection. Implemented 14 control key bindings mapped to human poses for seamless game interaction. Used pose detection algorithms to classify 14 distinct poses for intuitive gameplay control. Enhanced gaming with novel, immersive control using motion and gesture recognition.",
+    tags: [
+      {
+        name: "Kinect v2",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "Kinect SDK",
+        color: "green-text-gradient",
+      },
+      {
+        name: "Pose Detection",
+        color: "pink-text-gradient",
+      },
+      {
+        name: "Motion Control",
+        color: "blue-text-gradient",
+      },
+    ],
+    image: placeholder,
+    source_code_link: "https://github.com/mucahitkayadan",
+    live_project_link: "https://github.com/mucahitkayadan",
+  },
+  {
+    name: "NFS Most Wanted Self-Driving Car with OpenCV and TensorFlow",
+    description:
+      "Developed self-driving car system for NFS Most Wanted using OpenCV and TensorFlow. Implemented computer vision for line and lane detection, enabling in-lane navigation. Used object detection to track vehicles and pedestrians, avoiding collisions. Integrated adaptive speed control for safer cornering and improved maneuverability. Created immersive self-driving experience showcasing CV and ML in virtual environments.",
+    tags: [
+      {
+        name: "OpenCV",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "TensorFlow", 
+        color: "green-text-gradient",
+      },
+      {
+        name: "Computer Vision",
+        color: "pink-text-gradient",
+      },
+      {
+        name: "Machine Learning",
+        color: "blue-text-gradient",
+      }
+    ],
+    image: placeholder,
+    source_code_link: "https://github.com/mucahitkayadan",
+    live_project_link: "https://github.com/mucahitkayadan",
+  },
+  {
+    name: "Raspberry Pi-based Wild Boar Detection System for Corn Fields",
+    description: 
+      "Developed YOLO5 object detection model for wild boars, addressing crop threats. Used Raspberry Pi4, sensors, and peripherals for a comprehensive detection system. Created system to emit noise, activate lights, capture video, and send alerts upon detection. Achieved high-accuracy real-time boar detection, minimizing false positives. Designed user-friendly interface for remote system monitoring and control.",
+    tags: [
+      {
+        name: "YOLO5",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "Raspberry Pi",
+        color: "green-text-gradient", 
+      },
+      {
+        name: "Object Detection",
+        color: "pink-text-gradient",
+      },
+      {
+        name: "IoT",
+        color: "blue-text-gradient",
+      }
+    ],
+    image: placeholder,
+    source_code_link: "https://github.com/mucahitkayadan",
+    live_project_link: "https://github.com/mucahitkayadan",
+  },
+  {
+    name: "Fairfield Wildlife Surveillance",
+    description: 
+      "Implemented YOLOv8 object detection on Raspberry Pi4 and RoboFlow server, achieving 95% F1 score for wildlife surveillance. Developed website for customizable animal detection settings, including class selection and confidence threshold adjustment. Created database for animal info storage, video capture, and heatmap generation to track wildlife patterns. Optimized real-time detection and tracking of multiple animal species in diverse environments. Integrated analytics tools for insights on wildlife behavior and population trends. Designed user-friendly mobile app for remote monitoring and system control. Collaborated with experts to improve detection accuracy for region-specific animal species.",
+    tags: [
+      {
+        name: "YOLOv8",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "Raspberry Pi",
+        color: "green-text-gradient",
+      },
+      {
+        name: "Computer Vision",
+        color: "pink-text-gradient",
+      },
+      {
+        name: "IoT",
+        color: "blue-text-gradient",
+      },
+    ],
+    image: placeholder,
+    source_code_link: "https://github.com/mucahitkayadan",
+    live_project_link: "https://github.com/mucahitkayadan",
+  },
+  {
+    name: "Image Stitching with OpenCV - C++",
+    description:
+      "Conducted image stitching using C++ and OpenCV, focusing on challenges of stitching numerous images. Developed system for seamlessly combining multiple image pieces into cohesive panoramas. Implemented keypoint, feature, and descriptor-based techniques for high-quality image stitching. Used SLAM algorithm to create maps from videos, especially drone footage, enhancing versatility. Optimized real-time stitching of high-res images, reducing processing time by 40%. Implemented multi-threading to parallelize image processing, improving efficiency. Developed user-friendly interface for easy configuration of stitching parameters. Integrated error handling and quality assessment for robust performance across inputs.",
+    tags: [
+      {
+        name: "C++",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "OpenCV",
+        color: "green-text-gradient",
+      },
+      {
+        name: "SLAM",
+        color: "pink-text-gradient",
+      },
+      {
+        name: "Image Processing",
+        color: "blue-text-gradient",
+      },
+    ],
+    image: placeholder,
+    source_code_link: "https://github.com/mucahitkayadan",
+    live_project_link: "https://github.com/mucahitkayadan",
+  },
+  {
+    name: "Sex Classification by Egg Shape: Deep Learning and Image Processing Analysis",
+    description:
+      "Developed egg shape tech to determine gender pre-incubation, addressing mass culling of male chicks. Applied ML and image processing for 91% accuracy across chicken breeds. Won scientific award, led to startup in Ireland. Published in Nature - Scientific Reports. Secured $20,000 funding from research councils in Turkey and Ireland. Used computer vision to extract egg shape features, boosting accuracy by 15%. Created user-friendly interface for farmers to integrate tech into incubation. Conducted field trials on poultry farms, validating real-world effectiveness. Worked with ethics committees to align tech with animal welfare standards.",
+    tags: [
+      {
+        name: "Deep Learning",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "Computer Vision", 
+        color: "green-text-gradient",
+      },
+      {
+        name: "Image Processing",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: placeholder,
+    source_code_link: "https://github.com/mucahitkayadan",
+    live_project_link: "https://github.com/mucahitkayadan",
+  },
+  {
+    name: "Mountain Climber Assistant",
+    description:
+      "Designed system to detect climber actions using sensors in custom devices for enhanced mountaineering safety. Developed project architecture, aligning requirements with objectives for climber safety and performance tracking. Engineered compact device for vital signs and location monitoring, using RF tech for remote terrain tracking. Secured $20,000 funding, demonstrating project's significance for mountain climbing safety advancements. Implemented ML algorithms, achieving 95% precision in action classification for accurate climber monitoring. Optimized power consumption, extending device battery life to 72 hours for long climbing expeditions. Integrated emergency alert system, reducing response time to critical situations by 40% for improved safety.",
+    tags: [
+      {
+        name: "IoT",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "Machine Learning",
+        color: "green-text-gradient",
+      },
+      {
+        name: "Embedded Systems",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: placeholder,
+    source_code_link: "https://github.com/mucahitkayadan",
+    live_project_link: "https://github.com/mucahitkayadan",
+  },
+  {
+    name: "Steel Sheet Washing Machine with Siemens S7 PLC",
+    description:
+      "Designed steel sheet washing machine using Siemens S7 PLC for efficient industrial cleaning. Implemented control logic for oily surface removal, improving product quality. Integrated sensors and actuators for precise washing process control and monitoring. Developed HMI for operator control and real-time performance monitoring. Optimized washing for minimal water and energy use while maintaining high efficiency. Implemented safety features to comply with industrial standards and regulations. Designed modular architecture for easy maintenance and future upgrades.",
+    tags: [
+      {
+        name: "PLC",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "Industrial Automation",
+        color: "green-text-gradient",
+      },
+      {
+        name: "HMI",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: placeholder,
+    source_code_link: "https://github.com/mucahitkayadan",
+    live_project_link: "https://github.com/mucahitkayadan",
+  },
+  {
+    name: "Esty Mate: Real-Time Multiplayer Estimation Game",
+    description:
+      "Built a real-time multiplayer estimation game app using Flask, Flask-SocketIO, and PostgreSQL. Created 5000 estimation structured questions and with OpenAI API. Implemented secure user authentication with Flask-Login for registration, login, and logout. Designed a dynamic question database with SQLAlchemy for random, culturally relevant questions. Utilized WebSockets for real-time game events like joining rooms, starting games, and updating scores. Adopted an application factory pattern for scalability and maintainability.",
+    tags: [
+      {
+        name: "Flask",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "WebSocket",
+        color: "green-text-gradient",
+      },
+      {
+        name: "PostgreSQL",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: placeholder,
+    source_code_link: "https://github.com/mucahitkayadan",
+    live_project_link: "https://github.com/mucahitkayadan",
+  },
+  {
+    name: "Patently: AI-Powered Patent Search and Analysis",
+    description:
+      "Architected a patent analysis platform utilizing fine-tuned Llama 3.1 for semantic search and prior art retrieval, streamlining IP workflows. Engineered a vector-based similarity ranking system with Faiss, enabling rapid retrieval of relevant patents from a large-scale database. Designed a modular pipeline for user-generated idea prompts, integrating NLP models to produce detailed patent analysis reports. Developed an automated patent application generator with advanced NLP techniques, enhancing accuracy and reducing manual intervention.",
+    tags: [
+      {
+        name: "NLP",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "LLM",
+        color: "green-text-gradient",
+      },
+      {
+        name: "Vector Search",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: placeholder,
+    source_code_link: "https://github.com/mucahitkayadan",
+    live_project_link: "https://github.com/mucahitkayadan",
+  },
+  {
+    name: "MyCTO: AI-Powered CTO for Startups",
+    description:
+      "Architected an AI-powered CTO platform using fine-tuned transformer models to evaluate startup technical requirements and offer strategic guidance. Developed intelligent project analysis workflows leveraging Llama 3.1 to align budget constraints with scalable technical solutions. Engineered a developer-matching system integrating graph databases and embeddings for precise skill-to-project alignment. Designed a scalable talent-matching engine using Pinecone for vector search, optimizing developer selection for technical roles.",
+    tags: [
+      {
+        name: "LLMs",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "Vector Search",
+        color: "green-text-gradient", 
+      },
+      {
+        name: "AWS",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: placeholder,
+    source_code_link: "https://github.com/mucahitkayadan",
+    live_project_link: "https://github.com/mucahitkayadan",
+  },
+  {
+    name: "Dynamic Resume Generator",
+    description: 
+      "Developed a Streamlit-based web application that generates tailored resumes based on user-provided job descriptions. Implemented an AI-powered system using OpenAI's API to process and optimize resume content for specific job requirements. Created a modular architecture with separate loaders for JSON data, LaTeX templates, and prompts, enhancing maintainability and scalability. Utilized natural language processing techniques to analyze job descriptions and extract key requirements for resume customization.",
+    tags: [
+      {
+        name: "Streamlit",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "OpenAI",
+        color: "green-text-gradient",
+      },
+      {
+        name: "LaTeX",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: placeholder,
+    source_code_link: "https://github.com/mucahitkayadan",
+    live_project_link: "https://github.com/mucahitkayadan",
+  },
+  {
+    name: "AR Marble Visualization System",
+    description:
+      "Developed an advanced in-home AR application for Tez Marble, allowing users to scan rooms and visualize custom marble surfaces in real time with high fidelity. Integrated Matterport Showcase SDK with SLAM for precise 3D room scanning and NVIDIA Instant NeRF for rapid neural rendering, enabling life-like previews. Utilized a high-performance hardware stack for NeRF processing, incorporating NVIDIA RTX A6000 GPUs for accelerated neural rendering and Tensor Cores for optimized AI inference.",
+    tags: [
+      {
+        name: "AR",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "NeRF",
+        color: "green-text-gradient",
+      },
+      {
+        name: "WebGL",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: placeholder,
+    source_code_link: "https://github.com/mucahitkayadan", 
+    live_project_link: "https://github.com/mucahitkayadan",
   },
 ];
 
@@ -577,7 +756,6 @@ const testimonials = [
 
 export {
   services,
-  cybersecurityTools,
   experiences,
   extracurricular,
   projects,

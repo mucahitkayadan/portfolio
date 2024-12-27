@@ -9,7 +9,7 @@ import web from "./web.png";
 import fullstack from "./creator.png";
 import menu from "./menu.svg";
 import close from "./close.svg";
-import github from "./skills/github.svg";
+import github from "./github.svg";
 
 // Languages
 import python from "./skills/languages/python.png"
@@ -78,6 +78,9 @@ import selenium from "./skills/miscellaneous/selenium.svg";
 import milvus from "./skills/miscellaneous/milvus.svg";
 
 // Projects
+import placeholder from "./projects/coming_soon_placeholder.png";
+
+// Old Projects
 import knifethrowimage from "./knifethrow_demonstration.jpg"
 import pythonanalysis from "./data_analysis.png"
 import password_generator from "./passwordgenerator.png"
@@ -216,4 +219,7 @@ export {
   orsan,
   teknoworld,
   virac,
+
+  // Projects
+  placeholder,
 };
