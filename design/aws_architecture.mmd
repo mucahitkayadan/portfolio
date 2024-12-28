@@ -1,0 +1,26 @@
+graph LR
+    User((User)) --> Route53[Route 53 DNS]
+    Route53 --> CloudFront[CloudFront CDN]
+    CloudFront --> S3[S3 Bucket]
+    
+    subgraph DNS["DNS Management"]
+        CheckDomain[CheckDomain.net] -->|Domain Transfer| Route53
+        Route53 -->|DNS Records| ACM[ACM Certificate]
+    end
+    
+    subgraph Content["Content Delivery"]
+        CloudFront -->|Origin Access Control| S3
+        ACM -->|SSL Certificate| CloudFront
+    end
+    
+    subgraph Storage["Static Website"]
+        S3 -->|index.html| React[React App]
+        S3 -->|assets| Static[Static Files]
+    end
+
+    style User fill:#f9f,stroke:#333,stroke-width:2px
+    style CloudFront fill:#FF9900,stroke:#333,stroke-width:2px
+    style S3 fill:#FF9900,stroke:#333,stroke-width:2px
+    style Route53 fill:#FF9900,stroke:#333,stroke-width:2px
+    style ACM fill:#FF9900,stroke:#333,stroke-width:2px
+    style CheckDomain fill:#ddd,stroke:#333,stroke-width:2px

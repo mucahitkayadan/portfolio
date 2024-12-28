@@ -80,14 +80,6 @@ import milvus from "./skills/miscellaneous/milvus.svg";
 // Projects
 import placeholder from "./projects/coming_soon_placeholder.png";
 
-// Old Projects
-import knifethrowimage from "./knifethrow_demonstration.jpg"
-import pythonanalysis from "./data_analysis.png"
-import password_generator from "./passwordgenerator.png"
-import wordsearch from "./wordsearchoutput.jpg"
-import financialflowimage from "./FinancialFlowDemonstration.png"
-import enterpriseapitester from "./enterpriseapiui.png"
-
 // Platforms
 import linux from "./skills/platforms/linux.svg";
 import cuda from "./skills/platforms/cuda.svg";
@@ -202,14 +194,6 @@ export {
   menu,
   close,
   github,
-
-  // Projects
-  knifethrowimage,
-  pythonanalysis,
-  password_generator,
-  wordsearch,
-  financialflowimage,
-  enterpriseapitester,
 
   // Education
   miu,
