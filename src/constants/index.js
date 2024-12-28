@@ -17,6 +17,7 @@ import {
   placeholder,
   chess,
   tubitak,
+  resume_builder_tex,
 } from "../assets";
 
 export const navLinks = [
@@ -349,6 +350,54 @@ const awards = [
 
 const projects = [
   {
+    name: "Dynamic Resume Generator",
+    description: 
+      "Developed a Streamlit-based web application that generates tailored resumes based on user-provided job descriptions. Implemented an AI-powered system using OpenAI's API to process and optimize resume content for specific job requirements. Created a modular architecture with separate loaders for JSON data, LaTeX templates, and prompts, enhancing maintainability and scalability. Utilized natural language processing techniques to analyze job descriptions and extract key requirements for resume customization.",
+    tags: [
+      {
+        name: "Streamlit",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "OpenAI",
+        color: "green-text-gradient",
+      },
+      {
+        name: "LaTeX",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: resume_builder_tex,
+    source_code_link: "https://github.com/mucahitkayadan/Resume-Builder-TeX",
+    live_project_link: "https://github.com/mucahitkayadan/Resume-Builder-TeX",
+  },
+  {
+    name: "Fairfield Wildlife Surveillance",
+    description: 
+      "Implemented YOLOv8 object detection on Raspberry Pi4 and RoboFlow server, achieving 95% F1 score for wildlife surveillance. Developed website for customizable animal detection settings, including class selection and confidence threshold adjustment. Created database for animal info storage, video capture, and heatmap generation to track wildlife patterns. Optimized real-time detection and tracking of multiple animal species in diverse environments. Integrated analytics tools for insights on wildlife behavior and population trends. Designed user-friendly mobile app for remote monitoring and system control. Collaborated with experts to improve detection accuracy for region-specific animal species.",
+    tags: [
+      {
+        name: "YOLOv8",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "Raspberry Pi",
+        color: "green-text-gradient",
+      },
+      {
+        name: "Computer Vision",
+        color: "pink-text-gradient",
+      },
+      {
+        name: "IoT",
+        color: "blue-text-gradient",
+      },
+    ],
+    image: placeholder,
+    source_code_link: "https://github.com/mucahitkayadan",
+    live_project_link: "https://github.com/mucahitkayadan",
+  },
+  {
     name: "BMS and Battery Package Systems for Nenessa Electric Car",
     description:
       "Led battery team for TUBITAK Efficiency Challenge, implementing BMS with STM32F030 and designing battery pack for 3kW 60V Kelly motor controller. Optimized battery management algorithms, integrated real-time monitoring, and created custom UI for diagnostics.",
@@ -491,32 +540,6 @@ const projects = [
         name: "IoT",
         color: "blue-text-gradient",
       }
-    ],
-    image: placeholder,
-    source_code_link: "https://github.com/mucahitkayadan",
-    live_project_link: "https://github.com/mucahitkayadan",
-  },
-  {
-    name: "Fairfield Wildlife Surveillance",
-    description: 
-      "Implemented YOLOv8 object detection on Raspberry Pi4 and RoboFlow server, achieving 95% F1 score for wildlife surveillance. Developed website for customizable animal detection settings, including class selection and confidence threshold adjustment. Created database for animal info storage, video capture, and heatmap generation to track wildlife patterns. Optimized real-time detection and tracking of multiple animal species in diverse environments. Integrated analytics tools for insights on wildlife behavior and population trends. Designed user-friendly mobile app for remote monitoring and system control. Collaborated with experts to improve detection accuracy for region-specific animal species.",
-    tags: [
-      {
-        name: "YOLOv8",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "Raspberry Pi",
-        color: "green-text-gradient",
-      },
-      {
-        name: "Computer Vision",
-        color: "pink-text-gradient",
-      },
-      {
-        name: "IoT",
-        color: "blue-text-gradient",
-      },
     ],
     image: placeholder,
     source_code_link: "https://github.com/mucahitkayadan",
@@ -673,28 +696,6 @@ const projects = [
       },
       {
         name: "AWS",
-        color: "pink-text-gradient",
-      },
-    ],
-    image: placeholder,
-    source_code_link: "https://github.com/mucahitkayadan",
-    live_project_link: "https://github.com/mucahitkayadan",
-  },
-  {
-    name: "Dynamic Resume Generator",
-    description: 
-      "Developed a Streamlit-based web application that generates tailored resumes based on user-provided job descriptions. Implemented an AI-powered system using OpenAI's API to process and optimize resume content for specific job requirements. Created a modular architecture with separate loaders for JSON data, LaTeX templates, and prompts, enhancing maintainability and scalability. Utilized natural language processing techniques to analyze job descriptions and extract key requirements for resume customization.",
-    tags: [
-      {
-        name: "Streamlit",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "OpenAI",
-        color: "green-text-gradient",
-      },
-      {
-        name: "LaTeX",
         color: "pink-text-gradient",
       },
     ],

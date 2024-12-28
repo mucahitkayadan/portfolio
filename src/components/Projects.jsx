@@ -23,7 +23,7 @@ const ProjectCard = ({ name, description, tags, image, source_code_link, live_pr
       >
         <div className="relative w-full h-[230px]">
           <img
-            src={placeholder}
+            src={image}
             alt={name}
             className="w-full h-full object-cover rounded-2xl"
           />

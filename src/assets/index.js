@@ -79,6 +79,7 @@ import milvus from "./skills/miscellaneous/milvus.svg";
 
 // Projects
 import placeholder from "./projects/coming_soon_placeholder.png";
+import resume_builder_tex from "./projects/resume_builder_tex.png";
 
 // Platforms
 import linux from "./skills/platforms/linux.svg";
@@ -101,7 +102,7 @@ import orsan from "./work_experience/orsan.png";
 import teknoworld from "./work_experience/teknoworld.png";
 import virac from "./work_experience/virac.svg";
 
-// Certificates
+// Awards
 import chess from "./awards/chess.svg";
 import tubitak from "./awards/tubitak.svg";
 
@@ -209,7 +210,7 @@ export {
 
   // Projects
   placeholder,
-
+  resume_builder_tex,
   // Certificates
   chess,
   tubitak,
