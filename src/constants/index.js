@@ -6,18 +6,28 @@ import {
   backend,
   web,
   fullstack,
-  goglobal,
-  orsan,
-  teknoworld,
-  ventspils,
-  virac,
+  placeholder,
+
+  // Awards
+  chess,
+  tubitak,
+
+  // Education
   miu,
   padua,
   aksaray,
-  placeholder,
-  chess,
-  tubitak,
+  ventspils,
+
+  // Work Experience
+  goglobal,
+  orsan,
+  teknoworld,
+  virac,
+
+  // Projects
   resume_builder_tex,
+  envmasker,
+  wildlife_detector,
 } from "../assets";
 
 export const navLinks = [
@@ -74,16 +84,17 @@ const education = [
     iconBg: "#fff",
     date: "2023 - now",
     location: "Iowa, USA",
+    description: "Currently pursuing my Master's in Computer Science with a focus on AI and Machine Learning. Maintaining strong academic performance while working on cutting-edge projects in artificial intelligence and web development.",
+    gpa: "3.03",
     points: [
       "Artificial Intelligence",
       "Algorithms",
-      "Fundamental Programming Practices", 
+      "Fundamental Programming Practices",
       "Modern Programming",
       "Web Application Programming",
       "Software Architecture",
       "Big Data Analytics",
       "Cloud Computing",
-      "GPA: 3.03"
     ],
   },
   {
@@ -93,6 +104,8 @@ const education = [
     iconBg: "#fff",
     date: "2021 - 2023",
     location: "Padua, Italy",
+    description: "Completed my Master's with distinction, specializing in Computer Vision and Machine Learning. Engaged in advanced research projects and collaborated with international teams.",
+    gpa: "3.70",
     points: [
       "Computer Vision",
       "Digital And Interactive Multimedia",
@@ -112,7 +125,6 @@ const education = [
       "Internship",
       "English Language B2",
       "Final Project",
-      "GPA: 3.70"
     ],
   },
   {
@@ -122,12 +134,13 @@ const education = [
     iconBg: "#fff", 
     date: "2019 - 2021",
     location: "Aksaray, Turkey",
+    description: "Completed my Master's with distinction, specializing in Computer Vision and Machine Learning. Engaged in advanced research projects and collaborated with international teams.",
+    gpa: "3.79",
     points: [
       "Mobile Robots: Models and Algorithms",
       "Machine Learning Theory",
       "Optical Wireless Communication",
       "VLSI Design",
-      "GPA: 3.79"
     ],
   },
   {
@@ -137,6 +150,8 @@ const education = [
     iconBg: "#fff",
     date: "2018",
     location: "Ventspils, Latvia", 
+    description: "Completed my Bachelor's with distinction, specializing in Computer Vision and Machine Learning. Engaged in advanced research projects and collaborated with international teams.",
+    gpa: "3.68",
     points: [
       "Optimisation Methods",
       "Programming I",
@@ -148,7 +163,6 @@ const education = [
       "Electronics And Manufacturing Technology",
       "Electronic Circuit Design",
       "Semiconductor Electronics",
-      "GPA: 3.68"
     ],
   },
   {
@@ -158,6 +172,8 @@ const education = [
     iconBg: "#fff",
     date: "2015 - 2019",
     location: "Aksaray, Turkey",
+    description: "Completed my Bachelor's with distinction, specializing in Computer Vision and Machine Learning. Engaged in advanced research projects and collaborated with international teams.",
+    gpa: "3.68",
     points: [
       "Introduction To Electrical-Electronics Engineering",
       "Information Technologies And Their Applications",
@@ -225,11 +241,9 @@ const education = [
       "Design Algorithm",
       "Object-Oriented Software Development",
       "Graduation Project II",
-      "GPA: 3.60"
     ],
   },
 ];
-
 
 const experiences = [
   {
@@ -238,6 +252,8 @@ const experiences = [
     icon: goglobal,
     iconBg: "#fff",
     date: "Mar 2024 - Present",
+    location: "Remote",
+    description: "Go Global World is a platform that connects investors with startups. I am working on the AI team to develop AI-powered solutions for investor-founder matching and automated due diligence processes.",
     points: [
       "Architected and implemented an investor-founder matching system leveraging advanced similarity measures and vector embeddings for optimized performance.",
       "Developed a chatbot powered by LangChain and RAG, integrating OpenAI APIs for seamless personalized query resolution and information retrieval.",
@@ -257,6 +273,8 @@ const experiences = [
     icon: orsan,
     iconBg: "#fff", 
     date: "Jan 2020 - May 2021",
+    location: "Aksaray, Turkey",
+    description: "Orsan is a company that manufactures automotive parts for / under Mercedes-Benz. I worked on the R&D team to develop computer vision solutions for steel welding quality control.",
     points: [
       "Developed a custom computer vision pipeline using U-Net architectures for detecting welding defects with pixel-level accuracy.",
       "Integrated PLC data streams with deep learning models to create predictive maintenance systems, leveraging PyTorch for model training and evaluation.",
@@ -276,6 +294,8 @@ const experiences = [
     icon: teknoworld,
     iconBg: "#1294C8", 
     date: "Jun 2019 - Dec 2019",
+    location: "Dusseldorf, Germany",
+    description: "TeknoWorld is a company that provides security solutions for variety of clients, such as houses, supermarkets and embassies. I worked on the R&D team to develop computer vision solutions for security cameras.",
     points: [
       "Deployed AI-powered computer vision solutions using YOLO for object detection and deep learning for image analytics, improving surveillance efficiency.",
       "Configured smart camera systems leveraging Dahua SDKs for real-time video processing and anomaly detection in high-security environments.",
@@ -295,6 +315,8 @@ const experiences = [
     icon: virac,
     iconBg: "#fff",
     date: "Jun 2018 - Oct 2018",
+    location: "Ventspils, Latvia",
+    description: "Ventspils International Radio-Astronomy Center is the 8th largest radio telescope in the world. I worked on the R&D team to develop software solutions for radio astronomy.",
     points: [
       "Developed GUIs for RF transceivers using PyQt5, enabling real-time interaction with hardware systems and efficient data visualization.",
       "Implemented real-time signal visualization features using Matplotlib and NumPy, providing actionable insights into RF system performance.",
@@ -393,26 +415,52 @@ const projects = [
         color: "blue-text-gradient",
       },
     ],
-    image: placeholder,
+    image: wildlife_detector,
     source_code_link: "https://github.com/mucahitkayadan",
     live_project_link: "https://github.com/mucahitkayadan",
   },
   {
-    name: "BMS and Battery Package Systems for Nenessa Electric Car",
-    description:
-      "Led battery team for TUBITAK Efficiency Challenge, implementing BMS with STM32F030 and designing battery pack for 3kW 60V Kelly motor controller. Optimized battery management algorithms, integrated real-time monitoring, and created custom UI for diagnostics.",
+    name: "EnvMasker",
+    description: 
+      "Developed a tool to mask .env file values with asterisks to protect sensitive information. Implemented using Java with Docker containerization for enhanced deployment. Features include user-friendly interface, comprehensive unit tests, efficient handling of large files, and seamless logging. Contributed to open-source community via GitHub.",
     tags: [
       {
-        name: "STM32",
+        name: "Java",
         color: "blue-text-gradient",
       },
       {
-        name: "BMS",
-        color: "green-text-gradient", 
+        name: "Docker",
+        color: "green-text-gradient",
       },
       {
-        name: "LiFePo4",
+        name: "Security",
         color: "pink-text-gradient",
+      }
+    ],
+    image: envmasker,
+    source_code_link: "https://github.com/mucahitkayadan",
+    live_project_link: "https://github.com/mucahitkayadan",
+  },
+  {
+    name: "LLM Chess Evaluation",
+    description:
+      "Developed a chess playing benchmark framework for evaluating large language models (LLMs) using Python. Created comprehensive evaluation metrics and visualization tools for assessing LLM performance against standard chess engines. Implemented automated benchmarking with support for multiple LLMs and detailed analysis of game outcomes. Shared as open-source project with extensive documentation.",
+    tags: [
+      {
+        name: "Python",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "LLM",
+        color: "green-text-gradient",
+      },
+      {
+        name: "Chess",
+        color: "pink-text-gradient",
+      },
+      {
+        name: "Benchmarking",
+        color: "blue-text-gradient",
       }
     ],
     image: placeholder,
@@ -723,6 +771,28 @@ const projects = [
     ],
     image: placeholder,
     source_code_link: "https://github.com/mucahitkayadan", 
+    live_project_link: "https://github.com/mucahitkayadan",
+  },
+  {
+    name: "BMS and Battery Package Systems for Nenessa Electric Car",
+    description:
+      "Led battery team for TUBITAK Efficiency Challenge, implementing BMS with STM32F030 and designing battery pack for 3kW 60V Kelly motor controller. Optimized battery management algorithms, integrated real-time monitoring, and created custom UI for diagnostics.",
+    tags: [
+      {
+        name: "STM32",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "BMS",
+        color: "green-text-gradient", 
+      },
+      {
+        name: "LiFePo4",
+        color: "pink-text-gradient",
+      }
+    ],
+    image: placeholder,
+    source_code_link: "https://github.com/mucahitkayadan",
     live_project_link: "https://github.com/mucahitkayadan",
   },
 ];

@@ -14,7 +14,7 @@ import { textVariant } from "../utils/motion";
 
 const EducationCard = ({ education }) => {
   const [showAllCourses, setShowAllCourses] = useState(false);
-  const initialCoursesToShow = 3;
+  const initialCoursesToShow = 0;
 
   return (
     <VerticalTimelineElement
@@ -40,27 +40,44 @@ const EducationCard = ({ education }) => {
         <p className="text-secondary text-[16px] font-semibold" style={{ margin: 0 }}>
           {education.company_name}
         </p>
-      </div>
+        
+        <p className="text-white-100 text-[14px] mt-2">
+          {education.location}
+        </p>
 
-      <ul className="mt-5 list-disc ml-5 space-y-2">
-        {education.points.slice(0, showAllCourses ? education.points.length : initialCoursesToShow).map((point, index) => (
-          <li
-            key={`experience-point-${index}`}
-            className="text-white-100 text-[14px] pl-1 tracking-wider"
-          >
-            {point}
-          </li>
-        ))}
-      </ul>
+        <p className="text-white-100 text-[14px] mt-4">
+          {education.description}
+        </p>
 
-      {education.points.length > initialCoursesToShow && (
+        <div className="mt-4 p-2 bg-black-200 rounded">
+          <p className="text-white font-semibold text-[16px]">
+            GPA: {education.gpa}
+          </p>
+        </div>
+
+        {showAllCourses && (
+          <div className="mt-4">
+            <p className="text-white text-[16px] font-semibold mb-2">Courses:</p>
+            <ul className="list-disc ml-5 space-y-2">
+              {education.points.slice(0, education.points.length - 1).map((point, index) => (
+                <li
+                  key={`education-point-${index}`}
+                  className="text-white-100 text-[14px] pl-1 tracking-wider"
+                >
+                  {point}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
         <button
           onClick={() => setShowAllCourses(!showAllCourses)}
           className="mt-4 text-[14px] text-secondary hover:text-white transition-colors duration-200"
         >
-          {showAllCourses ? "Show Less" : `See All Courses (${education.points.length})`}
+          {showAllCourses ? "Hide Courses" : `Show Courses (${education.points.length - 1})`}
         </button>
-      )}
+      </div>
     </VerticalTimelineElement>
   );
 };

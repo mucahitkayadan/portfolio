@@ -1,16 +1,13 @@
 import React, { useState, useCallback } from "react";
 import { Tilt } from "react-tilt";
-import { motion } from "framer-motion";
 
 import { styles } from "../styles";
 import { github, placeholder } from "../assets";
 import { SectionWrapper } from "../hoc";
 import { projects } from "../constants";
-import { fadeIn } from "../utils/motion";
 
 const ProjectCard = ({ name, description, tags, image, source_code_link, live_project_link }) => {
-  console.log("Rendering card:", name); // Debug log
-  
+
   return (
     <div className="w-full sm:w-[360px]">
       <Tilt
@@ -77,8 +74,6 @@ const ProjectCard = ({ name, description, tags, image, source_code_link, live_pr
 const Projects = () => {
   const [visibleProjects, setVisibleProjects] = useState(6);
   const [isLoading, setIsLoading] = useState(false);
-
-  console.log("Rendering Projects component with", projects.length, "total projects");
 
   const loadMore = useCallback(async () => {
     if (isLoading) return;

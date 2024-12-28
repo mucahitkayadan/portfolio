@@ -30,6 +30,24 @@ const ExperienceCard = React.memo(({ experience, isActive, onClick, index }) => 
 });
 
 const ExperienceDetails = React.memo(({ experience }) => {
+  const [expandedPoints, setExpandedPoints] = useState(false);
+  const [visiblePoints, setVisiblePoints] = useState(5);
+
+  const handleShowMore = () => {
+    if (expandedPoints) {
+      // If already expanded, show 5 more points
+      setVisiblePoints(prev => Math.min(prev + 5, experience.points.length));
+    } else {
+      // If not expanded, start showing first 5 points
+      setExpandedPoints(true);
+    }
+  };
+
+  const handleShowLess = () => {
+    setExpandedPoints(false);
+    setVisiblePoints(5);
+  };
+
   return (
     <motion.div
       key={experience.company_name}
@@ -41,17 +59,72 @@ const ExperienceDetails = React.memo(({ experience }) => {
     >
       <h3 className="text-white text-[24px] font-bold mb-4">{experience.title}</h3>
       <p className="text-secondary text-[16px] mb-4">{experience.company_name}</p>
-      <p className="text-white-100 text-[14px] mb-4">{experience.date}</p>
-      <ul className="list-disc ml-5 space-y-2">
-        {experience.points.map((point, index) => (
-          <li
-            key={`experience-point-${index}`}
-            className="text-white-100 text-[14px] pl-1 tracking-wider"
+      
+      {/* Date and Location Row */}
+      <div className="flex items-center gap-4 mb-4">
+        <p className="text-white-100 text-[14px]">{experience.date}</p>
+        <span className="text-secondary">•</span>
+        <p className="text-white-100 text-[14px]">{experience.location}</p>
+      </div>
+
+      {/* Description Section */}
+      <p className="text-white-100 text-[14px] mb-6">
+        {experience.description}
+      </p>
+
+      {/* Bullet Points Section */}
+      {expandedPoints ? (
+        <ul className="list-disc ml-5 space-y-2">
+          {experience.points.slice(0, visiblePoints).map((point, index) => (
+            <li
+              key={`experience-point-${index}`}
+              className="text-white-100 text-[14px] pl-1 tracking-wider"
+            >
+              {point}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <ul className="list-disc ml-5 space-y-2">
+          {experience.points.slice(0, 2).map((point, index) => (
+            <li
+              key={`experience-point-${index}`}
+              className="text-white-100 text-[14px] pl-1 tracking-wider"
+            >
+              {point}
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {/* Show More/Less Controls */}
+      <div className="mt-4 flex gap-4">
+        {!expandedPoints ? (
+          <button
+            onClick={handleShowMore}
+            className="text-secondary hover:text-white text-[14px] cursor-pointer transition-colors duration-200"
           >
-            {point}
-          </li>
-        ))}
-      </ul>
+            Show More Details
+          </button>
+        ) : (
+          <>
+            {visiblePoints < experience.points.length && (
+              <button
+                onClick={handleShowMore}
+                className="text-secondary hover:text-white text-[14px] cursor-pointer transition-colors duration-200"
+              >
+                Load More
+              </button>
+            )}
+            <button
+              onClick={handleShowLess}
+              className="text-secondary hover:text-white text-[14px] cursor-pointer transition-colors duration-200"
+            >
+              Show Less
+            </button>
+          </>
+        )}
+      </div>
     </motion.div>
   );
 });

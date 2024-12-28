@@ -80,7 +80,8 @@ import milvus from "./skills/miscellaneous/milvus.svg";
 // Projects
 import placeholder from "./projects/coming_soon_placeholder.png";
 import resume_builder_tex from "./projects/resume_builder_tex.png";
-
+import envmasker from "./projects/envmasker.png";
+import wildlife_detector from "./projects/wildlife_detector.png";
 // Platforms
 import linux from "./skills/platforms/linux.svg";
 import cuda from "./skills/platforms/cuda.svg";
@@ -211,7 +212,9 @@ export {
   // Projects
   placeholder,
   resume_builder_tex,
-  
+  envmasker,
+  wildlife_detector,
+
   // Certificates
   chess,
   tubitak,
