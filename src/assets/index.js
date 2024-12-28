@@ -211,6 +211,7 @@ export {
   // Projects
   placeholder,
   resume_builder_tex,
+  
   // Certificates
   chess,
   tubitak,

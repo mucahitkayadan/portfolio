@@ -21,7 +21,14 @@ jobs:
       run: npm install
       
     - name: Build
-      run: npm run build
+      run: |
+        npm run build
+        echo "Build contents:"
+        ls -R dist/
+        
+    - name: Check image paths
+      run: |
+        find dist/ -name "*.png"
       
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
