@@ -7,5 +7,15 @@ export default defineConfig({
   build: {
     assetsDir: 'assets',
     sourcemap: true,
-  }
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'three-vendor': ['three', '@react-three/fiber', '@react-three/drei'],
+        },
+      },
+    },
+  },
+  optimizeDeps: {
+    include: ['three', '@react-three/fiber', '@react-three/drei'],
+  },
 })
