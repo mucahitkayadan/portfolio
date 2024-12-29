@@ -27,11 +27,11 @@ const ChatBot = () => {
     setIsLoading(true);
 
     try {
-      const lambdaUrl = import.meta.env.VITE_LAMBDA_URL;
-      console.log('Sending request to:', lambdaUrl);
+      const LAMBDA_URL = import.meta.env.VITE_LAMBDA_URL;
+      console.log('Sending request to:', LAMBDA_URL);
       console.log('Request body:', { message: inputMessage });
 
-      const response = await fetch(lambdaUrl, {
+      const response = await fetch(LAMBDA_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -64,12 +64,13 @@ const ChatBot = () => {
 
       setMessages(prev => [...prev, { role: 'assistant', content: data.response }]);
     } catch (error) {
-      console.error('Error details:', error);
+      console.error('Full error object:', error);
+      console.error('Error name:', error.name);
+      console.error('Error message:', error.message);
+      console.error('Error stack:', error.stack);
       setMessages(prev => [...prev, { 
         role: 'assistant', 
-        content: error.message === 'Failed to fetch' ? 
-          'Unable to connect to the assistant. Please check your internet connection and try again.' :
-          `Error: ${error.message}. Please try again later.`
+        content: `Error: ${error.message}. Please try again later.`
       }]);
     }
 

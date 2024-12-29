@@ -1,4 +1,4 @@
 node_modules
 .idea
 .env
-lambda-deployment.zip
+lambda-deploy.zip
