@@ -89,7 +89,7 @@ const Projects = () => {
   return (
     <>
       <div className="relative z-0">
-        <div>
+        <div className="text-center">
           <h2 className={styles.sectionHeadText}>Projects.</h2>
           <p className={styles.sectionSubText}>My work</p>
         </div>

@@ -103,7 +103,7 @@ const Education = () => {
           visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
         }}
       >
-        <p className={`${styles.sectionSubText} text-center`}>What I have Studied so far</p>
+        <p className={`${styles.sectionSubText} text-center`}>My Life-Long Learning Journey</p>
       </motion.div>
 
       <motion.div
