@@ -1,4 +1,4 @@
-﻿const { OpenAI } = require("openai");
+const { OpenAI } = require("openai");
 
 exports.handler = async (event) => {
   console.log("Event received:", JSON.stringify(event, null, 2));
@@ -10,6 +10,14 @@ exports.handler = async (event) => {
     "Content-Type": "application/json"
   };
 
+  if (event.requestContext.http.method === 'OPTIONS') {
+    return {
+      statusCode: 200,
+      headers,
+      body: JSON.stringify({ message: 'OK' })
+    };
+  }
+
   try {
     const openai = new OpenAI({
       apiKey: process.env.OPENAI_API_KEY,
@@ -19,11 +27,9 @@ exports.handler = async (event) => {
     const { message } = body;
     console.log("Received message:", message);
 
-    // Create a new thread for each conversation
     const thread = await openai.beta.threads.create();
     console.log("Created new thread:", thread.id);
 
-    // Add the user"s message to the thread
     await openai.beta.threads.messages.create(
       thread.id,
       {
@@ -32,7 +38,6 @@ exports.handler = async (event) => {
       }
     );
 
-    // Create a run with the assistant
     const run = await openai.beta.threads.runs.create(
       thread.id,
       {
@@ -40,13 +45,11 @@ exports.handler = async (event) => {
       }
     );
 
-    // Poll for the run completion
     let runStatus = await openai.beta.threads.runs.retrieve(
       thread.id,
       run.id
     );
 
-    // Wait for the assistant to complete its response
     while (runStatus.status !== "completed") {
       if (runStatus.status === "failed") {
         throw new Error("Assistant run failed");
@@ -58,12 +61,10 @@ exports.handler = async (event) => {
       );
     }
 
-    // Get the assistant"s response
     const messages = await openai.beta.threads.messages.list(
       thread.id
     );
 
-    // Get the latest assistant response
     const assistantResponse = messages.data
       .filter(msg => msg.role === "assistant")
       .map(msg => msg.content[0].text.value)[0];
