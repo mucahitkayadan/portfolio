@@ -1,6 +1,5 @@
 import React, { useRef, useState, useCallback, useEffect } from "react";
 import { motion } from "framer-motion";
-import emailjs from "@emailjs/browser";
 import { Toaster, toast } from 'react-hot-toast';
 import Confetti from 'react-confetti';
 
@@ -11,6 +10,8 @@ import { slideIn } from "../utils/motion";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faEnvelope, faComment, faPaperPlane, faSpinner, faPhone } from "@fortawesome/free-solid-svg-icons";
+
+const LAMBDA_EMAIL_URL = import.meta.env.VITE_LAMBDA_EMAIL_URL; // You'll need to add this to your .env
 
 const Contact = () => {
   const formRef = useRef();
@@ -47,7 +48,7 @@ const Contact = () => {
     setForm({ ...form, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!form.name || !form.email || !form.message) {
@@ -60,43 +61,39 @@ const Contact = () => {
 
     setLoading(true);
 
-    emailjs
-      .send(
-        'service_y0o5xfi',
-        'template_tn53hil',
-        {
-          from_name: form.name,
-          to_name: "Muja Kayadan",
-          from_email: form.email,
-          to_email: "mujakayadan@outlook.com",
-          message: form.message,
+    try {
+      const response = await fetch(LAMBDA_EMAIL_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-        "qKXGy2B0mb2m5HSJH"
-      )
-      .then(
-        () => {
-          setLoading(false);
-          setSuccess(true);
-          setForm({ name: "", email: "", message: "" });
-          toast.success("Message sent successfully!", {
-            duration: 3000,
-            position: 'bottom-right',
-          });
-          setShowConfetti(true);
-          setTimeout(() => {
-            setSuccess(false);
-            setShowConfetti(false);
-          }, 5000);
-        },
-        (error) => {
-          setLoading(false);
-          console.error(error);
-          toast.error("Something went wrong. Please try again.", {
-            duration: 3000,
-            position: 'bottom-right',
-          });
-        }
-      );
+        body: JSON.stringify(form)
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send message');
+      }
+
+      setLoading(false);
+      setSuccess(true);
+      setForm({ name: "", email: "", message: "" });
+      toast.success("Message sent successfully!", {
+        duration: 3000,
+        position: 'bottom-right',
+      });
+      setShowConfetti(true);
+      setTimeout(() => {
+        setSuccess(false);
+        setShowConfetti(false);
+      }, 5000);
+    } catch (error) {
+      setLoading(false);
+      console.error(error);
+      toast.error("Something went wrong. Please try again.", {
+        duration: 3000,
+        position: 'bottom-right',
+      });
+    }
   };
 
   const handleConfettiComplete = useCallback(() => {
