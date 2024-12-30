@@ -339,8 +339,7 @@ const awards = [
     icon: chess,
     iconBg: "#000000", 
     date: "Aug 2023",
-    points: ["Issued by Iowa State Chess Association, 4 Rounds G/60 d5"],
-    credential: "placeholder"
+    description: "Issued by Iowa State Chess Association, 4 Rounds G/60 d5"
   },
   {
     title: "High Honors Degree",
@@ -348,8 +347,7 @@ const awards = [
     icon: aksaray,
     iconBg: "#FFFFFF",
     date: "Jun 2019",
-    points: ["Awarded to Bachelor alumni who have graduated with a 3.60 GPA as 3rd of the faculty by Aksaray University"],
-    credential: "placeholder"
+    description: "Awarded to Bachelor alumni who have graduated with a 3.60 GPA as 3rd of the faculty by Aksaray University"
   },
   {
     title: "TUBITAK Scientist Support Programs Presidency Winner",
@@ -357,7 +355,7 @@ const awards = [
     icon: tubitak,
     iconBg: "#050C18",
     date: "Jun 2019", 
-    points: ["\"Egg Sex Classification with Morphological Methods\" at the Food and Agriculture Category of 2242-University Students Research Project Competitions organized by TUBITAK Scientist Support Programs Presidency won the first prize in the Kayseri Regional Exhibition"],
+    description: "\"Egg Sex Classification with Morphological Methods\" at the Food and Agriculture Category of 2242-University Students Research Project Competitions organized by TUBITAK Scientist Support Programs Presidency won the first prize in the Kayseri Regional Exhibition"
   },
   {
     title: "University of Padua Scholarship",
@@ -365,8 +363,7 @@ const awards = [
     icon: padua,
     iconBg: "#CCCFD8",
     date: "Sep 2021 - Sep 2023",
-    points: ["Awarded to graduate students who have been successful in the educational and professional area. Fee waiver + 7000 Euro / year grant"],
-    credential: "placeholder"
+    description: "Awarded to graduate students who have been successful in the educational and professional area. Fee waiver + 7000 Euro / year grant"
   }
 ];
 
