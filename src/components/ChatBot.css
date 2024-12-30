@@ -1,32 +1,42 @@
-.loading-message {
-    display: flex;
-    align-items: center;
-    color: #666;
+/* Add these to your existing CSS */
+
+/* Style for bold text */
+.message strong,
+.message b {
+    font-weight: 600;
+}
+
+/* Style for italic text */
+.message em,
+.message i {
     font-style: italic;
 }
 
-.loading-dots {
-    display: inline-block;
-    animation: loadingDots 1.5s infinite;
-    margin-left: 4px;
+/* Style for links */
+.message a {
+    color: #0066cc;
+    text-decoration: underline;
 }
 
-@keyframes loadingDots {
-    0% { content: '.'; }
-    33% { content: '..'; }
-    66% { content: '...'; }
-    100% { content: '.'; }
-}
-
-/* Disable input and button while loading */
-input:disabled, 
-button:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
-}
-
-/* Style for the temporary message */
-.message.assistant.loading {
+/* Style for code blocks */
+.message code {
     background-color: #f5f5f5;
-    font-style: italic;
-} 
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-family: monospace;
+}
+
+/* Style for blockquotes */
+.message blockquote {
+    border-left: 3px solid #ccc;
+    margin-left: 0;
+    padding-left: 1em;
+    color: #666;
+}
+
+/* Style for lists */
+.message ul,
+.message ol {
+    margin-left: 1.5em;
+    padding-left: 0;
+}

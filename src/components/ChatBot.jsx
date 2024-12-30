@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import ReactMarkdown from 'react-markdown';
+import './ChatBot.css';
 
 const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -115,7 +117,16 @@ const ChatBot = () => {
                       : 'bg-gray-200 text-gray-800'
                   }`}
                 >
-                  {message.content}
+                  {message.isLoading ? (
+                    <div className="loading-message">
+                      Muja is thinking
+                      <span className="loading-dots">...</span>
+                    </div>
+                  ) : (
+                    <ReactMarkdown>
+                      {message.content}
+                    </ReactMarkdown>
+                  )}
                 </div>
               </div>
             ))}

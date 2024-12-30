@@ -11,7 +11,7 @@ import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 
-const CertificationCard = ({ title, icon, type, date, points, credential }) => (
+const AwardCard = ({ title, icon, type, date, points, credential }) => (
   <div className="certification-card bg-tertiary p-6 rounded-2xl w-full h-full flex flex-col justify-between no-select">
     <div>
       <div className="relative w-full h-[50px] mb-4">
@@ -145,7 +145,7 @@ const Awards = () => {
         >
           {awards.map((certification, index) => (
             <SwiperSlide key={`certification-${index}`}>
-              <CertificationCard {...certification} />
+              <AwardCard {...certification} />
             </SwiperSlide>
           ))}
         </Swiper>
