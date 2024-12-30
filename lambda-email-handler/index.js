@@ -4,8 +4,12 @@ const sns = new SNSClient();
 exports.handler = async (event) => {
     console.log('Received event:', JSON.stringify(event, null, 2));
     
+    // Get the origin from the request
+    const origin = event.headers?.origin || '*';
+    const allowedOrigins = ['https://mujakayadan.com', 'http://localhost:5173'];
+    
     const headers = {
-        "Access-Control-Allow-Origin": "*", // Update this with your domain in production
+        "Access-Control-Allow-Origin": allowedOrigins.includes(origin) ? origin : allowedOrigins[0],
         "Access-Control-Allow-Methods": "POST, OPTIONS",
         "Access-Control-Allow-Headers": "Content-Type",
         "Content-Type": "application/json"

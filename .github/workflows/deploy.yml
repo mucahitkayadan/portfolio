@@ -16,6 +16,11 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: '18'
+
+    - name: Create Production Environment File
+      run: |
+        echo "VITE_LAMBDA_EMAIL_URL=${{ secrets.VITE_LAMBDA_EMAIL_URL }}" > .env.production
+        echo "VITE_LAMBDA_CHAT_URL=${{ secrets.VITE_LAMBDA_CHAT_URL }}" >> .env.production
         
     - name: Install Dependencies
       run: npm install
