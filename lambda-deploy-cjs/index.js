@@ -67,7 +67,11 @@ exports.handler = async (event) => {
 
     const assistantResponse = messages.data
       .filter(msg => msg.role === "assistant")
-      .map(msg => msg.content[0].text.value)[0];
+      .map(msg => {
+        let text = msg.content[0].text.value;
+        text = text.replace(/【\d+:\d+†[^】]+】/g, '');
+        return text;
+      })[0];
 
     return {
       statusCode: 200,

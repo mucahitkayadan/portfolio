@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { role: 'assistant', content: "Hi! I'm Muja's AI assistant. Feel free to ask me anything about his experience, skills, or projects!" }
+    { role: 'assistant', content: "Hi! I'm Muja's AI assistant. Feel free to ask me anything about my experience, skills, or projects!" }
   ]);
   const [inputMessage, setInputMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
