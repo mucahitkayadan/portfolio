@@ -10,6 +10,8 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "openai": "^4.77.0"
+    "@aws-sdk/client-dynamodb": "^3.716.0",
+    "openai": "^4.77.0",
+    "uuid": "^11.0.3"
   }
 }

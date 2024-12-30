@@ -1,5 +1,9 @@
 const { SNSClient, PublishCommand } = require("@aws-sdk/client-sns");
+const { DynamoDBClient, PutItemCommand } = require("@aws-sdk/client-dynamodb");
+const { v4: uuidv4 } = require('uuid');
+
 const sns = new SNSClient();
+const dynamodb = new DynamoDBClient();
 
 exports.handler = async (event) => {
     console.log('Received event:', JSON.stringify(event, null, 2));
@@ -27,6 +31,26 @@ exports.handler = async (event) => {
         const body = JSON.parse(event.body);
         const { name, email, message } = body;
 
+        // Generate unique ID for the contact
+        const contactId = uuidv4();
+        
+        // Save to DynamoDB
+        const dynamoParams = {
+            TableName: "portfolio-contacts",
+            Item: {
+                id: { S: contactId },
+                name: { S: name },
+                email: { S: email },
+                message: { S: message },
+                timestamp: { S: new Date().toISOString() },
+                userAgent: { S: event.headers['user-agent'] || 'Unknown' },
+                ipAddress: { S: event.requestContext.http.sourceIp || 'Unknown' }
+            }
+        };
+
+        await dynamodb.send(new PutItemCommand(dynamoParams));
+        console.log('Saved to DynamoDB:', contactId);
+
         if (!name || !email || !message) {
             console.log('Missing required fields');
             return {
@@ -52,6 +76,7 @@ exports.handler = async (event) => {
 
         const emailContent = `
 New Contact Form Submission
+ID: ${contactId}
 
 From: ${name}
 Email: ${email}

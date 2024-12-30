@@ -1,10 +1,18 @@
 const { OpenAI } = require("openai");
+const { DynamoDBClient, PutItemCommand } = require("@aws-sdk/client-dynamodb");
+const { v4: uuidv4 } = require('uuid');
+
+const dynamodb = new DynamoDBClient();
 
 exports.handler = async (event) => {
   console.log("Event received:", JSON.stringify(event, null, 2));
   
+  // Get the origin from the request
+  const origin = event.headers?.origin || '*';
+  const allowedOrigins = ['https://mujakayadan.com', 'http://localhost:5173'];
+  
   const headers = {
-    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Origin": allowedOrigins.includes(origin) ? origin : allowedOrigins[0],
     "Access-Control-Allow-Methods": "POST, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type",
     "Content-Type": "application/json"
@@ -26,6 +34,8 @@ exports.handler = async (event) => {
     const body = JSON.parse(event.body);
     const { message } = body;
     console.log("Received message:", message);
+
+    const chatId = uuidv4();
 
     const thread = await openai.beta.threads.create();
     console.log("Created new thread:", thread.id);
@@ -72,6 +82,23 @@ exports.handler = async (event) => {
         text = text.replace(/【\d+:\d+†[^】]+】/g, '');
         return text;
       })[0];
+
+    // Save to DynamoDB
+    const dynamoParams = {
+      TableName: "portfolio-chats",
+      Item: {
+        id: { S: chatId },
+        threadId: { S: thread.id },
+        userMessage: { S: message },
+        assistantResponse: { S: assistantResponse },
+        timestamp: { S: new Date().toISOString() },
+        userAgent: { S: event.headers?.['user-agent'] || 'Not provided' },
+        ipAddress: { S: event.requestContext?.http?.sourceIp || 'Not provided' }
+      }
+    };
+
+    await dynamodb.send(new PutItemCommand(dynamoParams));
+    console.log('Saved to DynamoDB:', chatId);
 
     return {
       statusCode: 200,
