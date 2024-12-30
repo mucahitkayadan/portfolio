@@ -2,9 +2,13 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
 import './ChatBot.css';
+import { chat_background } from "../assets";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faComment, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [hasShownInitial, setHasShownInitial] = useState(false);
   const [messages, setMessages] = useState([
     { role: 'assistant', content: "Hi! I'm Muja's AI assistant. Feel free to ask me anything about my experience, skills, or projects!" }
   ]);
@@ -19,6 +23,18 @@ const ChatBot = () => {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  // Auto-open chat after 10 seconds on first visit
+  useEffect(() => {
+    if (!hasShownInitial) {
+      const timer = setTimeout(() => {
+        setIsOpen(true);
+        setHasShownInitial(true);
+      }, 10000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [hasShownInitial]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -80,90 +96,103 @@ const ChatBot = () => {
     setIsLoading(false);
   };
 
+  const toggleChat = () => setIsOpen(!isOpen);
+
   return (
-    <div className="fixed bottom-4 right-4 z-50">
-      {/* Chat Toggle Button */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="bg-[#915EFF] hover:bg-[#7f52e0] text-white rounded-full p-4 shadow-lg"
+    <div className="fixed bottom-5 right-5 z-50">
+      {/* Chat Button - Always visible */}
+      <div 
+        onClick={toggleChat}
+        className={`w-24 h-24 rounded-full cursor-pointer hover:scale-110 transition-all duration-300 items-center justify-center relative chat-button-pulse ${
+          isOpen ? 'opacity-50' : 'opacity-100'
+        }`}
       >
-        {isOpen ? (
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        ) : (
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-          </svg>
-        )}
-      </button>
+        <img 
+          src={chat_background} 
+          alt="Chat" 
+          className="w-full h-full object-cover rounded-full hover:opacity-90 transition-all duration-300"
+        />
+        <div className="absolute bottom-0 right-0 w-6 h-6 bg-tertiary rounded-full flex items-center justify-center">
+          <FontAwesomeIcon icon={faComment} className="text-white text-sm" />
+        </div>
+      </div>
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="absolute bottom-16 right-0 w-96 bg-white rounded-lg shadow-xl overflow-hidden">
-          {/* Messages Container */}
-          <div className="h-96 overflow-y-auto p-4 bg-gray-50">
-            {messages.map((message, index) => (
-              <div
-                key={index}
-                className={`mb-4 ${
-                  message.role === 'user' ? 'text-right' : 'text-left'
-                }`}
-              >
-                <div
-                  className={`inline-block p-3 rounded-lg ${
-                    message.role === 'user'
-                      ? 'bg-[#915EFF] text-white'
-                      : 'bg-gray-200 text-gray-800'
-                  }`}
-                >
-                  {message.isLoading ? (
-                    <div className="loading-message">
-                      Muja is thinking
-                      <span className="loading-dots">...</span>
-                    </div>
-                  ) : (
-                    <ReactMarkdown>
-                      {message.content}
-                    </ReactMarkdown>
-                  )}
-                </div>
-              </div>
-            ))}
-            {isLoading && (
-              <div className="text-left mb-4">
-                <div className="inline-block p-3 rounded-lg bg-gray-200">
-                  <div className="flex space-x-2">
-                    <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce"></div>
-                    <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce delay-100"></div>
-                    <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce delay-200"></div>
-                  </div>
-                </div>
-              </div>
-            )}
-            <div ref={messagesEndRef} />
+        <div className="absolute bottom-0 right-0 w-96 h-[500px] bg-white rounded-lg shadow-xl overflow-hidden">
+          {/* Close Button */}
+          <div 
+            className="absolute top-2 right-2 w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center cursor-pointer transition-colors duration-300"
+            onClick={toggleChat}
+          >
+            <FontAwesomeIcon icon={faTimes} className="text-gray-600" />
           </div>
 
-          {/* Input Form */}
-          <form onSubmit={handleSubmit} className="p-4 border-t">
-            <div className="flex space-x-2">
-              <input
-                type="text"
-                value={inputMessage}
-                onChange={(e) => setInputMessage(e.target.value)}
-                placeholder="Ask me anything..."
-                className="flex-1 p-2 border rounded-lg focus:outline-none focus:border-[#915EFF]"
-                disabled={isLoading}
-              />
-              <button
-                type="submit"
-                disabled={isLoading}
-                className="bg-[#915EFF] hover:bg-[#7f52e0] text-white px-4 py-2 rounded-lg disabled:opacity-50"
-              >
-                Send
-              </button>
+          {/* Messages Container */}
+          <div className="flex flex-col h-full">
+            <div className="h-96 overflow-y-auto p-4 bg-gray-50">
+              {messages.map((message, index) => (
+                <div
+                  key={index}
+                  className={`mb-4 ${
+                    message.role === 'user' ? 'text-right' : 'text-left'
+                  }`}
+                >
+                  <div
+                    className={`inline-block p-3 rounded-lg ${
+                      message.role === 'user'
+                        ? 'bg-[#915EFF] text-white'
+                        : 'bg-gray-200 text-gray-800'
+                    }`}
+                  >
+                    {message.isLoading ? (
+                      <div className="loading-message">
+                        Muja is thinking
+                        <span className="loading-dots">...</span>
+                      </div>
+                    ) : (
+                      <ReactMarkdown>
+                        {message.content}
+                      </ReactMarkdown>
+                    )}
+                  </div>
+                </div>
+              ))}
+              {isLoading && (
+                <div className="text-left mb-4">
+                  <div className="inline-block p-3 rounded-lg bg-gray-200">
+                    <div className="flex space-x-2">
+                      <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce"></div>
+                      <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce delay-100"></div>
+                      <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce delay-200"></div>
+                    </div>
+                  </div>
+                </div>
+              )}
+              <div ref={messagesEndRef} />
             </div>
-          </form>
+
+            {/* Input Form */}
+            <form onSubmit={handleSubmit} className="p-4 border-t">
+              <div className="flex space-x-2">
+                <input
+                  type="text"
+                  value={inputMessage}
+                  onChange={(e) => setInputMessage(e.target.value)}
+                  placeholder="Ask me anything..."
+                  className="flex-1 p-2 border rounded-lg focus:outline-none focus:border-[#915EFF]"
+                  disabled={isLoading}
+                />
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className="bg-[#915EFF] hover:bg-[#7f52e0] text-white px-4 py-2 rounded-lg disabled:opacity-50"
+                >
+                  Send
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       )}
     </div>
