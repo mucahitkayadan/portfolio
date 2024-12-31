@@ -40,3 +40,38 @@
     margin-left: 1.5em;
     padding-left: 0;
 }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Welcome bubble specific styles */
+.welcome-bubble {
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .chat-button-pulse {
+    margin-right: 1rem;
+  }
+  
+  /* Adjust welcome bubble on mobile */
+  .welcome-bubble {
+    max-width: calc(100vw - 4rem);
+    margin-right: 1rem;
+  }
+}

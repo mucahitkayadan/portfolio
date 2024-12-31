@@ -18,7 +18,10 @@ exports.handler = async (event) => {
     "Content-Type": "application/json"
   };
 
-  if (event.requestContext.http.method === 'OPTIONS') {
+  // Handle both API Gateway and Lambda URL requests
+  const httpMethod = event.requestContext?.http?.method || event.httpMethod;
+  
+  if (httpMethod === 'OPTIONS') {
     return {
       statusCode: 200,
       headers,
@@ -31,7 +34,8 @@ exports.handler = async (event) => {
       apiKey: process.env.OPENAI_API_KEY,
     });
 
-    const body = JSON.parse(event.body);
+    // Handle both API Gateway and Lambda URL request bodies
+    const body = typeof event.body === 'string' ? JSON.parse(event.body) : event.body;
     const { message } = body;
     console.log("Received message:", message);
 

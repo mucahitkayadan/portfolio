@@ -2,19 +2,20 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
 import './ChatBot.css';
-import { chat_background } from "../assets";
+import { chat_background, notificationSound } from "../assets";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [hasShownInitial, setHasShownInitial] = useState(false);
+  const [showWelcome, setShowWelcome] = useState(false);
   const [messages, setMessages] = useState([
     { role: 'assistant', content: "Hi! I'm Muja's AI assistant. Feel free to ask me anything about my experience, skills, or projects!" }
   ]);
   const [inputMessage, setInputMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef(null);
+  const audioRef = useRef(new Audio(notificationSound));
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -24,17 +25,21 @@ const ChatBot = () => {
     scrollToBottom();
   }, [messages]);
 
-  // Auto-open chat after 10 seconds on first visit
+  // Show welcome message after 10 seconds with sound
   useEffect(() => {
-    if (!hasShownInitial) {
-      const timer = setTimeout(() => {
-        setIsOpen(true);
-        setHasShownInitial(true);
-      }, 10000);
+    const timer = setTimeout(() => {
+      if (!isOpen) {
+        setShowWelcome(true);
+        // Play sound
+        audioRef.current.play().catch(err => {
+          console.log('Audio play failed:', err);
+          // This is normal on first visit due to browser autoplay policies
+        });
+      }
+    }, 10000);
 
-      return () => clearTimeout(timer);
-    }
-  }, [hasShownInitial]);
+    return () => clearTimeout(timer);
+  }, [isOpen]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -96,16 +101,35 @@ const ChatBot = () => {
     setIsLoading(false);
   };
 
-  const toggleChat = () => setIsOpen(!isOpen);
+  const toggleChat = () => {
+    setIsOpen(!isOpen);
+    setShowWelcome(false);
+  };
 
   return (
     <div className="fixed bottom-5 right-5 z-50">
-      {/* Chat Button - Always visible */}
+      {/* Welcome Bubble */}
+      {showWelcome && !isOpen && (
+        <div className="absolute bottom-28 right-0 bg-white rounded-lg shadow-lg p-4 mb-4 min-w-[280px] max-w-[320px] animate-fade-in">
+          <div className="relative">
+            <button 
+              onClick={() => setShowWelcome(false)}
+              className="absolute -top-2 -right-2 w-6 h-6 bg-gray-100 rounded-full flex items-center justify-center text-gray-600 hover:bg-gray-200"
+            >
+              ×
+            </button>
+            <p className="text-base text-gray-800 pr-4">
+              Hey there! Muja salutes you. Would you like to talk to Virtual Muja? 👋
+            </p>
+          </div>
+          <div className="absolute -bottom-2 right-8 w-4 h-4 bg-white transform rotate-45 shadow-lg"></div>
+        </div>
+      )}
+
+      {/* Chat Button */}
       <div 
         onClick={toggleChat}
-        className={`w-24 h-24 rounded-full cursor-pointer hover:scale-110 transition-all duration-300 items-center justify-center relative chat-button-pulse ${
-          isOpen ? 'opacity-50' : 'opacity-100'
-        }`}
+        className="w-20 h-20 md:w-24 md:h-24 rounded-full cursor-pointer hover:scale-110 transition-all duration-300 items-center justify-center relative chat-button-pulse flex"
       >
         <img 
           src={chat_background} 
@@ -119,7 +143,7 @@ const ChatBot = () => {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="absolute bottom-0 right-0 w-96 h-[500px] bg-white rounded-lg shadow-xl overflow-hidden">
+        <div className="fixed bottom-0 right-0 md:bottom-24 md:right-5 w-full md:w-96 h-[80vh] md:h-[500px] bg-white rounded-t-lg md:rounded-lg shadow-xl">
           {/* Close Button */}
           <div 
             className="absolute top-2 right-2 w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center cursor-pointer transition-colors duration-300"
