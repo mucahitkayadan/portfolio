@@ -85,6 +85,10 @@ import placeholder from "./projects/coming_soon_placeholder.png";
 import resume_builder_tex from "./projects/resume_builder_tex.png";
 import envmasker from "./projects/envmasker.png";
 import wildlife_detector from "./projects/wildlife_detector.png";
+import chess_board from "./projects/chess_board.png";
+import rf_energy_harvesting from "./projects/rf_energy_harvesting.png";
+
+
 // Platforms
 import linux from "./skills/platforms/linux.svg";
 import cuda from "./skills/platforms/cuda.svg";
@@ -221,6 +225,8 @@ export {
   resume_builder_tex,
   envmasker,
   wildlife_detector,
+  chess_board,
+  rf_energy_harvesting,
 
   // Certificates
   chess,

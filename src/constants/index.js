@@ -28,6 +28,8 @@ import {
   resume_builder_tex,
   envmasker,
   wildlife_detector,
+  chess_board,
+  rf_energy_harvesting,
 } from "../assets";
 
 export const navLinks = [
@@ -460,7 +462,7 @@ const projects = [
         color: "blue-text-gradient",
       }
     ],
-    image: placeholder,
+    image: chess_board,
     source_code_link: "https://github.com/mucahitkayadan",
     live_project_link: "https://github.com/mucahitkayadan",
   },
@@ -482,7 +484,7 @@ const projects = [
         color: "pink-text-gradient",
       }
     ],
-    image: placeholder,
+    image: rf_energy_harvesting,
     source_code_link: "https://github.com/mucahitkayadan",
     live_project_link: "https://github.com/mucahitkayadan",
   },
