@@ -106,6 +106,13 @@ const ChatBot = () => {
     setShowWelcome(false);
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSubmit(e);
+    }
+  };
+
   return (
     <div className="fixed bottom-5 right-5 z-50">
       {/* Welcome Bubble */}
@@ -143,16 +150,20 @@ const ChatBot = () => {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-0 right-0 md:bottom-24 md:right-5 w-full md:w-96 h-[90vh] md:h-[500px] bg-white rounded-t-lg md:rounded-lg shadow-xl flex flex-col">
-          {/* Close button */}
-          <div className="absolute top-2 right-2 w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center cursor-pointer transition-colors duration-300"
-            onClick={toggleChat}
-          >
-            <FontAwesomeIcon icon={faTimes} className="text-gray-600" />
+        <div className="fixed inset-0 md:inset-auto md:bottom-24 md:right-5 w-full md:w-96 h-full md:h-[500px] bg-white md:rounded-lg shadow-xl flex flex-col z-50">
+          {/* Header with close button */}
+          <div className="sticky top-0 w-full bg-white p-4 border-b flex justify-between items-center">
+            <h3 className="text-lg font-semibold">Chat with Virtual Muja</h3>
+            <button
+              onClick={toggleChat}
+              className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center"
+            >
+              <FontAwesomeIcon icon={faTimes} className="text-gray-600" />
+            </button>
           </div>
 
           {/* Messages container */}
-          <div className="flex-1 overflow-y-auto p-4 pb-20">
+          <div className="flex-1 overflow-y-auto p-4 bg-gray-50">
             {messages.map((message, index) => (
               <div
                 key={index}
@@ -194,8 +205,8 @@ const ChatBot = () => {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Input area - fixed at bottom */}
-          <div className="absolute bottom-0 left-0 right-0 bg-white border-t p-3 flex gap-2 items-center">
+          {/* Input area */}
+          <div className="sticky bottom-0 left-0 right-0 bg-white border-t p-3 flex gap-2 items-center">
             <textarea
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}

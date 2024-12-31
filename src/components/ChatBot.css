@@ -75,10 +75,15 @@
     margin-right: 1rem;
   }
 
-  /* New mobile chat window styles */
-  .fixed.bottom-0 {
-    height: calc(100vh - env(safe-area-inset-bottom)) !important;
-    padding-bottom: env(safe-area-inset-bottom);
+  /* Updated mobile chat window styles */
+  .fixed.inset-0 {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 100% !important;
+    background-color: white;
   }
 
   textarea {
@@ -86,8 +91,9 @@
   }
 
   /* Ensure input area stays visible */
-  .absolute.bottom-0 {
-    bottom: env(safe-area-inset-bottom);
+  .sticky.bottom-0 {
+    position: sticky;
+    bottom: 0;
     background-color: white;
     border-top: 1px solid #e5e7eb;
     padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
