@@ -74,4 +74,24 @@
     max-width: calc(100vw - 4rem);
     margin-right: 1rem;
   }
+
+  /* New mobile chat window styles */
+  .fixed.bottom-0 {
+    height: calc(100vh - env(safe-area-inset-bottom)) !important;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  textarea {
+    max-height: 100px;
+  }
+
+  /* Ensure input area stays visible */
+  .absolute.bottom-0 {
+    bottom: env(safe-area-inset-bottom);
+    background-color: white;
+    border-top: 1px solid #e5e7eb;
+    padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+  }
 }
+
+/* Add viewport meta tag if not already present */

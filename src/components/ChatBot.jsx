@@ -143,79 +143,82 @@ const ChatBot = () => {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-0 right-0 md:bottom-24 md:right-5 w-full md:w-96 h-[80vh] md:h-[500px] bg-white rounded-t-lg md:rounded-lg shadow-xl">
-          {/* Close Button */}
-          <div 
-            className="absolute top-2 right-2 w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center cursor-pointer transition-colors duration-300"
+        <div className="fixed bottom-0 right-0 md:bottom-24 md:right-5 w-full md:w-96 h-[90vh] md:h-[500px] bg-white rounded-t-lg md:rounded-lg shadow-xl flex flex-col">
+          {/* Close button */}
+          <div className="absolute top-2 right-2 w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center cursor-pointer transition-colors duration-300"
             onClick={toggleChat}
           >
             <FontAwesomeIcon icon={faTimes} className="text-gray-600" />
           </div>
 
-          {/* Messages Container */}
-          <div className="flex flex-col h-full">
-            <div className="h-96 overflow-y-auto p-4 bg-gray-50">
-              {messages.map((message, index) => (
+          {/* Messages container */}
+          <div className="flex-1 overflow-y-auto p-4 pb-20">
+            {messages.map((message, index) => (
+              <div
+                key={index}
+                className={`mb-4 ${
+                  message.role === 'user' ? 'text-right' : 'text-left'
+                }`}
+              >
                 <div
-                  key={index}
-                  className={`mb-4 ${
-                    message.role === 'user' ? 'text-right' : 'text-left'
+                  className={`inline-block p-3 rounded-lg ${
+                    message.role === 'user'
+                      ? 'bg-[#915EFF] text-white'
+                      : 'bg-gray-200 text-gray-800'
                   }`}
                 >
-                  <div
-                    className={`inline-block p-3 rounded-lg ${
-                      message.role === 'user'
-                        ? 'bg-[#915EFF] text-white'
-                        : 'bg-gray-200 text-gray-800'
-                    }`}
-                  >
-                    {message.isLoading ? (
-                      <div className="loading-message">
-                        Muja is thinking
-                        <span className="loading-dots">...</span>
-                      </div>
-                    ) : (
-                      <ReactMarkdown>
-                        {message.content}
-                      </ReactMarkdown>
-                    )}
-                  </div>
-                </div>
-              ))}
-              {isLoading && (
-                <div className="text-left mb-4">
-                  <div className="inline-block p-3 rounded-lg bg-gray-200">
-                    <div className="flex space-x-2">
-                      <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce"></div>
-                      <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce delay-100"></div>
-                      <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce delay-200"></div>
+                  {message.isLoading ? (
+                    <div className="loading-message">
+                      Muja is thinking
+                      <span className="loading-dots">...</span>
                     </div>
+                  ) : (
+                    <ReactMarkdown>
+                      {message.content}
+                    </ReactMarkdown>
+                  )}
+                </div>
+              </div>
+            ))}
+            {isLoading && (
+              <div className="text-left mb-4">
+                <div className="inline-block p-3 rounded-lg bg-gray-200">
+                  <div className="flex space-x-2">
+                    <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce"></div>
+                    <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce delay-100"></div>
+                    <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce delay-200"></div>
                   </div>
                 </div>
-              )}
-              <div ref={messagesEndRef} />
-            </div>
-
-            {/* Input Form */}
-            <form onSubmit={handleSubmit} className="p-4 border-t">
-              <div className="flex space-x-2">
-                <input
-                  type="text"
-                  value={inputMessage}
-                  onChange={(e) => setInputMessage(e.target.value)}
-                  placeholder="Ask me anything..."
-                  className="flex-1 p-2 border rounded-lg focus:outline-none focus:border-[#915EFF]"
-                  disabled={isLoading}
-                />
-                <button
-                  type="submit"
-                  disabled={isLoading}
-                  className="bg-[#915EFF] hover:bg-[#7f52e0] text-white px-4 py-2 rounded-lg disabled:opacity-50"
-                >
-                  Send
-                </button>
               </div>
-            </form>
+            )}
+            <div ref={messagesEndRef} />
+          </div>
+
+          {/* Input area - fixed at bottom */}
+          <div className="absolute bottom-0 left-0 right-0 bg-white border-t p-3 flex gap-2 items-center">
+            <textarea
+              value={inputMessage}
+              onChange={(e) => setInputMessage(e.target.value)}
+              placeholder="Type your message..."
+              className="flex-1 resize-none border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 max-h-32"
+              rows="1"
+              onKeyDown={handleKeyDown}
+            />
+            <button
+              onClick={handleSubmit}
+              disabled={!inputMessage.trim() || isLoading}
+              className={`px-4 py-2 rounded-lg ${
+                inputMessage.trim() && !isLoading
+                  ? 'bg-tertiary text-white hover:bg-secondary'
+                  : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+              } transition-colors duration-300`}
+            >
+              {isLoading ? (
+                <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
+              ) : (
+                'Send'
+              )}
+            </button>
           </div>
         </div>
       )}
