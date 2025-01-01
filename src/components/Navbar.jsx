@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 import { styles } from "../styles";
@@ -10,6 +10,7 @@ const Navbar = () => {
   const [active, setActive] = useState("");
   const [toggle, setToggle] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -67,6 +68,18 @@ const Navbar = () => {
     transform: toggle ? 'rotate(45deg)' : 'none',
   };
 
+  const handleNavClick = (nav) => {
+    setActive(nav.title);
+    if (nav.isExternal) {
+      // For blog or other external pages
+      window.open(nav.path, '_self');  // '_self' to open in same tab, use '_blank' for new tab
+    } else {
+      // For anchor links within the same page
+      const element = document.getElementById(nav.id);
+      element?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <nav
       className={`${
@@ -117,11 +130,10 @@ const Navbar = () => {
               transition={{ duration: 0.5, delay: nav.id * 0.1 }}
             >
               <a
-                href={`#${nav.id}`}
+                onClick={() => handleNavClick(nav)}
                 className={`${
                   active === nav.title ? "text-white" : "text-secondary"
                 } hover:text-white text-[18px] font-medium cursor-pointer transition-colors duration-300`}
-                onClick={() => setActive(nav.title)}
               >
                 {nav.title}
               </a>
@@ -158,10 +170,10 @@ const Navbar = () => {
                   }`}
                   onClick={() => {
                     setToggle(!toggle);
-                    setActive(nav.title);
+                    handleNavClick(nav);
                   }}
                 >
-                  <a href={`#${nav.id}`}>{nav.title}</a>
+                  <a>{nav.title}</a>
                 </motion.li>
               ))}
             </ul>
