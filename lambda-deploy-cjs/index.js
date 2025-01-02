@@ -1,5 +1,5 @@
 const { OpenAI } = require("openai");
-const { DynamoDBClient, PutItemCommand } = require("@aws-sdk/client-dynamodb");
+const { DynamoDBClient, PutItemCommand, QueryCommand } = require("@aws-sdk/client-dynamodb");
 const { v4: uuidv4 } = require('uuid');
 
 const dynamodb = new DynamoDBClient();
@@ -10,10 +10,33 @@ const allowedOrigins = [
     'http://localhost:5173'
 ];
 
+async function getRecentMessages(threadId) {
+    if (!threadId) return [];
+
+    const params = {
+        TableName: "portfolio-chats",
+        KeyConditionExpression: "threadId = :threadId",
+        ExpressionAttributeValues: {
+            ":threadId": { S: threadId }
+        },
+        ScanIndexForward: true // Get messages in chronological order
+    };
+
+    try {
+        const result = await dynamodb.send(new QueryCommand(params));
+        return result.Items.map(item => ({
+            userMessage: item.userMessage.S,
+            assistantResponse: item.assistantResponse.S
+        }));
+    } catch (error) {
+        console.error("Error fetching messages:", error);
+        return [];
+    }
+}
+
 exports.handler = async (event) => {
     console.log("Event received:", JSON.stringify(event, null, 2));
     
-    // Get the origin from the request with fallback
     const origin = event.headers?.origin || event.headers?.Origin || allowedOrigins[0];
     
     const headers = {
@@ -23,7 +46,6 @@ exports.handler = async (event) => {
         "Content-Type": "application/json"
     };
 
-    // Handle both API Gateway and Lambda URL requests
     const httpMethod = event.requestContext?.http?.method || event.httpMethod;
     
     if (httpMethod === 'OPTIONS') {
@@ -39,18 +61,31 @@ exports.handler = async (event) => {
             apiKey: process.env.OPENAI_API_KEY,
         });
 
-        // Handle both API Gateway and Lambda URL request bodies
         const body = typeof event.body === 'string' ? JSON.parse(event.body) : event.body;
-        const { message } = body;
+        const { message, threadId } = body;
         console.log("Received message:", message);
+        console.log("Thread ID:", threadId);
 
-        const chatId = uuidv4();
+        let currentThreadId = threadId;
+        let thread;
 
-        const thread = await openai.beta.threads.create();
-        console.log("Created new thread:", thread.id);
+        if (currentThreadId) {
+            // Use existing thread
+            thread = { id: currentThreadId };
+        } else {
+            // Create new thread
+            thread = await openai.beta.threads.create();
+            currentThreadId = thread.id;
+        }
 
+        console.log("Using thread:", currentThreadId);
+
+        // Get previous messages if thread exists
+        const previousMessages = await getRecentMessages(currentThreadId);
+        
+        // Create new message
         await openai.beta.threads.messages.create(
-            thread.id,
+            currentThreadId,
             {
                 role: "user",
                 content: message
@@ -58,14 +93,14 @@ exports.handler = async (event) => {
         );
 
         const run = await openai.beta.threads.runs.create(
-            thread.id,
+            currentThreadId,
             {
                 assistant_id: process.env.OPENAI_ASSISTANT_ID,
             }
         );
 
         let runStatus = await openai.beta.threads.runs.retrieve(
-            thread.id,
+            currentThreadId,
             run.id
         );
 
@@ -75,13 +110,13 @@ exports.handler = async (event) => {
             }
             await new Promise(resolve => setTimeout(resolve, 1000));
             runStatus = await openai.beta.threads.runs.retrieve(
-                thread.id,
+                currentThreadId,
                 run.id
             );
         }
 
         const messages = await openai.beta.threads.messages.list(
-            thread.id
+            currentThreadId
         );
 
         const assistantResponse = messages.data
@@ -92,12 +127,12 @@ exports.handler = async (event) => {
                 return text;
             })[0];
 
-        // Save to DynamoDB
+        const chatId = uuidv4();
         const dynamoParams = {
             TableName: "portfolio-chats",
             Item: {
                 id: { S: chatId },
-                threadId: { S: thread.id },
+                threadId: { S: currentThreadId },
                 userMessage: { S: message },
                 assistantResponse: { S: assistantResponse },
                 timestamp: { S: new Date().toISOString() },
@@ -113,7 +148,9 @@ exports.handler = async (event) => {
             statusCode: 200,
             headers,
             body: JSON.stringify({ 
-                response: assistantResponse
+                response: assistantResponse,
+                threadId: currentThreadId,
+                history: previousMessages
             })
         };
     } catch (error) {
