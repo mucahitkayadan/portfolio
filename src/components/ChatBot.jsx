@@ -6,6 +6,8 @@ import { chat_background, notificationSound } from "../assets";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment, faTimes } from '@fortawesome/free-solid-svg-icons';
 
+const API_URL = import.meta.env.VITE_API_GATEWAY_URL;
+
 const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showWelcome, setShowWelcome] = useState(false);
@@ -16,6 +18,7 @@ const ChatBot = () => {
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef(null);
   const audioRef = useRef(new Audio(notificationSound));
+  const [threadId, setThreadId] = useState(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -43,62 +46,51 @@ const ChatBot = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!inputMessage.trim()) return;
-
-    // Add user message
-    setMessages(prev => [...prev, { role: 'user', content: inputMessage }]);
-    setIsLoading(true);
+    if (!inputMessage.trim() || isLoading) return;
 
     try {
-      const LAMBDA_URL = import.meta.env.VITE_LAMBDA_URL;
-      console.log('Sending request to:', LAMBDA_URL);
-      console.log('Request body:', { message: inputMessage });
-
-      const response = await fetch(LAMBDA_URL, {
+      setIsLoading(true);
+      const response = await fetch(API_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ message: inputMessage }),
+        body: JSON.stringify({ 
+          message: inputMessage,
+          threadId: threadId 
+        }),
       });
 
-      console.log('Response status:', response.status);
-      const responseText = await response.text();
-      console.log('Raw response:', responseText);
-
       if (!response.ok) {
-        let errorData;
-        try {
-          errorData = JSON.parse(responseText);
-        } catch (e) {
-          console.error('Failed to parse error response:', e);
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+        throw new Error('Network response was not ok');
       }
 
-      let data;
-      try {
-        data = JSON.parse(responseText);
-      } catch (e) {
-        console.error('Failed to parse success response:', e);
-        throw new Error('Invalid response from server');
+      const data = await response.json();
+      setThreadId(data.threadId);
+
+      // Update messages with history if available
+      if (data.history && !threadId) {
+        setMessages([
+          ...data.history.map(msg => ([
+            { role: 'user', content: msg.userMessage },
+            { role: 'assistant', content: msg.assistantResponse }
+          ])).flat(),
+          { role: 'user', content: inputMessage },
+          { role: 'assistant', content: data.response }
+        ]);
+      } else {
+        setMessages(prev => [...prev,
+          { role: 'user', content: inputMessage },
+          { role: 'assistant', content: data.response }
+        ]);
       }
 
-      setMessages(prev => [...prev, { role: 'assistant', content: data.response }]);
+      setInputMessage('');
     } catch (error) {
-      console.error('Full error object:', error);
-      console.error('Error name:', error.name);
-      console.error('Error message:', error.message);
-      console.error('Error stack:', error.stack);
-      setMessages(prev => [...prev, { 
-        role: 'assistant', 
-        content: `Error: ${error.message}. Please try again later.`
-      }]);
+      console.error('Error:', error);
+    } finally {
+      setIsLoading(false);
     }
-
-    setInputMessage('');
-    setIsLoading(false);
   };
 
   const toggleChat = () => {

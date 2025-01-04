@@ -34,9 +34,7 @@ async function getRecentMessages(threadId) {
     }
 }
 
-exports.handler = async (event) => {
-    console.log("Event received:", JSON.stringify(event, null, 2));
-    
+exports.handler = async (event) => {    
     const origin = event.headers?.origin || event.headers?.Origin || allowedOrigins[0];
     
     const headers = {
@@ -46,9 +44,11 @@ exports.handler = async (event) => {
         "Content-Type": "application/json"
     };
 
-    const httpMethod = event.requestContext?.http?.method || event.httpMethod;
-    
-    if (httpMethod === 'OPTIONS') {
+    // Log the incoming event
+    console.log('Received event:', JSON.stringify(event, null, 2));
+
+    // Handle OPTIONS request
+    if (event.httpMethod === 'OPTIONS') {
         return {
             statusCode: 200,
             headers,
@@ -61,7 +61,19 @@ exports.handler = async (event) => {
             apiKey: process.env.OPENAI_API_KEY,
         });
 
-        const body = typeof event.body === 'string' ? JSON.parse(event.body) : event.body;
+        // Parse the body correctly for API Gateway
+        let body;
+        try {
+            body = typeof event.body === 'string' ? JSON.parse(event.body) : event.body;
+        } catch (error) {
+            console.error("Error parsing body:", error);
+            return {
+                statusCode: 400,
+                headers,
+                body: JSON.stringify({ message: "Invalid request body" })
+            };
+        }
+
         const { message, threadId } = body;
         console.log("Received message:", message);
         console.log("Thread ID:", threadId);
