@@ -321,13 +321,16 @@ const Tech = () => {
   );
 
   return (
-    
     <section className="skills" ref={ref}>
       <div className="container">
-        <motion.div variants={textVariant()} className="skills-header">
-          <p className="sm:text-[18px] text-[14px] text-secondary uppercase tracking-wider text-center">My Technical Arsenal</p>
-          <h2 className="text-white font-black md:text-[60px] sm:text-[50px] xs:text-[40px] text-[30px] text-center">Skills.</h2>
-        </motion.div>
+        <div className="skills-header mb-12">
+          <p className="sm:text-[18px] text-[14px] text-white uppercase tracking-wider text-center">
+            My Technical Arsenal
+          </p>
+          <h2 className="text-white font-black md:text-[60px] sm:text-[50px] xs:text-[40px] text-[30px] text-center">
+            Skills.
+          </h2>
+        </div>
         {renderCategory("programming_languages", rows.programming_languages)}
         {renderCategory("machine_learning", rows.machine_learning)}
         {renderCategory("cloud_platforms", rows.cloud_platforms)}
@@ -338,4 +341,4 @@ const Tech = () => {
   );
 };
 
-export default SectionWrapper(Tech, "skills");
+export default SectionWrapper(Tech, "");

@@ -59,8 +59,9 @@ const About = () => {
           hidden: { opacity: 0, y: -20 },
           visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
         }}
+        className="text-center"
       >
-        <p className={styles.sectionSubText}>Introduction</p>
+        <p className={`${styles.sectionSubText} text-center`}>Introduction</p>
       </motion.div>
 
       <motion.div
@@ -70,8 +71,9 @@ const About = () => {
           hidden: { opacity: 0, y: -20 },
           visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
         }}
+        className="text-center"
       >
-        <h2 className={styles.sectionHeadText}>Overview.</h2>
+        <h2 className={`${styles.sectionHeadText} text-center`}>Overview.</h2>
       </motion.div>
 
       <div className="mt-10 flex flex-col md:flex-row items-center md:items-start gap-10">
