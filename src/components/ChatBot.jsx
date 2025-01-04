@@ -19,6 +19,8 @@ const ChatBot = () => {
   const messagesEndRef = useRef(null);
   const audioRef = useRef(new Audio(notificationSound));
   const [threadId, setThreadId] = useState(null);
+  const [isTyping, setIsTyping] = useState(false);
+  const [displayedResponse, setDisplayedResponse] = useState('');
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -44,19 +46,46 @@ const ChatBot = () => {
     return () => clearTimeout(timer);
   }, [isOpen]);
 
+  // Faster typing effect
+  const simulateTyping = (text) => {
+    setIsTyping(true);
+    let i = 0;
+    setDisplayedResponse('');
+    
+    const typing = setInterval(() => {
+      if (i < text.length) {
+        setDisplayedResponse(prev => prev + text.charAt(i));
+        i += 2; // Increment by 2 to type faster
+      } else {
+        clearInterval(typing);
+        setIsTyping(false);
+        setMessages(prev => {
+          const newMessages = [...prev];
+          newMessages[newMessages.length - 1].content = text;
+          return newMessages;
+        });
+      }
+    }, 10); // Reduced from 30ms to 10ms
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!inputMessage.trim() || isLoading) return;
 
+    const userMessage = inputMessage.trim();
+    setInputMessage('');
+    setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
+    
     try {
       setIsLoading(true);
+
       const response = await fetch(API_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ 
-          message: inputMessage,
+          message: userMessage,
           threadId: threadId 
         }),
       });
@@ -66,26 +95,14 @@ const ChatBot = () => {
       }
 
       const data = await response.json();
-      setThreadId(data.threadId);
+      const parsedBody = JSON.parse(data.body);
+      
+      setMessages(prev => [...prev, { 
+        role: 'assistant', 
+        content: parsedBody.response 
+      }]);
+      setThreadId(parsedBody.threadId);
 
-      // Update messages with history if available
-      if (data.history && !threadId) {
-        setMessages([
-          ...data.history.map(msg => ([
-            { role: 'user', content: msg.userMessage },
-            { role: 'assistant', content: msg.assistantResponse }
-          ])).flat(),
-          { role: 'user', content: inputMessage },
-          { role: 'assistant', content: data.response }
-        ]);
-      } else {
-        setMessages(prev => [...prev,
-          { role: 'user', content: inputMessage },
-          { role: 'assistant', content: data.response }
-        ]);
-      }
-
-      setInputMessage('');
     } catch (error) {
       console.error('Error:', error);
     } finally {
