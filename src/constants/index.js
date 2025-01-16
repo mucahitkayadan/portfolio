@@ -800,6 +800,28 @@ const projects = [
     source_code_link: "https://github.com/mucahitkayadan",
     live_project_link: "https://github.com/mucahitkayadan",
   },
+  {
+    name: "PreTree - Directory Tree Visualizer",
+    description: 
+      "Developed a cross-platform Python package for visualizing directory structures in a tree-like format. Implemented advanced filtering options, configurable depth settings, and pattern matching capabilities. Features include size-based filtering, sorted output with directories first, and both CLI and library usage options.",
+    tags: [
+      {
+        name: "Python",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "CLI",
+        color: "green-text-gradient",
+      },
+      {
+        name: "File Systems",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: placeholder,
+    source_code_link: "https://github.com/mucahitkayadan/prettree",
+    live_project_link: "https://github.com/mucahitkayadan/prettree",
+  },
 ];
 
 const testimonials = [
