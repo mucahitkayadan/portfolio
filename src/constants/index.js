@@ -1,11 +1,9 @@
 import {
   // Languages
   python, 
-  mobile,
+
+
   github,
-  backend,
-  web,
-  fullstack,
   placeholder,
 
   // Awards
@@ -65,24 +63,6 @@ export const navLinks = [
   },
 ];
 
-const services = [
-  {
-    title: "Software Engineer",
-    icon: fullstack,
-  },
-  {
-    title: "Machine Learning Engineer",
-    icon: backend,
-  },
-  {
-    title: "Computer Vision Engineer",
-    icon: mobile,
-  },
-  {
-    title: "Electrical Electronics Engineer",
-    icon: web,
-  },
-];
 
 const education = [
   {
@@ -141,7 +121,7 @@ const education = [
     icon: aksaray,
     iconBg: "#fff", 
     date: "2019 - 2021",
-    location: "Aksaray, Turkey",
+    location: "Aksaray, Turkiye",
     description: "Completed my Master's with distinction, specializing in Computer Vision and Machine Learning. Engaged in advanced research projects and collaborated with international teams.",
     gpa: "3.79",
     points: [
@@ -179,7 +159,7 @@ const education = [
     icon: aksaray,
     iconBg: "#fff",
     date: "2015 - 2019",
-    location: "Aksaray, Turkey",
+    location: "Aksaray, Turkiye",
     description: "Completed my Bachelor's with distinction, specializing in Computer Vision and Machine Learning. Engaged in advanced research projects and collaborated with international teams.",
     gpa: "3.68",
     points: [
@@ -260,7 +240,7 @@ const experiences = [
     icon: goglobal,
     iconBg: "#fff",
     date: "Mar 2024 - Present",
-    location: "Remote",
+    location: "Redwood City, CA",
     description: "Go Global World is a platform that connects investors with startups. I am working on the AI team to develop AI-powered solutions for investor-founder matching and automated due diligence processes.",
     points: [
       "Architected and implemented an investor-founder matching system leveraging advanced similarity measures and vector embeddings for optimized performance.",
@@ -281,7 +261,7 @@ const experiences = [
     icon: orsan,
     iconBg: "#fff", 
     date: "Jan 2020 - May 2021",
-    location: "Aksaray, Turkey",
+    location: "Aksaray, Turkiye",
     description: "Orsan is a company that manufactures automotive parts for / under Mercedes-Benz. I worked on the R&D team to develop computer vision solutions for steel welding quality control.",
     points: [
       "Developed a custom computer vision pipeline using U-Net architectures for detecting welding defects with pixel-level accuracy.",
@@ -627,7 +607,7 @@ const projects = [
   {
     name: "Sex Classification by Egg Shape: Deep Learning and Image Processing Analysis",
     description:
-      "Developed egg shape tech to determine gender pre-incubation, addressing mass culling of male chicks. Applied ML and image processing for 91% accuracy across chicken breeds. Won scientific award, led to startup in Ireland. Published in Nature - Scientific Reports. Secured $20,000 funding from research councils in Turkey and Ireland. Used computer vision to extract egg shape features, boosting accuracy by 15%. Created user-friendly interface for farmers to integrate tech into incubation. Conducted field trials on poultry farms, validating real-world effectiveness. Worked with ethics committees to align tech with animal welfare standards.",
+      "Developed egg shape tech to determine gender pre-incubation, addressing mass culling of male chicks. Applied ML and image processing for 91% accuracy across chicken breeds. Won scientific award, led to startup in Ireland. Published in Nature - Scientific Reports. Secured $20,000 funding from research councils in Turkiye and Ireland. Used computer vision to extract egg shape features, boosting accuracy by 15%. Created user-friendly interface for farmers to integrate tech into incubation. Conducted field trials on poultry farms, validating real-world effectiveness. Worked with ethics committees to align tech with animal welfare standards.",
     tags: [
       {
         name: "Deep Learning",
@@ -852,7 +832,6 @@ const testimonials = [
 ];
 
 export {
-  services,
   experiences,
   awards,
   projects,

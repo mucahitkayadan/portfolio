@@ -2,16 +2,7 @@
 import profilepic from './pfp.png';
 import logo from "./logo0.webp";
 import chat_background from "./chat_background.png";
-
 import notificationSound from "./notification.wav";
-
-// Technologies
-import backend from "./backend.png";
-import mobile from "./mobile.png";
-import web from "./web.png";
-import fullstack from "./creator.png";
-import menu from "./menu.svg";
-import close from "./close.svg";
 import github from "./github.svg";
 
 // Languages
@@ -198,14 +189,6 @@ export {
   linux,
   cuda,
 
-
-  // Technologies
-  backend,
-  mobile,
-  web,
-  fullstack,
-  menu,
-  close,
   github,
 
   // Education

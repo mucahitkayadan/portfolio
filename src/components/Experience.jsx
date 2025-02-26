@@ -86,7 +86,7 @@ const ExperienceDetails = React.memo(({ experience }) => {
         </ul>
       ) : (
         <ul className="list-disc ml-5 space-y-2">
-          {experience.points.slice(0, 2).map((point, index) => (
+          {experience.points.slice(0, 4).map((point, index) => (
             <li
               key={`experience-point-${index}`}
               className="text-white-100 text-[14px] pl-1 tracking-wider"

@@ -6,3 +6,10 @@ lambda-deploy.zip
 blog-mujakayadan
 .cursorignore
 .cursorrules
+
+/dist
+/build
+/coverage
+/logs
+/temp
+/cache
