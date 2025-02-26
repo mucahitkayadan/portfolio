@@ -1,6 +1,5 @@
-import { defineConfig } from 'vite';
+import { defineConfig, UserConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import { UserConfig } from 'vite';
 
 const config: UserConfig = {
   plugins: [react()],

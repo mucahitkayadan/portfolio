@@ -7,8 +7,12 @@
     "prepare-embeddings": "node server/scripts/prepare-embeddings.js",
     "server": "node server/server.js",
     "build": "tsc && vite build",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "lint:fix": "eslint . --ext ts,tsx --fix",
+    "lint:src": "eslint \"src/**/*.{ts,tsx}\" --max-warnings 0",
+    "lint:vite": "eslint vite.config.ts -c .eslintrc-vite.cjs",
+    "lint": "npm run lint:src && npm run lint:vite",
+    "lint:src:fix": "eslint \"src/**/*.{ts,tsx}\" --fix",
+    "lint:vite:fix": "eslint vite.config.ts -c .eslintrc-vite.cjs --fix",
+    "lint:fix": "npm run lint:src:fix && npm run lint:vite:fix",
     "preview": "vite preview",
     "ts:check": "tsc --noEmit",
     "ts:watch": "tsc --noEmit --watch",
@@ -69,9 +73,12 @@
     "vite": "^6.2.0"
   },
   "lint-staged": {
-    "*.{ts,tsx}": [
+    "src/**/*.{ts,tsx}": [
       "eslint --fix",
       "prettier --write"
+    ],
+    "vite.config.ts": [
+      "eslint --fix -c .eslintrc-vite.cjs"
     ],
     "*.{css,md}": "prettier --write"
   }
