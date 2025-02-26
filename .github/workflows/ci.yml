@@ -1,4 +1,4 @@
-name: CI/CD
+name: CI
 
 on:
   push:
@@ -33,28 +33,4 @@ jobs:
       run: npm run lint
 
     - name: Build
-      run: npm run build
-
-    - name: Cache build
-      uses: actions/cache@v3
-      with:
-        path: |
-          dist
-          .cache
-        key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-build-
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-
-    steps:
-    - uses: actions/checkout@v3
-
-    - name: Deploy to GitHub Pages
-      uses: JamesIves/github-pages-deploy-action@v4
-      with:
-        branch: gh-pages
-        folder: dist 
+      run: npm run build 
