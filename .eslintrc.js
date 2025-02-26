@@ -14,7 +14,7 @@ module.exports = {
     'plugin:import/warnings',
     'plugin:import/typescript',
   ],
-  ignorePatterns: ['dist', '.eslintrc.js'],
+  ignorePatterns: ['dist', '.eslintrc.js', 'blog-mujakayadan/**/*'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 'latest',
@@ -37,13 +37,41 @@ module.exports = {
     },
   },
   rules: {
-    'react-refresh/only-export-components': [
-      'warn',
-      { allowConstantExport: true },
-    ],
+    'react-refresh/only-export-components': 'off',
     'react/react-in-jsx-scope': 'off',
+    'react/prop-types': 'off',
+    'react/no-unknown-property': ['error', { 
+      ignore: [
+        'intensity',
+        'position',
+        'groundColor',
+        'angle',
+        'penumbra',
+        'castShadow',
+        'receiveShadow',
+        'args',
+        'object',
+        'rotation-y',
+        'position-y',
+        'scale',
+        'dispose',
+        'geometry',
+        'material',
+        'polygonOffset',
+        'polygonOffsetFactor',
+        'flatShading',
+        'shadow-mapSize',
+        'rotation',
+        'position-x',
+        'position-z'
+      ] 
+    }],
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-explicit-any': 'warn',
+    '@typescript-eslint/no-unused-vars': ['error', { 
+      'argsIgnorePattern': '^_',
+      'varsIgnorePattern': '^_'
+    }],
     'import/order': [
       'error',
       {

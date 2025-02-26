@@ -32,18 +32,22 @@ const ChatBot = () => {
 
   // Show welcome message after 10 seconds with sound
   useEffect(() => {
-    const timer = setTimeout(() => {
-      if (!isOpen) {
-        setShowWelcome(true);
-        // Play sound
-        audioRef.current.play().catch(err => {
-          console.log('Audio play failed:', err);
-          // This is normal on first visit due to browser autoplay policies
-        });
-      }
-    }, 10000);
+    const hasPlayed = sessionStorage.getItem('notificationPlayed');
+    if (!hasPlayed) {
+      const timer = setTimeout(() => {
+        if (!isOpen) {
+          setShowWelcome(true);
+          // Play sound only once
+          audioRef.current.play().catch(err => {
+            console.log('Audio play failed:', err);
+            // This is normal on first visit due to browser autoplay policies
+          });
+          sessionStorage.setItem('notificationPlayed', 'true');
+        }
+      }, 10000);
 
-    return () => clearTimeout(timer);
+      return () => clearTimeout(timer);
+    }
   }, [isOpen]);
 
   // Faster typing effect
