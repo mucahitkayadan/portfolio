@@ -1,12 +1,17 @@
 import React, { Suspense, useEffect, useState, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
+import { Mesh } from "three";
 
 import CanvasLoader from "../Loader";
 
-const Computers = ({ isMobile }) => {
+interface ComputersProps {
+  isMobile: boolean;
+}
+
+const Computers: React.FC<ComputersProps> = ({ isMobile }) => {
   const computer = useGLTF("./desktop_pc/scene.gltf");
-  const meshRef = useRef();
+  const meshRef = useRef<Mesh>(null);
 
   useFrame((state, delta) => {
     if (meshRef.current && isMobile) {
@@ -36,8 +41,8 @@ const Computers = ({ isMobile }) => {
   );
 };
 
-const ComputersCanvas = () => {
-  const [isMobile, setIsMobile] = useState(false);
+const ComputersCanvas: React.FC = () => {
+  const [isMobile, setIsMobile] = useState<boolean>(false);
 
   useEffect(() => {
     // Add a listener for changes to the screen size
@@ -47,7 +52,7 @@ const ComputersCanvas = () => {
     setIsMobile(mediaQuery.matches);
 
     // Define a callback function to handle changes to the media query
-    const handleMediaQueryChange = (event) => {
+    const handleMediaQueryChange = (event: MediaQueryListEvent) => {
       setIsMobile(event.matches);
     };
 
@@ -88,4 +93,4 @@ const ComputersCanvas = () => {
   );
 };
 
-export default ComputersCanvas;
+export default ComputersCanvas; 

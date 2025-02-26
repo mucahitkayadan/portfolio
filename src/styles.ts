@@ -1,4 +1,14 @@
-const styles = {
+interface Styles {
+  paddingX: string;
+  paddingY: string;
+  padding: string;
+  heroHeadText: string;
+  heroSubText: string;
+  sectionHeadText: string;
+  sectionSubText: string;
+}
+
+const styles: Styles = {
   paddingX: "sm:px-16 px-6",
   paddingY: "sm:py-16 py-6",
   padding: "sm:px-16 px-6 sm:py-16 py-10",
@@ -14,4 +24,4 @@ const styles = {
     "sm:text-[18px] text-[14px] text-secondary uppercase tracking-wider",
 };
 
-export { styles };
+export { styles }; 

@@ -1,17 +1,17 @@
-import { Html, useProgress } from "@react-three/drei"
-import { useEffect, useState } from "react"
+import { Html, useProgress } from "@react-three/drei";
+import { useEffect, useState } from "react";
 
-const CanvasLoader = () => {
-  const { progress } = useProgress()
-  const [showLoader, setShowLoader] = useState(true)
+const CanvasLoader: React.FC = () => {
+  const { progress } = useProgress();
+  const [showLoader, setShowLoader] = useState<boolean>(true);
 
   useEffect(() => {
     if (progress === 100) {
-      setTimeout(() => setShowLoader(false), 500)
+      setTimeout(() => setShowLoader(false), 500);
     }
-  }, [progress])
+  }, [progress]);
 
-  if (!showLoader) return null
+  if (!showLoader) return null;
 
   return (
     <Html
@@ -35,7 +35,7 @@ const CanvasLoader = () => {
         </p>
       </div>
     </Html>
-  )
-}
+  );
+};
 
-export default CanvasLoader
+export default CanvasLoader; 

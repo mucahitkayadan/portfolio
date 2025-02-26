@@ -1,8 +1,8 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import { UserConfig } from 'vite';
 
-// https://vitejs.dev/config/
-export default defineConfig({
+const config: UserConfig = {
   plugins: [react()],
   build: {
     assetsDir: 'assets',
@@ -18,4 +18,6 @@ export default defineConfig({
   optimizeDeps: {
     include: ['three', '@react-three/fiber', '@react-three/drei'],
   },
-})
+};
+
+export default defineConfig(config); 

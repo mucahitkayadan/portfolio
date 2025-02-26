@@ -1,5 +1,8 @@
 import React, { useState, useCallback } from "react";
 import { Tilt } from "react-tilt";
+import { motion } from "framer-motion";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 
 import { styles } from "../styles";
 import { github, placeholder } from "../assets";
@@ -104,15 +107,30 @@ const Projects = () => {
         </div>
 
         {visibleProjects < projects.length && (
-          <div className="flex justify-center mt-10">
+          <motion.div 
+            className="flex justify-center mt-10"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
             <button
               onClick={loadMore}
               disabled={isLoading}
-              className="bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-md font-medium transition-all duration-300"
+              className="group bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl flex items-center gap-3"
             >
-              {isLoading ? 'Loading...' : 'Load More Projects'}
+              {isLoading ? (
+                'Loading...'
+              ) : (
+                <>
+                  Load More Projects
+                  <FontAwesomeIcon 
+                    icon={faArrowDown} 
+                    className="transition-transform duration-300 group-hover:translate-y-1"
+                  />
+                </>
+              )}
             </button>
-          </div>
+          </motion.div>
         )}
       </div>
     </>

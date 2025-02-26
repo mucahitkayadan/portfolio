@@ -30,4 +30,4 @@ export {
   BallCanvas,
   ComputersCanvas,
   StarsCanvas,
-};
+}; 
