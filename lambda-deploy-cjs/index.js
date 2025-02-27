@@ -128,8 +128,8 @@ async function get_available_slots(timezone = 'America/Chicago') {
         
         const eventsData = eventsResponse.data;
         
-        // Format the response
-        let response = `Here's my current availability for scheduling a meeting:\n\n`;
+        // Format the response with proper markdown
+        let response = `I'd be happy to help you schedule a meeting!\n\n`;
         
         if (eventsData.collection && eventsData.collection.length > 0) {
             // Format and display the scheduled events
@@ -148,20 +148,20 @@ async function get_available_slots(timezone = 'America/Chicago') {
             });
             
             if (scheduledEvents.length === 1) {
-                response += `I have an existing appointment on ${scheduledEvents[0]}. `;
+                response += `I already have a meeting scheduled for:\n\n**${scheduledEvents[0]}**\n\n`;
             } else {
                 response += "I have the following appointments scheduled:\n\n";
                 scheduledEvents.forEach((time, index) => {
-                    response += `${index + 1}. ${time}\n`;
+                    response += `${index + 1}. **${time}**\n`;
                 });
                 response += "\n";
             }
             
-            response += `Aside from that, you can schedule a meeting with me using this link: ${calendlyUrl}\n\n`;
-            response += "Feel free to choose a time that works best for you! If you need any help with the process, just let me know. 😊";
+            response += `Feel free to choose any other time that works best for you using this link: ${calendlyUrl}\n\n`;
+            response += "Would you like to proceed with scheduling? If so, could you please provide your name and email so I can create a personalized scheduling link for you? 📅";
         } else {
             response += `I don't have any meetings scheduled for the next 7 days, so you can pick any time that works best for you! You can schedule using this link: ${calendlyUrl}\n\n`;
-            response += "Looking forward to our meeting! Let me know if you need any assistance with the scheduling process. 😊";
+            response += "Would you like to proceed with scheduling? I can create a personalized booking link for you - just share your name and email address. 📅";
         }
         
         return {
@@ -187,27 +187,27 @@ const availableFunctions = {
         };
     },
     get_available_slots: get_available_slots,
-    book_appointment: async function(name, email, slot_url) {
+    book_appointment: async function(name, email) {
         try {
-            const token = await getCalendlyAccessToken();
-            
+            // Use the personal access token if available
+            const token = process.env.CALENDLY_PERSONAL_TOKEN;
             if (!token) {
                 throw new Error('Could not authenticate with Calendly');
             }
-            
-            // Calendly doesn't allow direct booking through the API
-            // Instead, we'll return a personalized booking link
+
+            // Create a personalized scheduling link with pre-filled information
+            const schedulingUrl = `${CALENDLY_URL}?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`;
             
             return {
                 success: true,
-                message: `Thanks ${name}! I've prepared a booking link for you. Click the link below to confirm your appointment. You'll receive a confirmation email at ${email} once it's scheduled: ${CALENDLY_URL}`,
-                booking_link: CALENDLY_URL
+                message: `Perfect, ${name}! I've prepared a personalized scheduling link for you. When you click the link below, your information will be pre-filled:\n\n${schedulingUrl}\n\nJust choose a time that works best for you, and you'll receive a confirmation email at ${email} once it's scheduled. Looking forward to our meeting! 📅`,
+                booking_link: schedulingUrl
             };
         } catch (error) {
-            console.error('Error booking appointment:', error);
+            console.error('Error preparing booking link:', error);
             return {
                 success: false,
-                error: "I couldn't book your appointment at the moment. Please try using my Calendly link directly: " + CALENDLY_URL,
+                error: "I couldn't prepare your personalized booking link at the moment. Please try using my Calendly link directly: " + CALENDLY_URL,
                 calendly_link: CALENDLY_URL
             };
         }
@@ -298,7 +298,7 @@ exports.handler = async (event) => {
                 type: "function",
                 function: {
                     name: "book_appointment",
-                    description: "Book an appointment at a specific time slot",
+                    description: "Create a personalized scheduling link with pre-filled information",
                     parameters: {
                         type: "object",
                         properties: {
@@ -309,13 +309,9 @@ exports.handler = async (event) => {
                             email: {
                                 type: "string",
                                 description: "The email address of the person booking the appointment"
-                            },
-                            slot_url: {
-                                type: "string",
-                                description: "The URL of the specific time slot to book"
                             }
                         },
-                        required: ["name", "email", "slot_url"]
+                        required: ["name", "email"]
                     }
                 }
             }
@@ -362,8 +358,7 @@ exports.handler = async (event) => {
                         } else if (functionName === "book_appointment") {
                             functionResponse = await availableFunctions.book_appointment(
                                 functionArgs.name,
-                                functionArgs.email,
-                                functionArgs.slot_url
+                                functionArgs.email
                             );
                             console.log('book_appointment response:', functionResponse);
                         }

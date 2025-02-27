@@ -178,13 +178,13 @@ const ChatBot = () => {
       {isOpen && (
         <div className="fixed inset-0 md:inset-auto md:bottom-24 md:right-5 w-full md:w-96 h-full md:h-[500px] bg-white md:rounded-lg shadow-xl flex flex-col z-50">
           {/* Header with close button */}
-          <div className="sticky top-0 w-full bg-white p-4 border-b flex justify-between items-center">
-            <h3 className="text-lg font-semibold">Chat with Virtual Muja</h3>
+          <div className="sticky top-0 w-full bg-tertiary p-4 border-b flex justify-between items-center">
+            <h3 className="text-lg font-semibold text-white">Chat with Virtual Muja</h3>
             <button
               onClick={toggleChat}
-              className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center"
+              className="w-8 h-8 rounded-full bg-[rgba(255,255,255,0.2)] hover:bg-[rgba(255,255,255,0.3)] flex items-center justify-center"
             >
-              <FontAwesomeIcon icon={faTimes} className="text-gray-600" />
+              <FontAwesomeIcon icon={faTimes} className="text-white" />
             </button>
           </div>
 
