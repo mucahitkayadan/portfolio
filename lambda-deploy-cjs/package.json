@@ -11,7 +11,10 @@
   "description": "",
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.716.0",
+    "axios": "^1.8.1",
+    "dotenv": "^16.4.7",
     "openai": "^4.77.0",
+    "react-calendly": "^4.3.1",
     "uuid": "^11.0.3"
   }
 }

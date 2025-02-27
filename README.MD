@@ -188,6 +188,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 For questions or feedback, please reach out through:
 - GitHub Issues
-- Email: your.email@example.com
-- LinkedIn: [Your LinkedIn Profile](https://linkedin.com/in/yourusername)
+- Email: mujakayadan@outlook.com
+- LinkedIn: [Your LinkedIn Profile](https://linkedin.com/in/muja-kayadan)
 

@@ -8,6 +8,15 @@ import { faComment, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 const API_URL = import.meta.env.VITE_API_GATEWAY_URL;
 
+// Function to make URLs clickable in the chat
+const processMessageContent = (content) => {
+  // Replace URLs with markdown links
+  return content.replace(
+    /(https?:\/\/[^\s]+)/g,
+    '[$1]($1)'
+  );
+};
+
 const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showWelcome, setShowWelcome] = useState(false);
@@ -101,9 +110,13 @@ const ChatBot = () => {
       const data = await response.json();
       const parsedBody = JSON.parse(data.body);
       
+      // Process the response to make URLs clickable
+      const processedResponse = processMessageContent(parsedBody.response);
+      
       setMessages(prev => [...prev, { 
         role: 'assistant', 
-        content: parsedBody.response 
+        content: processedResponse,
+        isCalendarRelated: parsedBody.isCalendarRelated
       }]);
       setThreadId(parsedBody.threadId);
 
@@ -189,7 +202,7 @@ const ChatBot = () => {
                     message.role === 'user'
                       ? 'bg-[#915EFF] text-white'
                       : 'bg-gray-200 text-gray-800'
-                  }`}
+                  } ${message.isCalendarRelated ? 'calendar-message' : ''}`}
                 >
                   {message.isLoading ? (
                     <div className="loading-message">
@@ -197,7 +210,21 @@ const ChatBot = () => {
                       <span className="loading-dots">...</span>
                     </div>
                   ) : (
-                    <ReactMarkdown>
+                    <ReactMarkdown
+                      components={{
+                        a: ({ node, ...props }) => (
+                          <a
+                            {...props}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-600 hover:text-blue-800 underline"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                            }}
+                          />
+                        ),
+                      }}
+                    >
                       {message.content}
                     </ReactMarkdown>
                   )}
