@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import './ChatBot.css';
 import { chat_background, notificationSound } from "../assets";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComment, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faComment, faTimes, faExpand, faCompress } from '@fortawesome/free-solid-svg-icons';
 
 const API_URL = import.meta.env.VITE_API_GATEWAY_URL;
 
@@ -30,6 +30,8 @@ const ChatBot = () => {
   const [threadId, setThreadId] = useState(null);
   const [isTyping, setIsTyping] = useState(false);
   const [displayedResponse, setDisplayedResponse] = useState('');
+  const textareaRef = useRef(null);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -81,12 +83,33 @@ const ChatBot = () => {
     }, 10); // Reduced from 30ms to 10ms
   };
 
+  // Add this new function for auto-resizing
+  const autoResizeTextarea = () => {
+    const textarea = textareaRef.current;
+    if (textarea) {
+      // Reset height to auto to get the correct scrollHeight
+      textarea.style.height = 'auto';
+      // Set new height based on scrollHeight
+      textarea.style.height = `${Math.min(textarea.scrollHeight, 150)}px`;
+    }
+  };
+
+  // Handle input changes
+  const handleInputChange = (e) => {
+    setInputMessage(e.target.value);
+    autoResizeTextarea();
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!inputMessage.trim() || isLoading) return;
 
     const userMessage = inputMessage.trim();
     setInputMessage('');
+    // Reset textarea height after sending message
+    if (textareaRef.current) {
+      textareaRef.current.style.height = 'auto';
+    }
     setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
     
     try {
@@ -132,11 +155,8 @@ const ChatBot = () => {
     setShowWelcome(false);
   };
 
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSubmit(e);
-    }
+  const toggleSize = () => {
+    setIsExpanded(!isExpanded);
   };
 
   return (
@@ -176,10 +196,26 @@ const ChatBot = () => {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed inset-0 md:inset-auto md:bottom-24 md:right-5 w-full md:w-96 h-full md:h-[500px] bg-white md:rounded-lg shadow-xl flex flex-col z-50">
-          {/* Header with close button */}
+        <div className={`fixed md:right-5 bg-white shadow-xl flex flex-col z-50 transition-all duration-300 ${
+          isExpanded 
+            ? 'inset-0 md:inset-auto md:bottom-24 md:w-[48rem] md:h-[36rem] md:rounded-lg' 
+            : 'inset-0 md:inset-auto md:bottom-24 md:w-96 h-full md:h-[500px] md:rounded-lg'
+        }`}>
+          {/* Header with expand and close buttons */}
           <div className="sticky top-0 w-full bg-tertiary p-4 border-b flex justify-between items-center">
-            <h3 className="text-lg font-semibold text-white">Chat with Virtual Muja</h3>
+            <div className="flex items-center gap-3">
+              <button
+                onClick={toggleSize}
+                className="w-8 h-8 rounded-full bg-[rgba(255,255,255,0.2)] hover:bg-[rgba(255,255,255,0.3)] flex items-center justify-center"
+                title={isExpanded ? "Compress window" : "Expand window"}
+              >
+                <FontAwesomeIcon 
+                  icon={isExpanded ? faCompress : faExpand} 
+                  className="text-white text-sm" 
+                />
+              </button>
+              <h3 className="text-lg font-semibold text-white">Chat with Virtual Muja</h3>
+            </div>
             <button
               onClick={toggleChat}
               className="w-8 h-8 rounded-full bg-[rgba(255,255,255,0.2)] hover:bg-[rgba(255,255,255,0.3)] flex items-center justify-center"
@@ -193,16 +229,17 @@ const ChatBot = () => {
             {messages.map((message, index) => (
               <div
                 key={index}
-                className={`mb-4 ${
-                  message.role === 'user' ? 'text-right' : 'text-left'
-                }`}
+                className={`flex ${
+                  message.role === 'user' ? 'justify-end' : 'justify-start'
+                } mb-4`}
               >
                 <div
-                  className={`inline-block p-3 rounded-lg ${
+                  className={`max-w-[80%] break-words ${
                     message.role === 'user'
-                      ? 'bg-[#915EFF] text-white'
-                      : 'bg-gray-200 text-gray-800'
+                      ? 'bg-[#915EFF] text-white rounded-2xl rounded-tr-sm'
+                      : 'bg-gray-200 text-gray-800 rounded-2xl rounded-tl-sm'
                   } ${message.isCalendarRelated ? 'calendar-message' : ''}`}
+                  style={{ padding: '0.75rem 1rem' }}
                 >
                   {message.isLoading ? (
                     <div className="loading-message">
@@ -223,6 +260,7 @@ const ChatBot = () => {
                             }}
                           />
                         ),
+                        p: ({ children }) => <p className="whitespace-pre-wrap">{children}</p>
                       }}
                     >
                       {message.content}
@@ -232,8 +270,8 @@ const ChatBot = () => {
               </div>
             ))}
             {isLoading && (
-              <div className="text-left mb-4">
-                <div className="inline-block p-3 rounded-lg bg-gray-200">
+              <div className="flex justify-start mb-4">
+                <div className="inline-block p-3 rounded-2xl rounded-tl-sm bg-gray-200">
                   <div className="flex space-x-2">
                     <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce"></div>
                     <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce delay-100"></div>
@@ -246,14 +284,20 @@ const ChatBot = () => {
           </div>
 
           {/* Input area */}
-          <div className="sticky bottom-0 left-0 right-0 bg-white border-t p-3 flex gap-2 items-center">
+          <div className="sticky bottom-0 left-0 right-0 bg-white border-t p-3 flex gap-2 items-start">
             <textarea
+              ref={textareaRef}
               value={inputMessage}
-              onChange={(e) => setInputMessage(e.target.value)}
+              onChange={handleInputChange}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                  e.preventDefault();
+                  handleSubmit(e);
+                }
+              }}
               placeholder="Type your message..."
-              className="flex-1 resize-none border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 max-h-32"
+              className="flex-1 resize-none border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[40px] max-h-[150px] overflow-y-auto"
               rows="1"
-              onKeyDown={handleKeyDown}
             />
             <button
               onClick={handleSubmit}

@@ -129,3 +129,129 @@
     border-radius: 0;
   }
 }
+
+/* Textarea styles */
+textarea {
+  line-height: 1.5;
+  transition: height 0.1s ease-out;
+  font-size: 0.95rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Ensure proper scrollbar styling for textarea */
+textarea::-webkit-scrollbar {
+  width: 6px;
+}
+
+textarea::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+textarea::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+
+textarea::-webkit-scrollbar-thumb:hover {
+  background: #666;
+}
+
+/* Ensure input area stays visible and properly styled */
+.sticky.bottom-0 {
+  position: sticky;
+  bottom: 0;
+  background-color: white;
+  border-top: 1px solid #e5e7eb;
+  padding: 0.75rem;
+  z-index: 10;
+}
+
+/* Adjust spacing for send button when textarea grows */
+.sticky.bottom-0 button {
+  align-self: flex-start;
+  margin-top: 2px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  textarea {
+    font-size: 1rem; /* Slightly larger on mobile for better usability */
+  }
+
+  .sticky.bottom-0 {
+    padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+  }
+}
+
+/* Message container styles */
+.message {
+  max-width: 80%;
+  word-break: break-word;
+}
+
+/* Style for message content */
+.message p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Style for consecutive messages */
+.message + .message {
+  margin-top: 0.5rem;
+}
+
+/* Ensure links in user messages are properly visible */
+.bg-[#915EFF] a {
+  color: white !important;
+  text-decoration: underline;
+  opacity: 0.9;
+}
+
+.bg-[#915EFF] a:hover {
+  opacity: 1;
+}
+
+/* Improve code block readability in user messages */
+.bg-[#915EFF] code {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+/* Add subtle hover effect on messages */
+.message:hover {
+  filter: brightness(98%);
+}
+
+/* Chat window transition */
+.fixed.md\:right-5 {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Expanded state styles */
+.fixed.md\:right-5[class*='md:w-[48rem]'] {
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Ensure smooth transitions for all size changes */
+.fixed.md\:right-5,
+.fixed.md\:right-5 * {
+  transition-property: width, height, transform;
+  transition-duration: 0.3s;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Adjust expanded window position */
+@media (min-width: 768px) {
+  .fixed.md\:right-5[class*='md:w-[48rem]'] {
+    transform-origin: bottom right;
+  }
+}
+
+/* Expand/compress button hover effect */
+.sticky.top-0 button:hover {
+  transform: scale(1.05);
+}
