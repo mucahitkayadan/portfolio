@@ -96,6 +96,8 @@ import aksaray from "./education/aksaray.png";
 import ventspils from "./education/ventspils.png";
 
 // Work Experience
+import tesla from "./work_experience/tesla.png";
+import dopple from "./work_experience/dopple.png";
 import goglobal from "./work_experience/goglobal.png";
 import orsan from "./work_experience/orsan.png";
 import teknoworld from "./work_experience/teknoworld.png";
@@ -198,6 +200,8 @@ export {
   ventspils,
 
   // Work Experience
+  tesla,
+  dopple,
   goglobal,
   orsan,
   teknoworld,

@@ -17,6 +17,8 @@ import {
   ventspils,
 
   // Work Experience
+  tesla,
+  dopple,
   goglobal,
   orsan,
   teknoworld,
@@ -70,10 +72,10 @@ const education = [
     company_name: "Maharishi International University",
     icon: miu,
     iconBg: "#fff",
-    date: "2023 - now",
+    date: "2023 - 2025",
     location: "Iowa, USA",
-    description: "Currently pursuing my Master's in Computer Science with a focus on AI and Machine Learning. Maintaining strong academic performance while working on cutting-edge projects in artificial intelligence and web development.",
-    gpa: "3.03",
+    description: "Completed my Master's in Computer Science with a focus on AI and Machine Learning. Maintaining strong academic performance while working on cutting-edge projects in artificial intelligence and web development.",
+    gpa: "3.83",
     points: [
       "Artificial Intelligence",
       "Algorithms",
@@ -83,6 +85,7 @@ const education = [
       "Software Architecture",
       "Big Data Analytics",
       "Cloud Computing",
+      "Machine Learning",
     ],
   },
   {
@@ -110,9 +113,6 @@ const education = [
       "Internet Of Things And Smart Cities",
       "Organization Development And Behaviour",
       "Project Management",
-      "Internship",
-      "English Language B2",
-      "Final Project",
     ],
   },
   {
@@ -161,7 +161,7 @@ const education = [
     date: "2015 - 2019",
     location: "Aksaray, Turkiye",
     description: "Completed my Bachelor's with distinction, specializing in Computer Vision and Machine Learning. Engaged in advanced research projects and collaborated with international teams.",
-    gpa: "3.68",
+    gpa: "3.60",
     points: [
       "Introduction To Electrical-Electronics Engineering",
       "Information Technologies And Their Applications",
@@ -235,13 +235,55 @@ const education = [
 
 const experiences = [
   {
+    title: "AI/ML Engineer",
+    company_name: "Tesla Inc.",
+    icon: tesla,
+    iconBg: "#fff",
+    date: "Aug 2025 - Present",
+    location: "Palo Alto, CA",
+    description: "Building perception systems spanning ToF drivers, real-time C++/Qt tracking, PyTorch training pipelines, ONNX deployment, and fleet-wide dataset orchestration for in-cabin driver monitoring.",
+    points: [
+      "Designed a cross-modal knowledge-distillation pipeline in which an intensity-trained YOLO teacher labeled point-cloud frames to train a YOLOv11 student detector, lifting object detection from 32.8% (SCRFD baseline) to 89.7%.",
+      "Built an end-to-end 3D pose pipeline combining SCRFD face detection, MediaPipe / DAD-3DHeads 68-point landmark regression, FLAME parametric mesh fitting, Kabsch similarity alignment, and Open3D ICP refinement; achieving sub-5 mm RMSE on object localization.",
+      "Trained a ResNet-34 PointCloudNet on raster-ordered 4-channel tensors with PyTorch Lightning, outputting 6-DoF pose plus confidence; exported to ONNX for shared deployment across a Python batch service and a C++ real-time runtime.",
+      "Developed a fisheye camera calibration tool using three coplanar ArUco markers, solving intrinsics and 6-DoF extrinsics via PnP with homography-warped subpixel grid refinement.",
+      "Built a real-time gaze-estimation system combining MediaPipe FaceMesh (468 landmarks), iris detection with pupil-threshold fallback, per-eye eyelid-band normalization, EMA-based neutral calibration, and 1-Euro filtering for temporal stability on 1920×1080 near-IR driver video.",
+      "Deployed a FastAPI inference service with SQLite + Alembic schema migrations tracking model versions, sessions, and per-frame detections; supports both CLI batch processing and package-import inline integration with the upstream analytics platform.",
+      "Implemented an async multimodal frame-pairing pipeline aligning point-cloud frames, fisheye cabin video, and gaze CAN signals across UTC / wall-clock / frame-counter clock domains, with sub-second interpolation between gaze-counter transitions and byte-checksum-validated network transfer.",
+      "Solved perspective-corrected anatomical head-center estimation by registering FLAME meshes to detected landmarks and benchmarking with per-bucket yaw / distance error analysis against rig ground truth.",
+      "Owned the full vertical of a perception system spanning ToF drivers, real-time C++/Qt tracking, PyTorch training pipelines, ONNX deployment, FastAPI services, SQLite analytics, and fleet-wide, stream dataset orchestration, bridging hardware, ML, and data layers in a single shipping product.",
+    ],
+  },
+  {
+    title: "Lead Software Engineer",
+    company_name: "Dopple",
+    icon: dopple,
+    iconBg: "#fff",
+    iconInset: true,
+    date: "Mar 2025 - Apr 2026",
+    location: "Remote",
+    description: "Led development of a Svelte 5 wishlist platform with role-aware workflows for moms, agencies, and service providers, including starter-pack sharing and request-approval flows.",
+    points: [
+      "Architected a Svelte 5 wishlist application with modular components and reactive state management.",
+      "Implemented role-aware behavior driven by an entity_type query parameter (mom default, agency, individual/service provider).",
+      "Built starter-pack composition for service providers to curate services, activities, and products and share them via links.",
+      "Implemented import logic that pre-populates the wishlist-creation UI from shared starter-pack items.",
+      "Engineered a request–approval workflow enabling moms to request services/activities and providers to approve.",
+      "Authored raw SQL migrations defining normalized tables, foreign keys, and indexes, replacing ORM generation with explicit grants to doadmin and registry_user.",
+      "Set up branch-based CI/CD on DigitalOcean Apps deploying develop to staging and main to production with environment-specific configs.",
+      "Optimized Svelte 5 rendering and data flow using reactive stores to minimize recomputation.",
+      "Designed shareable URLs and item-selection UX to streamline adoption of provider-curated starter packs.",
+      "Configured environment variables and secrets on DigitalOcean Apps to parameterize staging and production behavior.",
+    ],
+  },
+  {
     title: "Machine Learning Engineer",
     company_name: "Go Global World Inc.",
     icon: goglobal,
     iconBg: "#fff",
-    date: "Mar 2024 - Present",
-    location: "Redwood City, CA",
-    description: "Go Global World is a platform that connects investors with startups. I am working on the AI team to develop AI-powered solutions for investor-founder matching and automated due diligence processes.",
+    date: "Mar 2024 - Mar 2025",
+    location: "Redwood City, CA, USA",
+    description: "Go Global World is a platform that connects investors with startups. I worked on the AI team to develop AI-powered solutions for investor-founder matching and automated due diligence processes.",
     points: [
       "Architected and implemented an investor-founder matching system leveraging advanced similarity measures and vector embeddings for optimized performance.",
       "Developed a chatbot powered by LangChain and RAG, integrating OpenAI APIs for seamless personalized query resolution and information retrieval.",
@@ -274,6 +316,7 @@ const experiences = [
       "Performed hyperparameter tuning with Bayesian optimization to enhance defect detection model precision and recall scores.",
       "Collaborated with production engineers to integrate ML pipelines with SCADA systems for comprehensive manufacturing monitoring.",
       "Conducted periodic performance audits to ensure model alignment with evolving manufacturing requirements and industry standards.",
+      "Prototyped an image processing solution using MATLAB's Image Processing Toolbox, enabling early-stage validation of defect detection algorithms prior to full-scale system integration.",
     ],
   },
   {
@@ -357,26 +400,30 @@ const awards = [
 
 const projects = [
   {
-    name: "Dynamic Resume Generator",
-    description: 
-      "Developed a Streamlit-based web application that generates tailored resumes based on user-provided job descriptions. Implemented an AI-powered system using OpenAI's API to process and optimize resume content for specific job requirements. Created a modular architecture with separate loaders for JSON data, LaTeX templates, and prompts, enhancing maintainability and scalability. Utilized natural language processing techniques to analyze job descriptions and extract key requirements for resume customization.",
+    name: "Yet Another Resume Builder App (YARBA)",
+    description:
+      "Developed a Python backend with FastAPI, delivering RESTful APIs for automated, job-description-based portfolio text classification. Utilized LiteLLM to integrate diverse Large Language Models for NLP, enabling resume content analysis and optimization. Engineered an automated LaTeX-to-PDF generation pipeline and managed user profiles with MongoDB. Built a responsive React and Material UI frontend with Firebase authentication.",
     tags: [
       {
-        name: "Streamlit",
+        name: "FastAPI",
         color: "blue-text-gradient",
       },
       {
-        name: "OpenAI",
+        name: "React",
         color: "green-text-gradient",
       },
       {
-        name: "LaTeX",
+        name: "LLM",
         color: "pink-text-gradient",
+      },
+      {
+        name: "LaTeX",
+        color: "blue-text-gradient",
       },
     ],
     image: resume_builder_tex,
-    source_code_link: "https://github.com/mucahitkayadan/Resume-Builder-TeX",
-    live_project_link: "https://github.com/mucahitkayadan/Resume-Builder-TeX",
+    source_code_link: "https://www.yarba.app/",
+    live_project_link: "https://www.yarba.app/",
   },
   {
     name: "Fairfield Wildlife Surveillance",
@@ -471,8 +518,8 @@ const projects = [
       }
     ],
     image: rf_energy_harvesting,
-    source_code_link: "https://github.com/mucahitkayadan",
-    live_project_link: "https://github.com/mucahitkayadan",
+    source_code_link: "https://drive.google.com/file/d/1K8ISH88MuUDCK2jtg4DzetOhGanBCYat/view?usp=drive_link",
+    live_project_link: "https://drive.google.com/file/d/1K8ISH88MuUDCK2jtg4DzetOhGanBCYat/view?usp=drive_link",
   },
   {
     name: "Fit Coach with OmniPose and Palm",
@@ -601,8 +648,8 @@ const projects = [
       },
     ],
     image: placeholder,
-    source_code_link: "https://github.com/mucahitkayadan",
-    live_project_link: "https://github.com/mucahitkayadan",
+    source_code_link: "https://github.com/mucahitkayadan/Image_Stitching_OpenCV",
+    live_project_link: "https://github.com/mucahitkayadan/Image_Stitching_OpenCV",
   },
   {
     name: "Sex Classification by Egg Shape: Deep Learning and Image Processing Analysis",
@@ -623,8 +670,8 @@ const projects = [
       },
     ],
     image: placeholder,
-    source_code_link: "https://github.com/mucahitkayadan",
-    live_project_link: "https://github.com/mucahitkayadan",
+    source_code_link: "https://www.nature.com/articles/s41598-023-27772-4",
+    live_project_link: "https://www.nature.com/articles/s41598-023-27772-4",
   },
   {
     name: "Mountain Climber Assistant",
@@ -737,9 +784,9 @@ const projects = [
     live_project_link: "https://github.com/mucahitkayadan",
   },
   {
-    name: "AR Marble Visualization System",
+    name: "AR Marble Visualization System for In-Home Use, freelance for Tez Marble",
     description:
-      "Developed an advanced in-home AR application for Tez Marble, allowing users to scan rooms and visualize custom marble surfaces in real time with high fidelity. Integrated Matterport Showcase SDK with SLAM for precise 3D room scanning and NVIDIA Instant NeRF for rapid neural rendering, enabling life-like previews. Utilized a high-performance hardware stack for NeRF processing, incorporating NVIDIA RTX A6000 GPUs for accelerated neural rendering and Tensor Cores for optimized AI inference.",
+      "Developed an advanced in-home AR application for Tez Marble, allowing users to scan rooms and visualize custom marble surfaces in real time with high fidelity. Integrated Matterport Showcase SDK with SLAM for precise 3D room scanning and NVIDIA Instant NeRF for rapid neural rendering, enabling life-like previews. Built an intuitive UI that lets users select surfaces and instantly apply over 50 marble textures, dynamically updating countertops, walls, and floors in real-time. Employed WebGL and Three.js for responsive, real-time rendering on mobile and tablet devices.",
     tags: [
       {
         name: "AR",
@@ -779,28 +826,6 @@ const projects = [
     image: placeholder,
     source_code_link: "https://github.com/mucahitkayadan",
     live_project_link: "https://github.com/mucahitkayadan",
-  },
-  {
-    name: "PreTree - Directory Tree Visualizer",
-    description: 
-      "Developed a cross-platform Python package for visualizing directory structures in a tree-like format. Implemented advanced filtering options, configurable depth settings, and pattern matching capabilities. Features include size-based filtering, sorted output with directories first, and both CLI and library usage options.",
-    tags: [
-      {
-        name: "Python",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "CLI",
-        color: "green-text-gradient",
-      },
-      {
-        name: "File Systems",
-        color: "pink-text-gradient",
-      },
-    ],
-    image: placeholder,
-    source_code_link: "https://github.com/mucahitkayadan/prettree",
-    live_project_link: "https://github.com/mucahitkayadan/prettree",
   },
 ];
 

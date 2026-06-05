@@ -67,6 +67,7 @@ const ComputersCanvas: React.FC = () => {
 
   return (
     <Canvas
+      className="w-full h-full"
       frameloop="always"
       shadows
       dpr={[1, 2]}

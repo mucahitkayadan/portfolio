@@ -129,19 +129,19 @@ const About = () => {
             <motion.li className="flex items-start" variants={fadeIn("up", "spring", 0.1, 0.75)}>
               <span className="mr-4 text-2xl flex-shrink-0">👨‍💻</span>
               <span>
-                I&apos;m a Software Engineer with 3 years of experience developing software solutions with a focus on machine learning, specializing in LLMs and computer vision applications.
+                I&apos;m a Software Engineer with 4 years of experience in software development, machine learning, and computer vision.
               </span>
             </motion.li>
             <motion.li className="flex items-start" variants={fadeIn("up", "spring", 0.2, 0.75)}>
               <span className="mr-4 text-2xl flex-shrink-0">🎓</span>
               <span>
-                3 Master&apos;s Degrees and 4 work experiences in 5 countries across 3 different continents.
+                3 Master&apos;s Degrees and 6 work experiences in 5 countries across 3 different continents.
               </span>
             </motion.li>
             <motion.li className="flex items-start" variants={fadeIn("up", "spring", 0.3, 0.75)}>
               <span className="mr-4 text-2xl flex-shrink-0">🛠</span>
               <span>
-                Currently working as an ML Engineer on LLMs, RAG, Chatbots and developing intelligent solutions that bridge the gap between human language and machine understanding to create more intuitive and powerful AI applications.
+                Currently working as an AI/ML Engineer at Tesla, building perception systems spanning computer vision, 3D pose estimation, gaze tracking, and real-time deployment across Python and C++ runtimes.
               </span>
             </motion.li>
             <motion.li className="flex items-start" variants={fadeIn("up", "spring", 0.4, 0.75)}>

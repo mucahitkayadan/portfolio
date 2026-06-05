@@ -6,6 +6,8 @@ import { SectionWrapper } from "../hoc";
 import { textVariant, fadeIn } from "../utils/motion";
 
 const ExperienceCard = React.memo(({ experience, isActive, onClick, index }) => {
+  const iconInset = experience.iconInset ?? false;
+
   return (
     <motion.div
       variants={fadeIn("right", "spring", index * 0.1, 0.5)}
@@ -14,11 +16,16 @@ const ExperienceCard = React.memo(({ experience, isActive, onClick, index }) => 
       }`}
       onClick={onClick}
     >
-      <div className="flex-shrink-0 w-16 h-16 rounded-full overflow-hidden mr-4">
+      <div
+        className={`flex-shrink-0 w-16 h-16 rounded-full overflow-hidden mr-4 flex items-center justify-center ${
+          iconInset ? "p-2" : ""
+        }`}
+        style={iconInset ? { backgroundColor: experience.iconBg ?? "#fff" } : undefined}
+      >
         <img
           src={experience.icon}
           alt={experience.company_name}
-          className="w-full h-full object-cover"
+          className={`w-full h-full ${iconInset ? "object-contain" : "object-cover"}`}
         />
       </div>
       <div>
