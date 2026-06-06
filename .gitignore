@@ -13,3 +13,4 @@ blog-mujakayadan
 /logs
 /temp
 /cache
+public/**/_backup

@@ -1,24 +1,30 @@
 import { useState, useRef } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Points, PointMaterial, Preload } from '@react-three/drei';
 import * as random from 'maath/random/dist/maath-random.esm';
 import { Points as ThreePoints } from 'three';
+
+import useInViewCanvas from '../../hooks/useInViewCanvas';
+import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion';
 
 interface StarsProps {
   color?: string;
   size?: number;
   stride?: number;
   frustumCulled?: boolean;
+  reducedMotion?: boolean;
 }
 
-const Stars: React.FC<StarsProps> = props => {
+const Stars: React.FC<StarsProps> = ({ reducedMotion = false, ...props }) => {
   const ref = useRef<ThreePoints>(null);
+  const { invalidate } = useThree();
   const [sphere] = useState(() => random.inSphere(new Float32Array(2001), { radius: 1.2 }));
 
   useFrame((_, delta) => {
-    if (ref.current) {
+    if (ref.current && !reducedMotion) {
       ref.current.rotation.x -= delta / 15;
       ref.current.rotation.y -= delta / 20;
+      invalidate();
     }
   });
 
@@ -38,12 +44,17 @@ const Stars: React.FC<StarsProps> = props => {
 };
 
 const StarsCanvas: React.FC = () => {
+  const reducedMotion = usePrefersReducedMotion();
+  const { ref, inView } = useInViewCanvas();
+
   return (
-    <div className="w-full h-auto absolute inset-0 z-[-1]">
-      <Canvas camera={{ position: [0, 0, 1] }}>
-        <Stars />
-        <Preload all />
-      </Canvas>
+    <div ref={ref} className="w-full h-auto absolute inset-0 z-[-1]">
+      {inView && (
+        <Canvas camera={{ position: [0, 0, 1] }} frameloop={reducedMotion ? 'never' : 'demand'}>
+          <Stars reducedMotion={reducedMotion} />
+          <Preload all />
+        </Canvas>
+      )}
     </div>
   );
 };

@@ -1,31 +1,39 @@
-import React, { useState, useCallback, useMemo, useTransition, useRef, useEffect } from "react";
-import { motion, AnimatePresence, useAnimation, useInView } from "framer-motion";
-import { styles } from "../styles";
-import { experiences } from "../constants";
-import { SectionWrapper } from "../hoc";
-import { textVariant, fadeIn } from "../utils/motion";
+import { useState, useCallback, useMemo, useTransition, useRef, useEffect, memo } from 'react';
+import { motion, AnimatePresence, useAnimation, useInView } from 'framer-motion';
 
-const ExperienceCard = React.memo(({ experience, isActive, onClick, index }) => {
+import { styles } from '../styles';
+import { experiences, type ExperienceEntry } from '../constants';
+import { SectionWrapper } from '../hoc';
+import { fadeIn } from '../utils/motion';
+
+interface ExperienceCardProps {
+  experience: ExperienceEntry;
+  isActive: boolean;
+  onClick: () => void;
+  index: number;
+}
+
+const ExperienceCard = memo(({ experience, isActive, onClick, index }: ExperienceCardProps) => {
   const iconInset = experience.iconInset ?? false;
 
   return (
     <motion.div
-      variants={fadeIn("right", "spring", index * 0.1, 0.5)}
+      variants={fadeIn('right', 'spring', index * 0.1, 0.5)}
       className={`flex items-center p-4 rounded-lg cursor-pointer transition-all duration-300 ${
-        isActive ? "bg-tertiary" : "bg-primary"
+        isActive ? 'bg-tertiary' : 'bg-primary'
       }`}
       onClick={onClick}
     >
       <div
         className={`flex-shrink-0 w-16 h-16 rounded-full overflow-hidden mr-4 flex items-center justify-center ${
-          iconInset ? "p-2" : ""
+          iconInset ? 'p-2' : ''
         }`}
-        style={iconInset ? { backgroundColor: experience.iconBg ?? "#fff" } : undefined}
+        style={iconInset ? { backgroundColor: experience.iconBg ?? '#fff' } : undefined}
       >
         <img
           src={experience.icon}
           alt={experience.company_name}
-          className={`w-full h-full ${iconInset ? "object-contain" : "object-cover"}`}
+          className={`w-full h-full ${iconInset ? 'object-contain' : 'object-cover'}`}
         />
       </div>
       <div>
@@ -35,17 +43,20 @@ const ExperienceCard = React.memo(({ experience, isActive, onClick, index }) => 
     </motion.div>
   );
 });
+ExperienceCard.displayName = 'ExperienceCard';
 
-const ExperienceDetails = React.memo(({ experience }) => {
+interface ExperienceDetailsProps {
+  experience: ExperienceEntry;
+}
+
+const ExperienceDetails = memo(({ experience }: ExperienceDetailsProps) => {
   const [expandedPoints, setExpandedPoints] = useState(false);
   const [visiblePoints, setVisiblePoints] = useState(5);
 
   const handleShowMore = () => {
     if (expandedPoints) {
-      // If already expanded, show 5 more points
       setVisiblePoints(prev => Math.min(prev + 5, experience.points.length));
     } else {
-      // If not expanded, start showing first 5 points
       setExpandedPoints(true);
     }
   };
@@ -61,25 +72,20 @@ const ExperienceDetails = React.memo(({ experience }) => {
       initial={{ opacity: 0, x: 20 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -20 }}
-      transition={{ duration: 0.2, ease: "easeInOut" }}
+      transition={{ duration: 0.2, ease: 'easeInOut' }}
       className="bg-tertiary p-8 rounded-lg"
     >
       <h3 className="text-white text-[24px] font-bold mb-4">{experience.title}</h3>
       <p className="text-secondary text-[16px] mb-4">{experience.company_name}</p>
-      
-      {/* Date and Location Row */}
+
       <div className="flex items-center gap-4 mb-4">
         <p className="text-white-100 text-[14px]">{experience.date}</p>
         <span className="text-secondary">•</span>
         <p className="text-white-100 text-[14px]">{experience.location}</p>
       </div>
 
-      {/* Description Section */}
-      <p className="text-white-100 text-[14px] mb-6">
-        {experience.description}
-      </p>
+      <p className="text-white-100 text-[14px] mb-6">{experience.description}</p>
 
-      {/* Bullet Points Section */}
       {expandedPoints ? (
         <ul className="list-disc ml-5 space-y-2">
           {experience.points.slice(0, visiblePoints).map((point, index) => (
@@ -104,10 +110,10 @@ const ExperienceDetails = React.memo(({ experience }) => {
         </ul>
       )}
 
-      {/* Show More/Less Controls */}
       <div className="mt-4 flex gap-4">
         {!expandedPoints ? (
           <button
+            type="button"
             onClick={handleShowMore}
             className="text-secondary hover:text-white text-[14px] cursor-pointer transition-colors duration-200"
           >
@@ -117,6 +123,7 @@ const ExperienceDetails = React.memo(({ experience }) => {
           <>
             {visiblePoints < experience.points.length && (
               <button
+                type="button"
                 onClick={handleShowMore}
                 className="text-secondary hover:text-white text-[14px] cursor-pointer transition-colors duration-200"
               >
@@ -124,6 +131,7 @@ const ExperienceDetails = React.memo(({ experience }) => {
               </button>
             )}
             <button
+              type="button"
               onClick={handleShowLess}
               className="text-secondary hover:text-white text-[14px] cursor-pointer transition-colors duration-200"
             >
@@ -135,15 +143,16 @@ const ExperienceDetails = React.memo(({ experience }) => {
     </motion.div>
   );
 });
+ExperienceDetails.displayName = 'ExperienceDetails';
 
 const Experience = () => {
   const [activeExperience, setActiveExperience] = useState(0);
   const [isPending, startTransition] = useTransition();
-  const sectionRef = useRef(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
   const mainControls = useAnimation();
 
-  const handleExperienceClick = useCallback((index) => {
+  const handleExperienceClick = useCallback((index: number) => {
     startTransition(() => {
       setActiveExperience(index);
     });
@@ -153,7 +162,7 @@ const Experience = () => {
 
   useEffect(() => {
     if (isInView) {
-      mainControls.start("visible");
+      mainControls.start('visible');
     }
   }, [isInView, mainControls]);
 
@@ -167,9 +176,7 @@ const Experience = () => {
           visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
         }}
       >
-        <p className={`${styles.sectionSubText} text-center`}>
-          My Professional Journey
-        </p>
+        <p className={`${styles.sectionSubText} text-center`}>My Professional Journey</p>
       </motion.div>
 
       <motion.div
@@ -180,9 +187,7 @@ const Experience = () => {
           visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
         }}
       >
-        <h2 className={`${styles.sectionHeadText} text-center`}>
-          Work Experience
-        </h2>
+        <h2 className={`${styles.sectionHeadText} text-center`}>Work Experience</h2>
       </motion.div>
 
       <div className="mt-20 flex flex-col md:flex-row gap-10">
@@ -202,7 +207,10 @@ const Experience = () => {
         <div className="md:w-2/3">
           <AnimatePresence mode="wait" initial={false}>
             {!isPending && (
-              <ExperienceDetails key={currentExperience.company_name} experience={currentExperience} />
+              <ExperienceDetails
+                key={currentExperience.company_name}
+                experience={currentExperience}
+              />
             )}
           </AnimatePresence>
         </div>
@@ -211,4 +219,4 @@ const Experience = () => {
   );
 };
 
-export default SectionWrapper(Experience, "work");
+export default SectionWrapper(Experience, 'work');

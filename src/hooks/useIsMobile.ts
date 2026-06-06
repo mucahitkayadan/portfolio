@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
-import { subscribeToMobileQuery } from "../utils/breakpoints";
+import { useEffect, useState } from 'react';
+
+import { subscribeToMobileQuery } from '../utils/breakpoints';
 
 const useIsMobile = () => {
   const [isMobile, setIsMobile] = useState(false);

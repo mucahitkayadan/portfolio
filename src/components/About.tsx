@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { motion, useAnimation, useInView } from 'framer-motion';
 
 import { styles } from '../styles';
@@ -6,7 +6,7 @@ import { SectionWrapper } from '../hoc';
 import { fadeIn } from '../utils/motion';
 import { profilepic } from '../assets';
 
-const About: React.FC = () => {
+const About = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
   const mainControls = useAnimation();
@@ -63,8 +63,12 @@ const About: React.FC = () => {
           </div>
           <div className="mt-10 flex flex-wrap gap-5 justify-center">
             <motion.button
+              type="button"
               className="px-6 py-3 text-white bg-gradient-to-r from-blue-400 to-blue-600 rounded-md shadow-md hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transform transition duration-500 ease-in-out hover:scale-105 active:translate-y-1 active:shadow-none no-select"
-              style={{ boxShadow: '0px 5px 0px 0px rgba(0,0,0,0.6)', transition: 'all ease 0.1s' }}
+              style={{
+                boxShadow: '0px 5px 0px 0px rgba(0,0,0,0.6)',
+                transition: 'all ease 0.1s',
+              }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => window.open('https://www.linkedin.com/in/muja-kayadan/', '_blank')}
@@ -73,8 +77,12 @@ const About: React.FC = () => {
             </motion.button>
 
             <motion.button
+              type="button"
               className="px-6 py-3 text-white bg-gradient-to-r from-gray-600 to-gray-800 rounded-md shadow-md hover:bg-gradient-to-r hover:from-gray-700 hover:to-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-opacity-50 transform transition duration-500 ease-in-out hover:scale-105 active:translate-y-1 active:shadow-none no-select"
-              style={{ boxShadow: '0px 5px 0px 0px rgba(0,0,0,0.6)', transition: 'all ease 0.1s' }}
+              style={{
+                boxShadow: '0px 5px 0px 0px rgba(0,0,0,0.6)',
+                transition: 'all ease 0.1s',
+              }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => window.open('https://github.com/mucahitkayadan', '_blank')}

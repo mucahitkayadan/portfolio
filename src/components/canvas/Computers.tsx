@@ -1,22 +1,27 @@
-import React, { Suspense, useEffect, useState, useRef } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import React, { Suspense, useRef } from 'react';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { OrbitControls, Preload, useGLTF } from '@react-three/drei';
 import { Mesh } from 'three';
 
+import useIsMobile from '../../hooks/useIsMobile';
+import useInViewCanvas from '../../hooks/useInViewCanvas';
+import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion';
 import CanvasLoader from '../Loader';
-import { subscribeToMobileQuery } from '../../utils/breakpoints';
 
 interface ComputersProps {
   isMobile: boolean;
+  reducedMotion: boolean;
 }
 
-const Computers: React.FC<ComputersProps> = ({ isMobile }) => {
+const Computers: React.FC<ComputersProps> = ({ isMobile, reducedMotion }) => {
   const computer = useGLTF('./desktop_pc/scene.gltf');
   const meshRef = useRef<Mesh>(null);
+  const { invalidate } = useThree();
 
   useFrame((_, delta) => {
-    if (meshRef.current && isMobile) {
+    if (meshRef.current && isMobile && !reducedMotion) {
       meshRef.current.rotation.y += delta * 0.5;
+      invalidate();
     }
   });
 
@@ -43,33 +48,37 @@ const Computers: React.FC<ComputersProps> = ({ isMobile }) => {
 };
 
 const ComputersCanvas: React.FC = () => {
-  const [isMobile, setIsMobile] = useState<boolean>(false);
-
-  useEffect(() => subscribeToMobileQuery(setIsMobile), []);
+  const isMobile = useIsMobile();
+  const reducedMotion = usePrefersReducedMotion();
+  const { ref, inView } = useInViewCanvas();
 
   return (
-    <Canvas
-      className="w-full h-full"
-      frameloop="always"
-      shadows={!isMobile}
-      dpr={isMobile ? [1, 1.5] : [1, 2]}
-      camera={isMobile ? { position: [0, 0, 22], fov: 45 } : { position: [20, 3, 5], fov: 25 }}
-      gl={{ preserveDrawingBuffer: true }}
-    >
-      <Suspense fallback={<CanvasLoader />}>
-        {!isMobile && (
-          <OrbitControls
-            enableZoom={false}
-            maxPolarAngle={Math.PI / 2}
-            minPolarAngle={Math.PI / 2}
-            autoRotate={true}
-          />
-        )}
-        <Computers isMobile={isMobile} />
-      </Suspense>
+    <div ref={ref} className="w-full h-full">
+      {inView && (
+        <Canvas
+          className="w-full h-full"
+          frameloop={reducedMotion ? 'never' : 'demand'}
+          shadows={!isMobile}
+          dpr={isMobile ? [1, 1.5] : [1, 2]}
+          camera={isMobile ? { position: [0, 0, 22], fov: 45 } : { position: [20, 3, 5], fov: 25 }}
+          gl={{ preserveDrawingBuffer: true }}
+        >
+          <Suspense fallback={<CanvasLoader />}>
+            {!isMobile && !reducedMotion && (
+              <OrbitControls
+                enableZoom={false}
+                maxPolarAngle={Math.PI / 2}
+                minPolarAngle={Math.PI / 2}
+                autoRotate
+              />
+            )}
+            <Computers isMobile={isMobile} reducedMotion={reducedMotion} />
+          </Suspense>
 
-      <Preload all />
-    </Canvas>
+          <Preload all />
+        </Canvas>
+      )}
+    </div>
   );
 };
 

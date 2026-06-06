@@ -1,24 +1,46 @@
-import React, { useRef, useState, useCallback, useEffect } from "react";
-import { motion } from "framer-motion";
+import {
+  useRef,
+  useState,
+  useCallback,
+  useEffect,
+  Suspense,
+  lazy,
+  type ChangeEvent,
+  type FormEvent,
+} from 'react';
+import { motion } from 'framer-motion';
 import { Toaster, toast } from 'react-hot-toast';
 import Confetti from 'react-confetti';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faUser,
+  faEnvelope,
+  faComment,
+  faPaperPlane,
+  faSpinner,
+  faPhone,
+} from '@fortawesome/free-solid-svg-icons';
 
-import { styles } from "../styles";
-import { EarthCanvas } from "./canvas";
-import { SectionWrapper } from "../hoc";
-import { slideIn } from "../utils/motion";
+import { styles } from '../styles';
+import { SectionWrapper } from '../hoc';
+import { slideIn } from '../utils/motion';
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faEnvelope, faComment, faPaperPlane, faSpinner, faPhone } from "@fortawesome/free-solid-svg-icons";
+const EarthCanvas = lazy(() => import('./canvas/Earth'));
 
-const LAMBDA_EMAIL_URL = import.meta.env.VITE_LAMBDA_EMAIL_URL; // You'll need to add this to your .env
+const LAMBDA_EMAIL_URL = import.meta.env.VITE_LAMBDA_EMAIL_URL;
+
+interface ContactForm {
+  name: string;
+  email: string;
+  message: string;
+}
 
 const Contact = () => {
-  const formRef = useRef();
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    message: "",
+  const formRef = useRef<HTMLFormElement>(null);
+  const [form, setForm] = useState<ContactForm>({
+    name: '',
+    email: '',
+    message: '',
   });
 
   const [loading, setLoading] = useState(false);
@@ -43,16 +65,16 @@ const Contact = () => {
     };
   }, []);
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!form.name || !form.email || !form.message) {
-      toast.error("Please fill all fields before submitting. ⚠️", {
+      toast.error('Please fill all fields before submitting. ⚠️', {
         duration: 3000,
         position: 'bottom-right',
       });
@@ -67,7 +89,7 @@ const Contact = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(form)
+        body: JSON.stringify(form),
       });
 
       if (!response.ok) {
@@ -76,8 +98,8 @@ const Contact = () => {
 
       setLoading(false);
       setSuccess(true);
-      setForm({ name: "", email: "", message: "" });
-      toast.success("Message sent successfully!", {
+      setForm({ name: '', email: '', message: '' });
+      toast.success('Message sent successfully!', {
         duration: 3000,
         position: 'bottom-right',
       });
@@ -89,7 +111,7 @@ const Contact = () => {
     } catch (error) {
       setLoading(false);
       console.error(error);
-      toast.error("Something went wrong. Please try again.", {
+      toast.error('Something went wrong. Please try again.', {
         duration: 3000,
         position: 'bottom-right',
       });
@@ -101,8 +123,8 @@ const Contact = () => {
   }, []);
 
   return (
-    <div className={`xl:mt-12 flex xl:flex-row flex-col-reverse gap-10 overflow-hidden no-select`}>
-      <Toaster 
+    <div className="xl:mt-12 flex xl:flex-row flex-col-reverse gap-10 overflow-hidden no-select">
+      <Toaster
         position="bottom-right"
         reverseOrder={false}
         toastOptions={{
@@ -124,8 +146,8 @@ const Contact = () => {
         />
       )}
       <motion.div
-        variants={slideIn("left", "tween", 0.2, 1)}
-        className='flex-[0.75] bg-black-100 p-8 rounded-2xl'
+        variants={slideIn('left', 'tween', 0.2, 1)}
+        className="flex-[0.75] bg-black-100 p-8 rounded-2xl"
       >
         <div className="flex justify-between items-center mb-4">
           <p className={styles.sectionSubText}>Get in touch</p>
@@ -139,60 +161,56 @@ const Contact = () => {
         </div>
         <h3 className={styles.sectionHeadText}>Contact.</h3>
 
-        <form
-          ref={formRef}
-          onSubmit={handleSubmit}
-          className='mt-12 flex flex-col gap-8'
-        >
+        <form ref={formRef} onSubmit={handleSubmit} className="mt-12 flex flex-col gap-8">
           <div className="flex flex-col sm:flex-row gap-8">
             <div className="flex-1">
-              <label className='flex flex-col'>
-                <span className='text-white font-medium mb-4'>
+              <label className="flex flex-col">
+                <span className="text-white font-medium mb-4">
                   <FontAwesomeIcon icon={faUser} className="text-purple-500 mr-2" /> Name
                 </span>
                 <input
                   type="text"
-                  name='name'
+                  name="name"
                   value={form.name}
                   onChange={handleChange}
                   placeholder="Your name"
-                  className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium transition-all duration-300 focus:ring-2 focus:ring-purple-500'
+                  className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium transition-all duration-300 focus:ring-2 focus:ring-purple-500"
                 />
               </label>
             </div>
             <div className="flex-1">
-              <label className='flex flex-col'>
-                <span className='text-white font-medium mb-4'>
+              <label className="flex flex-col">
+                <span className="text-white font-medium mb-4">
                   <FontAwesomeIcon icon={faEnvelope} className="text-purple-500 mr-2" /> Email
                 </span>
                 <input
                   type="email"
-                  name='email'
+                  name="email"
                   value={form.email}
                   onChange={handleChange}
                   placeholder="Your email"
-                  className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium transition-all duration-300 focus:ring-2 focus:ring-purple-500'
+                  className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium transition-all duration-300 focus:ring-2 focus:ring-purple-500"
                 />
               </label>
             </div>
           </div>
-          <label className='flex flex-col'>
-            <span className='text-white font-medium mb-4'>
+          <label className="flex flex-col">
+            <span className="text-white font-medium mb-4">
               <FontAwesomeIcon icon={faComment} className="text-purple-500 mr-2" /> Message
             </span>
             <textarea
               rows={7}
-              name='message'
+              name="message"
               value={form.message}
               onChange={handleChange}
               placeholder="Hey Muja, love the website! I'd like to chat about some opportunities you might like! 🎉"
-              className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium transition-all duration-300 focus:ring-2 focus:ring-purple-500'
+              className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium transition-all duration-300 focus:ring-2 focus:ring-purple-500"
             />
           </label>
 
           <button
-            type='submit'
-            className='bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-3 px-8 rounded-lg transition-all duration-300 flex items-center justify-center'
+            type="submit"
+            className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-3 px-8 rounded-lg transition-all duration-300 flex items-center justify-center"
             disabled={loading}
           >
             {loading ? (
@@ -217,7 +235,7 @@ const Contact = () => {
           transition={{ delay: 0.5 }}
           className="mt-8 text-center text-secondary"
         >
-          Copyright &copy; {new Date().getFullYear()} Sunny Patel's Portfolio
+          Copyright &copy; {new Date().getFullYear()} Sunny Patel&apos;s Portfolio
           <br />
           Designed and Developed by
           <a
@@ -232,13 +250,15 @@ const Contact = () => {
       </motion.div>
 
       <motion.div
-        variants={slideIn("right", "tween", 0.2, 1)}
-        className='xl:flex-1 xl:h-auto md:h-[500px] h-[350px] xl:pr-8'
+        variants={slideIn('right', 'tween', 0.2, 1)}
+        className="xl:flex-1 xl:h-auto md:h-[500px] h-[350px] xl:pr-8"
       >
-        <EarthCanvas />
+        <Suspense fallback={null}>
+          <EarthCanvas />
+        </Suspense>
       </motion.div>
     </div>
   );
 };
 
-export default SectionWrapper(Contact, "contact");
+export default SectionWrapper(Contact, 'contact');

@@ -1,0 +1,139 @@
+import { useState, useCallback } from 'react';
+import { Tilt } from 'react-tilt';
+import { motion } from 'framer-motion';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
+
+import { styles } from '../styles';
+import { github } from '../assets';
+import { SectionWrapper } from '../hoc';
+import { projects, type ProjectEntry } from '../constants';
+
+type ProjectCardProps = ProjectEntry;
+
+const ProjectCard = ({
+  name,
+  description,
+  tags,
+  image,
+  source_code_link,
+  live_project_link,
+}: ProjectCardProps) => (
+  <div className="w-full sm:w-[360px]">
+    <Tilt
+      options={{
+        max: 45,
+        scale: 1,
+        speed: 450,
+      }}
+      className="bg-tertiary p-5 rounded-2xl w-full"
+    >
+      <div className="relative w-full h-[230px]">
+        <img src={image} alt={name} className="w-full h-full object-cover rounded-2xl" />
+
+        {source_code_link && (
+          <div className="absolute inset-0 flex justify-end m-3 card-img_hover">
+            <button
+              type="button"
+              onClick={() => window.open(source_code_link, '_blank')}
+              className="black-gradient w-10 h-10 rounded-full flex justify-center items-center cursor-pointer border-0"
+              aria-label={`View ${name} source code`}
+            >
+              <img src={github} alt="github" className="w-1/2 h-1/2 object-contain" />
+            </button>
+          </div>
+        )}
+      </div>
+
+      <div className="mt-5">
+        <h3 className="text-white font-bold text-[24px]">{name}</h3>
+        <p className="mt-2 text-secondary text-[14px]">{description}</p>
+      </div>
+
+      <div className="mt-4 flex flex-wrap gap-2">
+        {tags.map(tag => (
+          <p key={tag.name} className={`text-[14px] ${tag.color}`}>
+            #{tag.name}
+          </p>
+        ))}
+      </div>
+
+      {live_project_link && (
+        <a
+          href={live_project_link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block mt-3"
+        >
+          <button
+            type="button"
+            className="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-md font-medium transition-all duration-300"
+          >
+            Live Project
+          </button>
+        </a>
+      )}
+    </Tilt>
+  </div>
+);
+
+const Projects = () => {
+  const [visibleProjects, setVisibleProjects] = useState(6);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const loadMore = useCallback(async () => {
+    if (isLoading) return;
+    setIsLoading(true);
+    try {
+      await new Promise(resolve => setTimeout(resolve, 300));
+      setVisibleProjects(prev => Math.min(prev + 6, projects.length));
+    } finally {
+      setIsLoading(false);
+    }
+  }, [isLoading]);
+
+  return (
+    <div className="relative z-0">
+      <div className="text-center">
+        <h2 className={styles.sectionHeadText}>Projects.</h2>
+        <p className={styles.sectionSubText}>My work</p>
+      </div>
+
+      <div className="mt-20 flex flex-wrap gap-7 justify-center">
+        {projects.slice(0, visibleProjects).map((project, index) => (
+          <ProjectCard key={`project-${index}`} {...project} />
+        ))}
+      </div>
+
+      {visibleProjects < projects.length && (
+        <motion.div
+          className="flex justify-center mt-10"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <button
+            type="button"
+            onClick={loadMore}
+            disabled={isLoading}
+            className="group bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl flex items-center gap-3"
+          >
+            {isLoading ? (
+              'Loading...'
+            ) : (
+              <>
+                Load More Projects
+                <FontAwesomeIcon
+                  icon={faArrowDown}
+                  className="transition-transform duration-300 group-hover:translate-y-1"
+                />
+              </>
+            )}
+          </button>
+        </motion.div>
+      )}
+    </div>
+  );
+};
+
+export default SectionWrapper(Projects, 'projects');

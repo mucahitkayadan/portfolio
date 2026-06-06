@@ -1,45 +1,42 @@
-import React, { useState, useEffect, useRef } from "react";
-import { motion, useAnimation, useInView } from "framer-motion";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectCoverflow, Autoplay, Pagination } from "swiper/modules";
-import { styles } from "../styles";
-import { awards } from "../constants";
-import { SectionWrapper } from "../hoc";
-import { fadeIn, textVariant } from "../utils/motion";
+import { useState, useEffect, useRef } from 'react';
+import { motion, useAnimation, useInView } from 'framer-motion';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { EffectCoverflow, Autoplay, Pagination } from 'swiper/modules';
+
+import { styles } from '../styles';
+import { awards, type AwardEntry } from '../constants';
+import { SectionWrapper } from '../hoc';
+import { fadeIn } from '../utils/motion';
 
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 
-const AwardCard = ({ title, icon, type, date, description }) => (
+type AwardCardProps = AwardEntry;
+
+const AwardCard = ({ title, icon, type, date, description }: AwardCardProps) => (
   <div className="certification-card bg-tertiary p-6 rounded-2xl w-full h-full flex flex-col justify-between no-select">
     <div>
       <div className="relative w-full h-[50px] mb-4">
-        <img
-          src={icon}
-          alt={title}
-          className="w-auto h-full object-contain no-select"
-        />
+        <img src={icon} alt={title} className="w-auto h-full object-contain no-select" />
       </div>
       <h3 className="text-white font-bold text-[20px] mb-2 no-select">{title}</h3>
       <p className="text-secondary text-[12px] mb-1 no-select">{type}</p>
       <p className="text-secondary text-[12px] mb-3 no-select">{date}</p>
-      <p className="text-white-100 text-[12px] tracking-wider no-select">
-        {description}
-      </p>
+      <p className="text-white-100 text-[12px] tracking-wider no-select">{description}</p>
     </div>
   </div>
 );
 
 const Awards = () => {
   const [isMobile, setIsMobile] = useState(false);
-  const sectionRef = useRef(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
   const mainControls = useAnimation();
 
   useEffect(() => {
     if (isInView) {
-      mainControls.start("visible");
+      mainControls.start('visible');
     }
   }, [isInView, mainControls]);
 
@@ -49,10 +46,10 @@ const Awards = () => {
     };
 
     checkMobile();
-    window.addEventListener("resize", checkMobile);
+    window.addEventListener('resize', checkMobile);
 
     return () => {
-      window.removeEventListener("resize", checkMobile);
+      window.removeEventListener('resize', checkMobile);
     };
   }, []);
 
@@ -80,17 +77,17 @@ const Awards = () => {
         <h2 className={`${styles.sectionHeadText} text-center`}>Awards</h2>
       </motion.div>
 
-      <motion.div 
-        variants={fadeIn("up", "spring", 0.5, 0.75)}
+      <motion.div
+        variants={fadeIn('up', 'spring', 0.5, 0.75)}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.25 }}
         className="mt-20 flex flex-col items-center"
       >
         <Swiper
-          effect={isMobile ? '' : 'coverflow'}
-          grabCursor={true}
-          centeredSlides={true}
+          effect={isMobile ? undefined : 'coverflow'}
+          grabCursor
+          centeredSlides
           slidesPerView={1}
           spaceBetween={isMobile ? 20 : 0}
           coverflowEffect={{
@@ -98,7 +95,7 @@ const Awards = () => {
             stretch: 0,
             depth: 100,
             modifier: 1,
-            slideShadows: false, // Disable slide shadows entirely
+            slideShadows: false,
           }}
           pagination={{
             clickable: true,
@@ -135,7 +132,7 @@ const Awards = () => {
       </motion.div>
 
       <div className="swiper-styles">
-        <style global="true">{`
+        <style>{`
           .mySwiper {
             width: 100%;
             padding-top: 50px;
@@ -201,4 +198,4 @@ const Awards = () => {
   );
 };
 
-export default SectionWrapper(Awards, "awards");
+export default SectionWrapper(Awards, 'awards');
