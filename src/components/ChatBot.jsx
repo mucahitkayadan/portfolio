@@ -160,7 +160,7 @@ const ChatBot = () => {
   };
 
   return (
-    <div className="fixed bottom-5 right-5 z-50">
+    <div className="fixed bottom-[max(1.25rem,env(safe-area-inset-bottom))] right-[max(1.25rem,env(safe-area-inset-right))] z-50">
       {/* Welcome Bubble */}
       {showWelcome && !isOpen && (
         <div className="absolute bottom-28 right-0 bg-white rounded-lg shadow-lg p-4 mb-4 min-w-[280px] max-w-[320px] animate-fade-in">

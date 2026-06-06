@@ -4,6 +4,7 @@ import { OrbitControls, Preload, useGLTF } from '@react-three/drei';
 import { Mesh } from 'three';
 
 import CanvasLoader from '../Loader';
+import { subscribeToMobileQuery } from '../../utils/breakpoints';
 
 interface ComputersProps {
   isMobile: boolean;
@@ -27,14 +28,14 @@ const Computers: React.FC<ComputersProps> = ({ isMobile }) => {
         angle={0.12}
         penumbra={1}
         intensity={1}
-        castShadow
+        castShadow={!isMobile}
         shadow-mapSize={1024}
       />
       <pointLight intensity={1} />
       <primitive
         object={computer.scene}
-        scale={isMobile ? 0.75 : 0.75}
-        position={isMobile ? [0, -3, 0] : [0, -3.25, -1.5]}
+        scale={isMobile ? 0.55 : 0.75}
+        position={isMobile ? [0, -4.75, 0] : [0, -3.25, -1.5]}
         rotation={isMobile ? [0, 0, 0] : [-0.01, -0.2, -0.1]}
       />
     </mesh>
@@ -44,34 +45,15 @@ const Computers: React.FC<ComputersProps> = ({ isMobile }) => {
 const ComputersCanvas: React.FC = () => {
   const [isMobile, setIsMobile] = useState<boolean>(false);
 
-  useEffect(() => {
-    // Add a listener for changes to the screen size
-    const mediaQuery = window.matchMedia('(max-width: 500px)');
-
-    // Set the initial value of the `isMobile` state variable
-    setIsMobile(mediaQuery.matches);
-
-    // Define a callback function to handle changes to the media query
-    const handleMediaQueryChange = (event: MediaQueryListEvent) => {
-      setIsMobile(event.matches);
-    };
-
-    // Add the callback function as a listener for changes to the media query
-    mediaQuery.addEventListener('change', handleMediaQueryChange);
-
-    // Remove the listener when the component is unmounted
-    return () => {
-      mediaQuery.removeEventListener('change', handleMediaQueryChange);
-    };
-  }, []);
+  useEffect(() => subscribeToMobileQuery(setIsMobile), []);
 
   return (
     <Canvas
       className="w-full h-full"
       frameloop="always"
-      shadows
-      dpr={[1, 2]}
-      camera={isMobile ? { position: [0, 0, 20], fov: 50 } : { position: [20, 3, 5], fov: 25 }}
+      shadows={!isMobile}
+      dpr={isMobile ? [1, 1.5] : [1, 2]}
+      camera={isMobile ? { position: [0, 0, 22], fov: 45 } : { position: [20, 3, 5], fov: 25 }}
       gl={{ preserveDrawingBuffer: true }}
     >
       <Suspense fallback={<CanvasLoader />}>

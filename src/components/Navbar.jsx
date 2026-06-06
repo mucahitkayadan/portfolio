@@ -84,7 +84,7 @@ const Navbar = () => {
     <nav
       className={`${
         styles.paddingX
-      } w-full flex items-center py-5 fixed top-0 z-20 transition-all duration-300 ${
+      } safe-top safe-x w-full flex items-center py-4 sm:py-5 fixed top-0 z-20 transition-all duration-300 ${
         scrolled ? "bg-primary shadow-lg" : "bg-transparent"
       }`}
     >
@@ -105,10 +105,9 @@ const Navbar = () => {
             transition={{ duration: 0.5 }}
           >
             <span 
-              className='block' 
+              className='block text-[22px] sm:text-[26px]' 
               style={{
                 fontFamily: "'Dancing Script', cursive",
-                fontSize: "26px",
                 background: "linear-gradient(90deg, #915EFF, #00BFFF)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
@@ -153,7 +152,7 @@ const Navbar = () => {
           <motion.div
             className={`${
               !toggle ? "hidden" : "flex"
-            } p-6 black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-10 rounded-xl`}
+            } p-6 black-gradient absolute top-[calc(env(safe-area-inset-top,0px)+4.5rem)] right-0 mx-4 my-2 min-w-[140px] z-10 rounded-xl`}
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: toggle ? 1 : 0, scale: toggle ? 1 : 0.95 }}
             transition={{ duration: 0.2 }}
