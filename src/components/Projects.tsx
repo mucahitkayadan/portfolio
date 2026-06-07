@@ -6,8 +6,9 @@ import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
 
 import { styles } from '../styles';
 import { github } from '../assets';
+import { type ProjectEntry } from '../constants';
+import { usePortfolio } from '../context/PortfolioContext';
 import { SectionWrapper } from '../hoc';
-import { projects, type ProjectEntry } from '../constants';
 
 type ProjectCardProps = ProjectEntry;
 
@@ -78,6 +79,7 @@ const ProjectCard = ({
 );
 
 const Projects = () => {
+  const { projects } = usePortfolio();
   const [visibleProjects, setVisibleProjects] = useState(6);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -90,7 +92,7 @@ const Projects = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [isLoading]);
+  }, [isLoading, projects.length]);
 
   return (
     <div className="relative z-0">

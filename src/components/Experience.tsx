@@ -2,7 +2,8 @@ import { useState, useCallback, useMemo, useTransition, useRef, useEffect, memo 
 import { motion, AnimatePresence, useAnimation, useInView } from 'framer-motion';
 
 import { styles } from '../styles';
-import { experiences, type ExperienceEntry } from '../constants';
+import { type ExperienceEntry } from '../constants';
+import { usePortfolio } from '../context/PortfolioContext';
 import { SectionWrapper } from '../hoc';
 import { fadeIn } from '../utils/motion';
 
@@ -146,6 +147,7 @@ const ExperienceDetails = memo(({ experience }: ExperienceDetailsProps) => {
 ExperienceDetails.displayName = 'ExperienceDetails';
 
 const Experience = () => {
+  const { experiences } = usePortfolio();
   const [activeExperience, setActiveExperience] = useState(0);
   const [isPending, startTransition] = useTransition();
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -158,13 +160,20 @@ const Experience = () => {
     });
   }, []);
 
-  const currentExperience = useMemo(() => experiences[activeExperience], [activeExperience]);
+  const currentExperience = useMemo(
+    () => experiences[activeExperience],
+    [experiences, activeExperience]
+  );
 
   useEffect(() => {
     if (isInView) {
       mainControls.start('visible');
     }
   }, [isInView, mainControls]);
+
+  if (experiences.length === 0) {
+    return null;
+  }
 
   return (
     <div ref={sectionRef}>

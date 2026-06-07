@@ -22,6 +22,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 import { styles } from '../styles';
+import { usePortfolio } from '../context/PortfolioContext';
 import { SectionWrapper } from '../hoc';
 import { slideIn } from '../utils/motion';
 
@@ -36,6 +37,7 @@ interface ContactForm {
 }
 
 const Contact = () => {
+  const { fullName, displayName, phone } = usePortfolio();
   const formRef = useRef<HTMLFormElement>(null);
   const [form, setForm] = useState<ContactForm>({
     name: '',
@@ -151,13 +153,15 @@ const Contact = () => {
       >
         <div className="flex justify-between items-center mb-4">
           <p className={styles.sectionSubText}>Get in touch</p>
-          <a
-            href="tel:+16412339607"
-            className="text-purple-500 hover:text-purple-400 transition-colors duration-300 flex items-center"
-          >
-            <FontAwesomeIcon icon={faPhone} className="mr-2" />
-            (641) 233-9607
-          </a>
+          {phone && (
+            <a
+              href={`tel:${phone.replace(/[^\d+]/g, '')}`}
+              className="text-purple-500 hover:text-purple-400 transition-colors duration-300 flex items-center"
+            >
+              <FontAwesomeIcon icon={faPhone} className="mr-2" />
+              {phone}
+            </a>
+          )}
         </div>
         <h3 className={styles.sectionHeadText}>Contact.</h3>
 
@@ -203,7 +207,7 @@ const Contact = () => {
               name="message"
               value={form.message}
               onChange={handleChange}
-              placeholder="Hey Muja, love the website! I'd like to chat about some opportunities you might like! 🎉"
+              placeholder={`Hey ${displayName}, love the website! I'd like to chat about some opportunities you might like! 🎉`}
               className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium transition-all duration-300 focus:ring-2 focus:ring-purple-500"
             />
           </label>
@@ -235,17 +239,7 @@ const Contact = () => {
           transition={{ delay: 0.5 }}
           className="mt-8 text-center text-secondary"
         >
-          Copyright &copy; {new Date().getFullYear()} Sunny Patel&apos;s Portfolio
-          <br />
-          Designed and Developed by
-          <a
-            href="https://www.linkedin.com/in/sunny-patel-30b460204/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-bold text-purple-500 hover:text-purple-400 transition-colors duration-300 ml-1"
-          >
-            Sunny Jayendra Patel
-          </a>
+          Copyright &copy; {new Date().getFullYear()} {fullName}&apos;s Portfolio
         </motion.p>
       </motion.div>
 

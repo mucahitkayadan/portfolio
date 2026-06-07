@@ -3,9 +3,11 @@ import { motion } from 'framer-motion';
 
 import { styles } from '../styles';
 import { navLinks, type NavLink } from '../constants';
+import { usePortfolio } from '../context/PortfolioContext';
 import { logo } from '../assets';
 
 const Navbar = () => {
+  const { fullName } = usePortfolio();
   const [active, setActive] = useState('');
   const [toggle, setToggle] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -106,7 +108,9 @@ const Navbar = () => {
                 backgroundClip: 'text',
               }}
             >
-              {'</'}Muja Kayadan{'>'}
+              {'</'}
+              {fullName}
+              {'>'}
             </span>
           </motion.p>
         </button>

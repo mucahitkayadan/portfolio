@@ -14,12 +14,17 @@ vi.mock('../components/canvas/Earth', () => ({
 }));
 
 import Contact from '../components/Contact';
+import { PortfolioProvider } from '../context/PortfolioContext';
 
 describe('Contact', () => {
   it('requires all fields before submitting', async () => {
     const { toast } = await import('react-hot-toast');
 
-    render(<Contact />);
+    render(
+      <PortfolioProvider>
+        <Contact />
+      </PortfolioProvider>
+    );
 
     fireEvent.click(screen.getByRole('button', { name: /send message/i }));
 

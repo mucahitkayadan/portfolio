@@ -4,7 +4,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Autoplay, Pagination } from 'swiper/modules';
 
 import { styles } from '../styles';
-import { awards, type AwardEntry } from '../constants';
+import { type AwardEntry } from '../constants';
+import { usePortfolio } from '../context/PortfolioContext';
 import { SectionWrapper } from '../hoc';
 import { fadeIn } from '../utils/motion';
 
@@ -29,6 +30,7 @@ const AwardCard = ({ title, icon, type, date, description }: AwardCardProps) => 
 );
 
 const Awards = () => {
+  const { awards } = usePortfolio();
   const [isMobile, setIsMobile] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });

@@ -5,7 +5,8 @@ import { motion, useAnimation, useInView } from 'framer-motion';
 import 'react-vertical-timeline-component/style.min.css';
 
 import { styles } from '../styles';
-import { education, type EducationEntry } from '../constants';
+import { type EducationEntry } from '../constants';
+import { usePortfolio } from '../context/PortfolioContext';
 import { SectionWrapper } from '../hoc';
 
 interface EducationCardProps {
@@ -73,6 +74,7 @@ const EducationCard = ({ education: edu }: EducationCardProps) => {
 };
 
 const Education = () => {
+  const { education } = usePortfolio();
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
   const mainControls = useAnimation();

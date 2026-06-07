@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Suspense, lazy, useState, useEffect } from 'react';
 
 import usePrefersReducedMotion from '../hooks/usePrefersReducedMotion';
+import { usePortfolio } from '../context/PortfolioContext';
 import { styles } from '../styles';
 
 const ComputersCanvas = lazy(() => import('./canvas/Computers'));
@@ -86,13 +87,7 @@ const WavingHand = () => (
 );
 
 const Hero = () => {
-  const typedItems = [
-    'Software Engineer',
-    'Machine Learning Engineer',
-    'Computer Vision Engineer',
-    'Electrical Electronics Engineer',
-    'Machine Vision Engineer',
-  ];
+  const { displayName, typedItems } = usePortfolio();
 
   return (
     <section className="relative w-full min-h-screen min-h-[100dvh] mx-auto overflow-hidden">
@@ -112,7 +107,7 @@ const Hero = () => {
 
         <div className="w-full max-w-full">
           <h1 className={`${styles.heroHeadText} text-white leading-tight`}>
-            Hi, I&apos;m <span className="text-[#915EFF]">Muja</span> <WavingHand />
+            Hi, I&apos;m <span className="text-[#915EFF]">{displayName}</span> <WavingHand />
           </h1>
           <p className={`${styles.heroSubText} mt-2 text-white-100 max-w-xl`}>
             I&apos;m a <TypewriterText texts={typedItems} />

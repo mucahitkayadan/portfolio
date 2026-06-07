@@ -23,7 +23,7 @@ describe('App', () => {
   it('renders navbar and hero content', () => {
     render(<App />);
 
-    expect(screen.getByText(/Muja Kayadan/)).toBeInTheDocument();
+    expect(screen.getAllByText(/Muja Kayadan/).length).toBeGreaterThan(0);
     expect(screen.getByText(/Hi, I'm/)).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /skip to content/i })).toBeInTheDocument();
   });
