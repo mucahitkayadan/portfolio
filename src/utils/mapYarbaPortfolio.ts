@@ -4,8 +4,6 @@ import {
   getCompanyIcon,
   getProjectImage,
   getProjectTags,
-  getSkillMeta,
-  slugifyCategory,
 } from '../config/assetMap';
 import type { AboutBullet, PortfolioData } from '../types/portfolio';
 import type { YarbaPortfolioContent } from '../types/yarbaPortfolio';
@@ -92,18 +90,6 @@ export const mapYarbaPortfolio = (content: YarbaPortfolioContent): PortfolioData
       location: exp.location,
       description: exp.responsibilities[0] ?? '',
       points: exp.responsibilities,
-    })),
-    skillCategories: content.skills.map(category => ({
-      key: slugifyCategory(category.category || 'skills'),
-      label: category.category || 'Skills',
-      items: category.skills.map(skill => {
-        const meta = getSkillMeta(skill);
-        return {
-          name: skill,
-          icon: meta.icon,
-          url: meta.url,
-        };
-      }),
     })),
     projects: content.projects.map(project => ({
       name: project.name,

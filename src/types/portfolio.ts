@@ -81,7 +81,6 @@ export interface PortfolioData {
   aboutBullets: AboutBullet[];
   education: EducationEntry[];
   experiences: ExperienceEntry[];
-  skillCategories: SkillCategory[];
   projects: ProjectEntry[];
   awards: AwardEntry[];
 }

@@ -14,7 +14,6 @@ describe('mapYarbaPortfolio', () => {
     expect(mapped.experiences).toHaveLength(1);
     expect(mapped.projects).toHaveLength(1);
     expect(mapped.awards).toHaveLength(1);
-    expect(mapped.skillCategories[0]?.items.length).toBeGreaterThan(0);
     expect(mapped.aboutBullets.length).toBeGreaterThan(0);
   });
 });

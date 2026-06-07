@@ -1,17 +1,20 @@
 import { useEffect, useState, useRef } from 'react';
 import { motion, useAnimation, useInView, type Variants } from 'framer-motion';
 
-import { usePortfolio } from '../context/PortfolioContext';
+import { techCategories, techCategoryOrder, type TechCategoryKey } from '../config/skills';
 import { SectionWrapper } from '../hoc';
 import type { TechItem } from '../types/portfolio';
 
-interface TechRows {
-  [categoryKey: string]: TechItem[][];
-}
+type TechRows = Record<TechCategoryKey, TechItem[][]>;
 
 const Tech = () => {
-  const { skillCategories } = usePortfolio();
-  const [rows, setRows] = useState<TechRows>({});
+  const [rows, setRows] = useState<TechRows>({
+    programming_languages: [],
+    machine_learning: [],
+    cloud_platforms: [],
+    miscellaneous: [],
+    platforms: [],
+  });
 
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, {
@@ -37,7 +40,7 @@ const Tech = () => {
         techArray.slice(3, 5),
         techArray.slice(5, 8),
         techArray.slice(8, 10),
-      ].filter(row => row.length > 0);
+      ];
     }
 
     while (startIndex < techArray.length) {
@@ -53,20 +56,20 @@ const Tech = () => {
   useEffect(() => {
     const calculateRowsForAllCategories = () => {
       const width = window.innerWidth;
-      const nextRows: TechRows = {};
-
-      skillCategories.forEach(category => {
-        nextRows[category.key] = calculateRows(width, category.items);
+      setRows({
+        programming_languages: calculateRows(width, techCategories.programming_languages),
+        machine_learning: calculateRows(width, techCategories.machine_learning),
+        cloud_platforms: calculateRows(width, techCategories.cloud_platforms),
+        miscellaneous: calculateRows(width, techCategories.miscellaneous),
+        platforms: calculateRows(width, techCategories.platforms),
       });
-
-      setRows(nextRows);
     };
 
     calculateRowsForAllCategories();
 
     window.addEventListener('resize', calculateRowsForAllCategories);
     return () => window.removeEventListener('resize', calculateRowsForAllCategories);
-  }, [skillCategories]);
+  }, []);
 
   const hexagonVariants: Variants = {
     hidden: { opacity: 0, scale: 0.8 },
@@ -96,13 +99,9 @@ const Tech = () => {
     filter: 'drop-shadow(0 0 10px #915EFF)',
   } as const;
 
-  const renderCategory = (
-    categoryKey: string,
-    categoryLabel: string,
-    categoryRows: TechItem[][]
-  ) => (
+  const renderCategory = (categoryName: TechCategoryKey, categoryRows: TechItem[][]) => (
     <motion.div
-      key={categoryKey}
+      key={categoryName}
       className="category-container"
       initial="hidden"
       animate={mainControls}
@@ -118,11 +117,11 @@ const Tech = () => {
           visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
         }}
         style={categoryTitleStyle}
-      >{`<${categoryLabel}>`}</motion.h2>
+      >{`<${categoryName}>`}</motion.h2>
       <div className="honeycomb-grid">
         {categoryRows?.map((row, rowIndex) => (
           <div
-            key={`${categoryKey}-row-${rowIndex}`}
+            key={`${categoryName}-row-${rowIndex}`}
             className={`honeycomb-row ${rowIndex % 2 === 1 ? 'staggered-row' : ''}`}
           >
             {row.map(tech => (
@@ -155,7 +154,7 @@ const Tech = () => {
           visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
         }}
         style={categoryTitleStyle}
-      >{`</${categoryLabel}>`}</motion.h2>
+      >{`</${categoryName}>`}</motion.h2>
     </motion.div>
   );
 
@@ -170,9 +169,7 @@ const Tech = () => {
             Skills.
           </h2>
         </div>
-        {skillCategories.map(category =>
-          renderCategory(category.key, category.label, rows[category.key] ?? [])
-        )}
+        {techCategoryOrder.map(categoryName => renderCategory(categoryName, rows[categoryName]))}
       </div>
     </section>
   );
